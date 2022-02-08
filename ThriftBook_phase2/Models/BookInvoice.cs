@@ -8,17 +8,13 @@ using System.Threading.Tasks;
 
 namespace ThriftBook_phase2.Models
 {
-    public class BookRating
+    public class BookInvoice
     {
         [Key, Column(Order = 0)]
+        public int TransactionId { get; set; }
         public int BookId { get; set; }
 
-        [Key, Column(Order = 0)]
-        public int BuyerId { get; set; }
-        public decimal? BookRating1 { get; set; }
-        public string Comments { get; set; }
-
+        public virtual Invoice Invoice { get; set; }
         public virtual Book Book { get; set; }
-        public virtual Buyer Buyer { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace ThriftBook_phase2.Data
         public DbSet<Invoice> Invoice { get; set; }
 
 
+>>>>>>> d1f6ad03a9580bda620661e95c2c4a661be1fbb5
 
     }
 }

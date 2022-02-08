@@ -38,8 +38,7 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "like new",
                     BookQuantity = 5,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/41z2wSFrXbL._SX326_BO1,204,203,200_.jpg",
-                    Price = 14,
-                    StoreName = "ThriftBook"
+                    Price = 14
                 },
                 new Book
                 {
@@ -50,8 +49,7 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "good",
                     BookQuantity = 3,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51rg5EDPpDL._SX336_BO1,204,203,200_.jpg",
-                    Price = 12,
-                    StoreName = "ThriftBook"
+                    Price = 12
                 },
                 new Book
                 {
@@ -62,8 +60,7 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "old",
                     BookQuantity = 2,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/41tyokViuNL._SY355_BO1,204,203,200_.jpg",
-                    Price = 6.25m,
-                    StoreName = "ThriftBook"
+                    Price = 6.25m
                 },
                 new Book
                 {
@@ -74,8 +71,7 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "like new",
                     BookQuantity = 3,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51oDyfsqKwL._SX327_BO1,204,203,200_.jpg",
-                    Price = 10,
-                    StoreName = "ThriftBook"
+                    Price = 10
                 },
                 new Book
                 {
@@ -86,8 +82,7 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "like new",
                     BookQuantity = 5,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51IcVjsJlDL._SX322_BO1,204,203,200_.jpg",
-                    Price = 10,
-                    StoreName = "ThriftBook"
+                    Price = 7
                 }
                 );
 
@@ -158,6 +153,37 @@ namespace ThriftBook_phase2.Data
                     Street = "Pacific Boulevard",
                     PostalCode = "V2W1B5",
                     PhoneNumber = "778-689-1000"
+                }
+            );
+
+            modelBuilder.Entity<BookRating>().HasData(
+                new BookRating
+                {
+                    BookId = 1,
+                    BuyerId = 1,
+                    Rating = 4.5m,
+                    Comments = "Good Book"
+                },
+                    new BookRating
+                    {
+                    BookId = 2,
+                    BuyerId = 1,
+                    Rating = 4.8m,
+                    Comments = "Children loved this book"
+                },
+                    new BookRating
+                {
+                    BookId = 3,
+                    BuyerId = 2,
+                    Rating = 4.3m,
+                    Comments = "Great read"
+                },
+                    new BookRating
+                {
+                    BookId = 5,
+                    BuyerId = 2,
+                    Rating = 4.9m,
+                    Comments = "Great read, good"
                 }
             );
         }

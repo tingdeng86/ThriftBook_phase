@@ -15,7 +15,7 @@ namespace ThriftBook_phase2.Models
 
         [Key, Column(Order = 0)]
         public int BuyerId { get; set; }
-        public decimal? BookRating1 { get; set; }
+        public decimal? Rating { get; set; }
         public string Comments { get; set; }
 
         public virtual Book Book { get; set; }

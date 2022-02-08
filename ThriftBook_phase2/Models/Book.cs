@@ -21,7 +21,6 @@ namespace ThriftBook_phase2.Models
         public decimal? Price { get; set; }
         public string StoreName { get; set; }
 
-
         public virtual Store StoreNameNavigation { get; set; }
         public virtual ICollection<BookRating> BookRatings { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }

@@ -22,40 +22,11 @@ namespace ThriftBook_phase2.Data
         public DbSet<Store> Store { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // When adding OnModelCreating() in .NET Core a reference 
             // to the base class is also needed at the start of the method.
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<BookInvoice>()
-               .HasKey(bi => new { bi.BookId, bi.TransactionId });
-            // Define foreign keys here. Do not use foreign key annotations.
-            modelBuilder.Entity<BookInvoice>()
-                .HasOne(c => c.Book)
-                .WithMany(c => c.BookInvoices)
-                .HasForeignKey(fk => new { fk.BookId })
-                .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<BookInvoice>()
-                .HasOne(c => c.Invoice)
-                .WithMany(c => c.BookInvoices)
-                .HasForeignKey(fk => new { fk.TransactionId })
-                .OnDelete(DeleteBehavior.Restrict);
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<BookRating>()
-              .HasKey(bi => new { bi.BookId, bi.BuyerId });
-            modelBuilder.Entity<BookRating>()
-                .HasOne(c => c.Book)
-                .WithMany(c => c.BookRatings)
-                .HasForeignKey(fk => new { fk.BookId })
-                .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<BookRating>()
-                .HasOne(c => c.Buyer)
-                .WithMany(c => c.BookRatings)
-                .HasForeignKey(fk => new { fk.BuyerId })
-                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Book>().HasData(
                 new Book
@@ -115,7 +86,7 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "like new",
                     BookQuantity = 5,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51IcVjsJlDL._SX322_BO1,204,203,200_.jpg",
-                    Price = 7,
+                    Price = 10,
                     StoreName = "ThriftBook"
                 }
                 );
@@ -187,69 +158,6 @@ namespace ThriftBook_phase2.Data
                     Street = "Pacific Boulevard",
                     PostalCode = "V2W1B5",
                     PhoneNumber = "778-689-1000"
-                }
-            );
-
-            modelBuilder.Entity<BookRating>().HasData(
-                new BookRating
-                {
-                    BookId = 1,
-                    BuyerId = 1,
-                    Rating = 4.5m,
-                    Comments = "Good Book"
-                },
-                new BookRating
-                {
-                    BookId = 2,
-                    BuyerId = 1,
-                    Rating = 4.8m,
-                    Comments = "Children loved this book"
-                },
-                new BookRating
-                {
-                    BookId = 3,
-                    BuyerId = 2,
-                    Rating = 4.3m,
-                    Comments = "Great read"
-                },
-                new BookRating
-                {
-                    BookId = 5,
-                    BuyerId = 2,
-                    Rating = 4.9m,
-                    Comments = "Great read, good"
-                },
-                new BookRating
-                {
-                    BookId = 4,
-                    BuyerId = 1,
-                    Rating = 3m,
-                    Comments = "Very short book"
-                }               
-            );
-            modelBuilder.Entity<Invoice>().HasData(
-                new Invoice
-                {
-                    TransactionId = 100001,
-                    BuyerId = 1,
-                    TotalPrice = 12.50m,
-                    DateOfTransaction = new DateTime(2021 - 10 - 16)
-                },
-
-                new Invoice
-                {
-                    TransactionId = 100002,
-                    BuyerId = 2,
-                    TotalPrice = 8.10m,
-                    DateOfTransaction = new DateTime(2021 - 11 - 03)
-                },
-
-                new Invoice
-                {
-                   TransactionId = 100003,
-                   BuyerId = 3,
-                   TotalPrice = 9.99m,
-                   DateOfTransaction = new DateTime(2021 - 12 - 10)
                 }
             );
         }

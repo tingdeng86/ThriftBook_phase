@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ThriftBook_phase2.Models
+{
+    public class BookRating
+    {
+        [Key, Column(Order = 0)]
+        public int BookId { get; set; }
+
+        [Key, Column(Order = 0)]
+        public int BuyerId { get; set; }
+        public decimal? BookRating1 { get; set; }
+        public string Comments { get; set; }
+
+        public virtual BookDetail Book { get; set; }
+        public virtual Buyer Buyer { get; set; }
+    }
+}

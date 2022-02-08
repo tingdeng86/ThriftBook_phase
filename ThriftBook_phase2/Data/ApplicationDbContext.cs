@@ -101,7 +101,7 @@ namespace ThriftBook_phase2.Data
                     City = "Los Angeles",
                     Street = "Coldwater Canyon",
                     PostalCode = "90210",
-                    PhoneNumber = 123456
+                    PhoneNumber = "123-456-7890"
                 },
                 new Buyer
                 {
@@ -112,7 +112,7 @@ namespace ThriftBook_phase2.Data
                     City = "Miami",
                     Street = "Sunset Blvd.",
                     PostalCode = "10101",
-                    PhoneNumber = 654321
+                    PhoneNumber = "210-654-3218"
                 },
                 new Buyer
                 {
@@ -123,7 +123,7 @@ namespace ThriftBook_phase2.Data
                     City = "Springfield",
                     Street = "Evergreen Terrace",
                     PostalCode = "12121",
-                    PhoneNumber = 123321
+                    PhoneNumber = "123-321-3165"
                 },
                 new Buyer
                 {
@@ -134,7 +134,7 @@ namespace ThriftBook_phase2.Data
                     City = "Dragonstone",
                     Street = "Free Cities St.",
                     PostalCode = "13337",
-                    PhoneNumber = 6543216
+                    PhoneNumber = "654-321-6458"
                 },
                 new Buyer
                 {
@@ -145,7 +145,7 @@ namespace ThriftBook_phase2.Data
                     City = "Shanghai",
                     Street = "Movecanada",
                     PostalCode = "13ceo4",
-                    PhoneNumber = 765432
+                    PhoneNumber = "765-432-2500"
                 }
             );
 
@@ -157,7 +157,7 @@ namespace ThriftBook_phase2.Data
                     City = "Vancouver",
                     Street = "Pacific Boulevard",
                     PostalCode = "V2W1B5",
-                    PhoneNumber = "778-689-100"
+                    PhoneNumber = "778-689-1000"
                 }
             );
         }

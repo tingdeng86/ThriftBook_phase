@@ -38,7 +38,8 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "like new",
                     BookQuantity = 5,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/41z2wSFrXbL._SX326_BO1,204,203,200_.jpg",
-                    Price = 14
+                    Price = 14,
+                    StoreName = "ThriftBook"
                 },
                 new Book
                 {
@@ -49,7 +50,8 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "good",
                     BookQuantity = 3,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51rg5EDPpDL._SX336_BO1,204,203,200_.jpg",
-                    Price = 12
+                    Price = 12,
+                    StoreName = "ThriftBook"
                 },
                 new Book
                 {
@@ -60,7 +62,8 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "old",
                     BookQuantity = 2,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/41tyokViuNL._SY355_BO1,204,203,200_.jpg",
-                    Price = 6.25m
+                    Price = 6.25m,
+                    StoreName = "ThriftBook"
                 },
                 new Book
                 {
@@ -71,7 +74,8 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "like new",
                     BookQuantity = 3,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51oDyfsqKwL._SX327_BO1,204,203,200_.jpg",
-                    Price = 10
+                    Price = 10,
+                    StoreName = "ThriftBook"
                 },
                 new Book
                 {
@@ -82,7 +86,8 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "like new",
                     BookQuantity = 5,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51IcVjsJlDL._SX322_BO1,204,203,200_.jpg",
-                    Price = 7
+                    Price = 7,
+                    StoreName = "ThriftBook"
                 }
                 );
 
@@ -164,26 +169,58 @@ namespace ThriftBook_phase2.Data
                     Rating = 4.5m,
                     Comments = "Good Book"
                 },
-                    new BookRating
-                    {
+                new BookRating
+                {
                     BookId = 2,
                     BuyerId = 1,
                     Rating = 4.8m,
                     Comments = "Children loved this book"
                 },
-                    new BookRating
+                new BookRating
                 {
                     BookId = 3,
                     BuyerId = 2,
                     Rating = 4.3m,
                     Comments = "Great read"
                 },
-                    new BookRating
+                new BookRating
                 {
                     BookId = 5,
                     BuyerId = 2,
                     Rating = 4.9m,
                     Comments = "Great read, good"
+                },
+                new BookRating
+                {
+                    BookId = 4,
+                    BuyerId = 1,
+                    Rating = 3m,
+                    Comments = "Very short book"
+                }               
+            );
+            modelBuilder.Entity<Invoice>().HasData(
+                new Invoice
+                {
+                    TransactionId = 100001,
+                    BuyerId = 1,
+                    TotalPrice = 12.50m,
+                    DateOfTransaction = new DateTime(2021 - 10 - 16)
+                },
+
+                new Invoice
+                {
+                    TransactionId = 100002,
+                    BuyerId = 2,
+                    TotalPrice = 8.10m,
+                    DateOfTransaction = new DateTime(2021 - 11 - 03)
+                },
+
+                new Invoice
+                {
+                   TransactionId = 100003,
+                   BuyerId = 3,
+                   TotalPrice = 9.99m,
+                   DateOfTransaction = new DateTime(2021 - 12 - 10)
                 }
             );
         }

@@ -24,9 +24,37 @@ namespace ThriftBook_phase2.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // When adding OnModelCreating() in .NET Core a reference 
+            // When adding OnModelCreating() in .NET Core a reference t
             // to the base class is also needed at the start of the method.
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<BookInvoice>()
+               .HasKey(bi => new { bi.BookId, bi.TransactionId });
+            // Define foreign keys here. Do not use foreign key annotations.
+            modelBuilder.Entity<BookInvoice>()
+                .HasOne(c => c.Book)
+                .WithMany(c => c.BookInvoices)
+                .HasForeignKey(fk => new { fk.BookId })
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<BookInvoice>()
+                .HasOne(c => c.Invoice)
+                .WithMany(c => c.BookInvoices)
+                .HasForeignKey(fk => new { fk.TransactionId })
+                .OnDelete(DeleteBehavior.Restrict);
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<BookRating>()
+              .HasKey(bi => new { bi.BookId, bi.BuyerId });
+            modelBuilder.Entity<BookRating>()
+                .HasOne(c => c.Book)
+                .WithMany(c => c.BookRatings)
+                .HasForeignKey(fk => new { fk.BookId })
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<BookRating>()
+                .HasOne(c => c.Buyer)
+                .WithMany(c => c.BookRatings)
+                .HasForeignKey(fk => new { fk.BuyerId })
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Book>().HasData(
                 new Book

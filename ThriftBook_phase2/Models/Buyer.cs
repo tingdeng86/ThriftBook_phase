@@ -19,7 +19,7 @@ namespace rolesDemoSSD.Models
         public string City { get; set; }
         public string Street { get; set; }
         public string PostalCode { get; set; }
-        public int? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public virtual ICollection<BookRating> BookRatings { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }

@@ -13,7 +13,7 @@ namespace ThriftBook_phase2.Models
         [Key, Column(Order = 0)]
         public int BookId { get; set; }
 
-        [Key, Column(Order = 0)]
+        [Key, Column(Order = 1)]
         public int BuyerId { get; set; }
         public decimal? Rating { get; set; }
         public string Comments { get; set; }

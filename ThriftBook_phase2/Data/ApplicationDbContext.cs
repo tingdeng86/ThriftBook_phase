@@ -19,6 +19,9 @@ namespace ThriftBook_phase2.Data
         public DbSet<BookRating> BookRating { get; set; }
         public DbSet<Profile> Profile { get; set; }
         public DbSet<Buyer> Buyer { get; set; }
+        public DbSet<Store> Store { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
+
 
 
     }

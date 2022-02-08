@@ -12,6 +12,7 @@ namespace ThriftBook_phase2.Models
     {
         [Key, Column(Order = 0)]
         public int TransactionId { get; set; }
+        [Key, Column(Order = 1)]
         public int BookId { get; set; }
 
         public virtual Invoice Invoice { get; set; }

@@ -10,7 +10,7 @@ namespace rolesDemoSSD.Models
 {
     public class Invoice
     {
-        [Key]
+        [Key, Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransactionId { get; set; }
         public int? BuyerId { get; set; }

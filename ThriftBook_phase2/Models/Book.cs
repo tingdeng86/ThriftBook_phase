@@ -19,7 +19,7 @@ namespace ThriftBook_phase2.Models
         public int? BookQuantity { get; set; }
         public string BookPhoto { get; set; }
         public decimal? Price { get; set; }
-        public string StoreName { get; set; }
+        
 
         public virtual Store StoreNameNavigation { get; set; }
         public virtual ICollection<BookRating> BookRatings { get; set; }

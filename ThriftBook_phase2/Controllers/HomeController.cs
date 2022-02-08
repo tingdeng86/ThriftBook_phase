@@ -28,19 +28,18 @@ namespace ThriftBook_phase2.Controllers
         }
 
 
-        [Authorize]
-        public IActionResult SecureArea()
-        {
-            // Get user name of user who is logged in.
-            // This line must be in the controller.
-            string userName = User.Identity.Name;
+        //[Authorize]
+        //public IActionResult SecureArea()
+        //{
 
-            // Usually this section would be in a repository.
-            var registeredUser = _context.MyRegisteredUsers.Where(ru => ru.Email == userName)
-                                .FirstOrDefault();// Use FirstOrDefault() when getting one item
+        //    string userName = User.Identity.Name;
 
-            return View(registeredUser);
-        }
+
+        //    var registeredUser = _context.MyRegisteredUsers.Where(ru => ru.Email == userName)
+        //                        .FirstOrDefault();// Use FirstOrDefault() when getting one item
+
+        //    return View(registeredUser);
+        //}
 
         public IActionResult Privacy()
         {

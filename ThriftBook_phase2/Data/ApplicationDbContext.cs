@@ -108,11 +108,56 @@ namespace ThriftBook_phase2.Data
                     BuyerId = 2,
                     FirstName = "Tiger",
                     LastName = "King",
-                    Email = "keanureeves@gmail.com",
-                    City = "Los Angeles",
-                    Street = "Coldwater Canyon",
-                    PostalCode = "90210",
-                    PhoneNumber = 123456
+                    Email = "tigerking@gmail.com",
+                    City = "Miami",
+                    Street = "Sunset Blvd.",
+                    PostalCode = "10101",
+                    PhoneNumber = 654321
+                },
+                new Buyer
+                {
+                    BuyerId = 3,
+                    FirstName = "Homer",
+                    LastName = "Simpson",
+                    Email = "homer.j.simpson@gmail.com",
+                    City = "Springfield",
+                    Street = "Evergreen Terrace",
+                    PostalCode = "12121",
+                    PhoneNumber = 123321
+                },
+                new Buyer
+                {
+                    BuyerId = 4,
+                    FirstName = "Daenerys",
+                    LastName = "Targaryen",
+                    Email = "emailia.clarke@gmail.com",
+                    City = "Dragonstone",
+                    Street = "Free Cities St.",
+                    PostalCode = "13337",
+                    PhoneNumber = 6543216
+                },
+                new Buyer
+                {
+                    BuyerId = 5,
+                    FirstName = "Ting",
+                    LastName = "Deng",
+                    Email = "ting.the.ceo@gmail.com",
+                    City = "Shanghai",
+                    Street = "Movecanada",
+                    PostalCode = "13ceo4",
+                    PhoneNumber = 765432
+                }
+            );
+
+            modelBuilder.Entity<Store>().HasData(
+                new Store
+                {
+                    StoreName = "ThriftBook",
+                    Email = "thriftbook@thriftbook.com",
+                    City = "Vancouver",
+                    Street = "Pacific Boulevard",
+                    PostalCode = "V2W1B5",
+                    PhoneNumber = "778-689-100"
                 }
             );
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using rolesDemoSSD.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,8 +15,11 @@ namespace ThriftBook_phase2.Data
         {
         }
 
-        public DbSet<BookDetail> BookDetail { get; set; }
+        public DbSet<Book> Book { get; set; }
         public DbSet<BookRating> BookRating { get; set; }
         public DbSet<Profile> Profile { get; set; }
+        public DbSet<Buyer> Buyer { get; set; }
+
+
     }
 }

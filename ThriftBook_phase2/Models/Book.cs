@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ThriftBook_phase2.Models
 {
-    public class BookDetail
+    public class Book
     {
         [Key, Column(Order = 0)]
         public int BookId { get; set; }

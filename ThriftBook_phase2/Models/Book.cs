@@ -1,4 +1,5 @@
-﻿using System;
+﻿using rolesDemoSSD.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,6 +24,5 @@ namespace ThriftBook_phase2.Models
         public virtual Store StoreNameNavigation { get; set; }
         public virtual ICollection<BookRating> BookRatings { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

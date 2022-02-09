@@ -188,6 +188,70 @@ namespace ThriftBook_phase2.Data
                     PhoneNumber = "778-689-1000"
                 }
             );
+
+            modelBuilder.Entity<BookRating>().HasData(
+                new BookRating
+                {
+                    BookId = 1,
+                    BuyerId = 1,
+                    Rating = 4.5m,
+                    Comments = "Good Book"
+                },
+                    new BookRating
+                    {
+                    BookId = 2,
+                    BuyerId = 1,
+                    Rating = 4.8m,
+                    Comments = "Children loved this book"
+                },
+                    new BookRating
+                {
+                    BookId = 3,
+                    BuyerId = 2,
+                    Rating = 4.3m,
+                    Comments = "Great read"
+                },
+                    new BookRating
+                {
+                    BookId = 5,
+                    BuyerId = 2,
+                    Rating = 4.9m,
+                    Comments = "Great read, good"
+                },
+                new BookRating
+                {
+                    BookId = 4,
+                    BuyerId = 1,
+                    Rating = 3m,
+                    Comments = "Very short book"
+                }
+            );
+
+            modelBuilder.Entity<Invoice>().HasData(
+               new Invoice
+               {
+                   TransactionId = 100001,
+                   BuyerId = 1,
+                   TotalPrice = 12.50m,
+                   DateOfTransaction = new DateTime(2021 - 10 - 16)                   
+               },
+               
+               new Invoice
+               {
+                     TransactionId = 100002,
+                     BuyerId = 2,
+                     TotalPrice = 8.10m,
+                     DateOfTransaction = new DateTime(2021 - 11 - 03)
+               },
+
+                new Invoice
+                {
+                    TransactionId = 100003,
+                    BuyerId = 3,
+                    TotalPrice = 9.99m,
+                    DateOfTransaction = new DateTime(2021 - 12 - 10)
+                }
+            );
         }
     }
 }

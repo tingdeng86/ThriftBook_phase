@@ -64,7 +64,7 @@ namespace ThriftBook_phase2.Data
                     Author = "Greg Dinkin",
                     Gennre = "Business & Investing",
                     BookQuality = "like new",
-                    BookQuantity = 5,
+                    BookQuantity = 6,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/41z2wSFrXbL._SX326_BO1,204,203,200_.jpg",
                     Price = 14,
                     StoreName = "ThriftBook"

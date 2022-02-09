@@ -27,6 +27,14 @@ namespace ThriftBook_phase2.Data
             // When adding OnModelCreating() in .NET Core a reference t
             // to the base class is also needed at the start of the method.
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Invoice>()
+               .HasKey(bi => new { bi.TransactionId });
+            // Define foreign keys here. Do not use foreign key annotations.
+            modelBuilder.Entity<Invoice>()
+                .HasOne(c => c.Buyer)
+                .WithMany(c => c.Invoices)
+                .HasForeignKey(fk => new { fk.BuyerId })
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<BookInvoice>()
                .HasKey(bi => new { bi.BookId, bi.TransactionId });

@@ -9,7 +9,7 @@ namespace ThriftBook_phase2.Models
     public class Cart
     {
         [Key]
-        public string CartItemId { get; set; }
+        public int CartItemId { get; set; }
 
         public string SessionId { get; set; }
         public int BookId { get; set; }

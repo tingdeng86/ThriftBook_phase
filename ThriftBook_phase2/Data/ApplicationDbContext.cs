@@ -21,6 +21,7 @@ namespace ThriftBook_phase2.Data
         public DbSet<Profile> Buyer { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<Cart> Cart { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

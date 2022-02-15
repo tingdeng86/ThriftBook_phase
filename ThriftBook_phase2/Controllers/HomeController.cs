@@ -27,6 +27,13 @@ namespace ThriftBook_phase2.Controllers
             return View();
         }
 
+        
+        public IActionResult ViewBooks()
+        {
+
+            var bookView = _context.Book;
+            return View(bookView);
+        }
 
         //[Authorize]
         //public IActionResult SecureArea()

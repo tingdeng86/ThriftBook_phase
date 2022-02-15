@@ -19,6 +19,6 @@ namespace ThriftBook_phase2.Models
         public string Comments { get; set; }
 
         public virtual Book Book { get; set; }
-        public virtual Buyer Buyer{ get; set; }
+        public virtual Profile Buyer{ get; set; }
     }
 }

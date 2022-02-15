@@ -18,7 +18,7 @@ namespace ThriftBook_phase2.Data
         public DbSet<Book> Book { get; set; }
         public DbSet<BookRating> BookRating { get; set; }
         public DbSet<BookInvoice> BookInvoice { get; set; }
-        public DbSet<Profile> Buyer { get; set; }
+        public DbSet<Profile> Profile { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
 
@@ -31,7 +31,7 @@ namespace ThriftBook_phase2.Data
                .HasKey(bi => new { bi.TransactionId });
             // Define foreign keys here. Do not use foreign key annotations.
             modelBuilder.Entity<Invoice>()
-                .HasOne(c => c.Buyer)
+                .HasOne(c => c.Profile)
                 .WithMany(c => c.Invoices)
                 .HasForeignKey(fk => new { fk.BuyerId })
                 .OnDelete(DeleteBehavior.Restrict);
@@ -59,7 +59,7 @@ namespace ThriftBook_phase2.Data
                 .HasForeignKey(fk => new { fk.BookId })
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<BookRating>()
-                .HasOne(c => c.Buyer)
+                .HasOne(c => c.Profile)
                 .WithMany(c => c.BookRatings)
                 .HasForeignKey(fk => new { fk.BuyerId })
                 .OnDelete(DeleteBehavior.Restrict);

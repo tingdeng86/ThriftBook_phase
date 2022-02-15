@@ -18,7 +18,7 @@ namespace ThriftBook_phase2.Controllers
             _logger = logger;
             _context = context;
         }
-        public IActionResult ViewContact()
+        public IActionResult Index()
         {
             var contact = _context.Store.First();
             return View(contact);

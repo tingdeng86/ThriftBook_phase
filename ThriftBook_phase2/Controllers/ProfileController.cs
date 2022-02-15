@@ -8,11 +8,11 @@ using ThriftBook_phase2.Data;
 
 namespace ThriftBook_phase2.Controllers
 {
-    public class ContactController : Controller
+    public class ProfileController : Controller
     {
-        private readonly ILogger<ContactController> _logger;
+        private readonly ILogger<ProfileController> _logger;
         private readonly ApplicationDbContext _context;
-        public ContactController(ILogger<ContactController> logger,
+        public ProfileController(ILogger<ProfileController> logger,
                               ApplicationDbContext context)
         {
             _logger = logger;
@@ -20,8 +20,9 @@ namespace ThriftBook_phase2.Controllers
         }
         public IActionResult Index()
         {
-            var contact = _context.Store.First();
-            return View(contact);
+            string userName = User.Identity.Name;
+
+            return View();
         }
     }
 }

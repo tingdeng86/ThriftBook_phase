@@ -9,6 +9,14 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<h3>@ViewBag.UserName</h3>
+
+<p>
+    @Html.ActionLink("Assign Roles", "Create",
+                     new { userName = @ViewBag.UserName })
+</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -24,27 +32,21 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoleName)
-                </td>
-                <td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <!--<td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-        }
-    </tbody>
+                </td>-->
+        </tr>
+         }
+     </tbody>
 </table>
 
-<h3>@ViewBag.UserName</h3>
-
-<p>
-    @Html.ActionLink("Assign Roles", "Create",
-                     new { userName = @ViewBag.UserName })
-</p>
 

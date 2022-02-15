@@ -122,7 +122,7 @@ namespace ThriftBook_phase2.Data
                     BookQuality = "like new",
                     BookQuantity = 5,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51IcVjsJlDL._SX322_BO1,204,203,200_.jpg",
-                    Price = 10,
+                    Price = 7.50m,
                     StoreName = "ThriftBook"
                 }
                 );
@@ -240,25 +240,56 @@ namespace ThriftBook_phase2.Data
                {
                    TransactionId = 100001,
                    BuyerId = 1,
-                   TotalPrice = 12.50m,
+                   TotalPrice = 21.50m,
                    DateOfTransaction = new DateTime(2021 - 10 - 16)                   
-               },
-               
+               },               
                new Invoice
                {
                      TransactionId = 100002,
                      BuyerId = 2,
-                     TotalPrice = 8.10m,
+                     TotalPrice = 22,
                      DateOfTransaction = new DateTime(2021 - 11 - 03)
                },
-
                 new Invoice
                 {
                     TransactionId = 100003,
                     BuyerId = 3,
-                    TotalPrice = 9.99m,
+                    TotalPrice = 13.75m,
                     DateOfTransaction = new DateTime(2021 - 12 - 10)
                 }
+            );
+
+            modelBuilder.Entity<BookInvoice>().HasData(
+               new BookInvoice
+               {
+                   TransactionId = 100001,
+                   BookId = 1,
+               },
+               new BookInvoice
+               {
+                   TransactionId = 100001,
+                   BookId = 5,
+               },
+               new BookInvoice
+               {
+                   TransactionId = 100002,
+                   BookId = 2,
+               },
+               new BookInvoice
+               {
+                   TransactionId = 100002,
+                   BookId = 4,
+               },
+               new BookInvoice
+               {
+                   TransactionId = 100003,
+                   BookId = 3,
+               },
+               new BookInvoice
+               {
+                   TransactionId = 100003,
+                   BookId = 5,
+               }
             );
         }
     }

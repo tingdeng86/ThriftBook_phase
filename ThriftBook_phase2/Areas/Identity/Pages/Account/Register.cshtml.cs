@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using rolesDemoSSD.Models;
+using ThriftBook_phase2.Data;
 
 namespace ThriftBook_phase2.Areas.Identity.Pages.Account
 {
@@ -24,17 +26,20 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -105,6 +110,17 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    // Normally this code would be placed in a repository.
+                    Profile registerUser = new Profile()
+                    {
+                        Email = Input.Email,
+                        FirstName = Input.FirstName,
+                        LastName = Input.LastName
+                    };
+                    _context.Profile.Add(registerUser);
+                    _context.SaveChanges();
+
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

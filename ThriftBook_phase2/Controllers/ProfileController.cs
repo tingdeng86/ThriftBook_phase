@@ -18,7 +18,7 @@ namespace ThriftBook_phase2.Controllers
             _logger = logger;
             _context = context;
         }
-        public IActionResult Profile()
+        public IActionResult Index()
         {
             string userName = User.Identity.Name;
 

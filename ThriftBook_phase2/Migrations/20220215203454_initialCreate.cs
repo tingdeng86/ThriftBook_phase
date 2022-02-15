@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ThriftBook_phase2.Migrations
 {
-    public partial class dbc : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,14 +47,14 @@ namespace ThriftBook_phase2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Buyer",
+                name: "Profile",
                 columns: table => new
                 {
                     BuyerId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
-                    LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     City = table.Column<string>(type: "TEXT", nullable: true),
                     Street = table.Column<string>(type: "TEXT", nullable: true),
                     PostalCode = table.Column<string>(type: "TEXT", nullable: true),
@@ -62,7 +62,7 @@ namespace ThriftBook_phase2.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Buyer", x => x.BuyerId);
+                    table.PrimaryKey("PK_Profile", x => x.BuyerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -233,9 +233,9 @@ namespace ThriftBook_phase2.Migrations
                         principalColumn: "BookId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BookRating_Buyer_BuyerId",
+                        name: "FK_BookRating_Profile_BuyerId",
                         column: x => x.BuyerId,
-                        principalTable: "Buyer",
+                        principalTable: "Profile",
                         principalColumn: "BuyerId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -261,9 +261,9 @@ namespace ThriftBook_phase2.Migrations
                         principalColumn: "BookId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Invoice_Buyer_BuyerId",
+                        name: "FK_Invoice_Profile_BuyerId",
                         column: x => x.BuyerId,
-                        principalTable: "Buyer",
+                        principalTable: "Profile",
                         principalColumn: "BuyerId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -318,27 +318,27 @@ namespace ThriftBook_phase2.Migrations
                 values: new object[] { 5, "Carl Sagan", "https://images-na.ssl-images-amazon.com/images/I/51IcVjsJlDL._SX322_BO1,204,203,200_.jpg", "like new", 5, "Science & Math", 7.50m, "ThriftBook", null, "Cosmos" });
 
             migrationBuilder.InsertData(
-                table: "Buyer",
+                table: "Profile",
                 columns: new[] { "BuyerId", "City", "Email", "FirstName", "LastName", "PhoneNumber", "PostalCode", "Street" },
                 values: new object[] { 1, "Los Angeles", "keanureeves@gmail.com", "Keanu", "Reeves", "123-456-7890", "90210", "Coldwater Canyon" });
 
             migrationBuilder.InsertData(
-                table: "Buyer",
+                table: "Profile",
                 columns: new[] { "BuyerId", "City", "Email", "FirstName", "LastName", "PhoneNumber", "PostalCode", "Street" },
                 values: new object[] { 2, "Miami", "tigerking@gmail.com", "Tiger", "King", "210-654-3218", "10101", "Sunset Blvd." });
 
             migrationBuilder.InsertData(
-                table: "Buyer",
+                table: "Profile",
                 columns: new[] { "BuyerId", "City", "Email", "FirstName", "LastName", "PhoneNumber", "PostalCode", "Street" },
                 values: new object[] { 3, "Springfield", "homer.j.simpson@gmail.com", "Homer", "Simpson", "123-321-3165", "12121", "Evergreen Terrace" });
 
             migrationBuilder.InsertData(
-                table: "Buyer",
+                table: "Profile",
                 columns: new[] { "BuyerId", "City", "Email", "FirstName", "LastName", "PhoneNumber", "PostalCode", "Street" },
                 values: new object[] { 4, "Dragonstone", "emailia.clarke@gmail.com", "Daenerys", "Targaryen", "654-321-6458", "13337", "Free Cities St." });
 
             migrationBuilder.InsertData(
-                table: "Buyer",
+                table: "Profile",
                 columns: new[] { "BuyerId", "City", "Email", "FirstName", "LastName", "PhoneNumber", "PostalCode", "Street" },
                 values: new object[] { 5, "Shanghai", "ting.the.ceo@gmail.com", "Ting", "Deng", "765-432-2500", "13ceo4", "Movecanada" });
 
@@ -516,7 +516,7 @@ namespace ThriftBook_phase2.Migrations
                 name: "Book");
 
             migrationBuilder.DropTable(
-                name: "Buyer");
+                name: "Profile");
 
             migrationBuilder.DropTable(
                 name: "Store");

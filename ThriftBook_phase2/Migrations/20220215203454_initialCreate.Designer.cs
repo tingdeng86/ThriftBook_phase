@@ -9,8 +9,8 @@ using ThriftBook_phase2.Data;
 namespace ThriftBook_phase2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220215185905_dbc")]
-    partial class dbc
+    [Migration("20220215203454_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -421,7 +421,57 @@ namespace ThriftBook_phase2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("rolesDemoSSD.Models.Buyer", b =>
+            modelBuilder.Entity("rolesDemoSSD.Models.Invoice", b =>
+                {
+                    b.Property<int>("TransactionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("BuyerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("DateOfTransaction")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("TotalPrice")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TransactionId");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("BuyerId");
+
+                    b.ToTable("Invoice");
+
+                    b.HasData(
+                        new
+                        {
+                            TransactionId = 100001,
+                            BuyerId = 1,
+                            DateOfTransaction = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1995),
+                            TotalPrice = 21.50m
+                        },
+                        new
+                        {
+                            TransactionId = 100002,
+                            BuyerId = 2,
+                            DateOfTransaction = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2007),
+                            TotalPrice = 22m
+                        },
+                        new
+                        {
+                            TransactionId = 100003,
+                            BuyerId = 3,
+                            DateOfTransaction = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1999),
+                            TotalPrice = 13.75m
+                        });
+                });
+
+            modelBuilder.Entity("rolesDemoSSD.Models.Profile", b =>
                 {
                     b.Property<int>("BuyerId")
                         .ValueGeneratedOnAdd()
@@ -431,12 +481,17 @@ namespace ThriftBook_phase2.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
@@ -450,7 +505,7 @@ namespace ThriftBook_phase2.Migrations
 
                     b.HasKey("BuyerId");
 
-                    b.ToTable("Buyer");
+                    b.ToTable("Profile");
 
                     b.HasData(
                         new
@@ -507,56 +562,6 @@ namespace ThriftBook_phase2.Migrations
                             PhoneNumber = "765-432-2500",
                             PostalCode = "13ceo4",
                             Street = "Movecanada"
-                        });
-                });
-
-            modelBuilder.Entity("rolesDemoSSD.Models.Invoice", b =>
-                {
-                    b.Property<int>("TransactionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("BookId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("BuyerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("DateOfTransaction")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal?>("TotalPrice")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("TransactionId");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("BuyerId");
-
-                    b.ToTable("Invoice");
-
-                    b.HasData(
-                        new
-                        {
-                            TransactionId = 100001,
-                            BuyerId = 1,
-                            DateOfTransaction = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1995),
-                            TotalPrice = 21.50m
-                        },
-                        new
-                        {
-                            TransactionId = 100002,
-                            BuyerId = 2,
-                            DateOfTransaction = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2007),
-                            TotalPrice = 22m
-                        },
-                        new
-                        {
-                            TransactionId = 100003,
-                            BuyerId = 3,
-                            DateOfTransaction = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1999),
-                            TotalPrice = 13.75m
                         });
                 });
 
@@ -683,7 +688,7 @@ namespace ThriftBook_phase2.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("rolesDemoSSD.Models.Buyer", "Buyer")
+                    b.HasOne("rolesDemoSSD.Models.Profile", "Profile")
                         .WithMany("BookRatings")
                         .HasForeignKey("BuyerId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -691,7 +696,7 @@ namespace ThriftBook_phase2.Migrations
 
                     b.Navigation("Book");
 
-                    b.Navigation("Buyer");
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("rolesDemoSSD.Models.Invoice", b =>
@@ -700,12 +705,12 @@ namespace ThriftBook_phase2.Migrations
                         .WithMany("Invoices")
                         .HasForeignKey("BookId");
 
-                    b.HasOne("rolesDemoSSD.Models.Buyer", "Buyer")
+                    b.HasOne("rolesDemoSSD.Models.Profile", "Profile")
                         .WithMany("Invoices")
                         .HasForeignKey("BuyerId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Buyer");
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("ThriftBook_phase2.Models.Book", b =>
@@ -717,16 +722,16 @@ namespace ThriftBook_phase2.Migrations
                     b.Navigation("Invoices");
                 });
 
-            modelBuilder.Entity("rolesDemoSSD.Models.Buyer", b =>
+            modelBuilder.Entity("rolesDemoSSD.Models.Invoice", b =>
+                {
+                    b.Navigation("BookInvoices");
+                });
+
+            modelBuilder.Entity("rolesDemoSSD.Models.Profile", b =>
                 {
                     b.Navigation("BookRatings");
 
                     b.Navigation("Invoices");
-                });
-
-            modelBuilder.Entity("rolesDemoSSD.Models.Invoice", b =>
-                {
-                    b.Navigation("BookInvoices");
                 });
 
             modelBuilder.Entity("rolesDemoSSD.Models.Store", b =>

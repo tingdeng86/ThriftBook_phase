@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ThriftBook_phase2.Data;
 using Microsoft.AspNetCore.Authorization;
 using rolesDemoSSD.Models;
+using ThriftBook_phase2.Repositories;
 
 namespace ThriftBook_phase2.Controllers
 {
@@ -24,22 +25,20 @@ namespace ThriftBook_phase2.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            string userName = User.Identity.Name;
-
-            var objects = _context.Profile;
-            var registeredUser = _context.Profile.Where(ru => ru.Email == userName)
-                                .FirstOrDefault();
-            return View(registeredUser);
+            string userEmail = User.Identity.Name;
+            ProfileRepo prRepo = new ProfileRepo(_context);
+            var currentRegisteredUser = prRepo.GetLoggedInUser(userEmail);
+            return View(currentRegisteredUser);
         }
 
 
         [Authorize]
         public IActionResult Edit()
         {
-            string userName = User.Identity.Name;
-            var currentUser = _context.Profile.Where(ru => ru.Email == userName)
-                                .FirstOrDefault();
-            return View(currentUser);
+            string userEmail = User.Identity.Name;
+            ProfileRepo prRepo = new ProfileRepo(_context);
+            var currentRegisteredUser = prRepo.GetLoggedInUser(userEmail);
+            return View(currentRegisteredUser);
         }
 
 
@@ -48,19 +47,10 @@ namespace ThriftBook_phase2.Controllers
         public IActionResult Edit([Bind("Email, FirstName, LastName, City, Street, PostalCode, PhoneNumber")] Profile userInfoEdited)
         {
             ViewData["Message"] = "Account Edited Successfully";
-            string userName = User.Identity.Name;
-            var currentUser = _context.Profile.Where(ru => ru.Email == userName)
-                                .FirstOrDefault();
-            currentUser.FirstName = userInfoEdited.FirstName;
-            currentUser.LastName = userInfoEdited.LastName;
-            currentUser.Email = userInfoEdited.Email;
-            currentUser.City = userInfoEdited.City;
-            currentUser.Street = userInfoEdited.Street;
-            currentUser.PostalCode = userInfoEdited.PostalCode;
-            currentUser.PhoneNumber = userInfoEdited.PhoneNumber;
-            _context.SaveChanges();
-
-            return View(currentUser);
+            string userEmail = User.Identity.Name;
+            ProfileRepo prRepo = new ProfileRepo(_context);
+            prRepo.EditingUserInfo(userInfoEdited, userEmail);
+            return RedirectToAction(nameof(Index), new { ViewBag.Message });
         }
     }
 }

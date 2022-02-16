@@ -10,7 +10,8 @@
 *.userosscache
 *.sln.docstates
 
-*.sql.db*
+*sql.db*
+\\ThriftBook_phase2\\Migrations
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)

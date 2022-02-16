@@ -1,4 +1,4 @@
-﻿@model ThriftBook_phase2.Models.Cart
+﻿@model IEnumerable<ThriftBook_phase2.Models.Cart>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,31 +6,56 @@
 
 <h1>Index</h1>
 
-<div>
-    <h4>Cart</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SessionId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SessionId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Book)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Book.BookId)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.CartItemId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SessionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SessionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CartItemId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CartItemId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CartItemId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form asp-action="AddToCart" asp-route-id="2">
+    
+    <div class="form-group">
+        <input type="submit" value="Add to Cart" class="btn btn-primary" />
+    </div>
+</form>
+<form asp-action="AddToCart" asp-route-id="1">
+
+    <div class="form-group">
+        <input type="submit" value="Add to Cart" class="btn btn-primary" />
+    </div>
+</form>
+@Html.ActionLink("Details", "Details", new { bookId = 1 }) |

@@ -10,8 +10,8 @@ namespace rolesDemoSSD.Models
 {
     public class Profile
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BuyerId { get; set; }
 
         [Required(ErrorMessage = "Email required.")]

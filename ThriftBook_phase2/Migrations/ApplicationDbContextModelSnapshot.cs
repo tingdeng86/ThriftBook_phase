@@ -419,28 +419,6 @@ namespace ThriftBook_phase2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ThriftBook_phase2.Models.Cart", b =>
-                {
-                    b.Property<int>("CartItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SessionId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("CartItemId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("Cart");
-                });
-
             modelBuilder.Entity("rolesDemoSSD.Models.Invoice", b =>
                 {
                     b.Property<int>("TransactionId")
@@ -525,7 +503,7 @@ namespace ThriftBook_phase2.Migrations
 
                     b.HasKey("BuyerId");
 
-                    b.ToTable("Buyer");
+                    b.ToTable("Profile");
 
                     b.HasData(
                         new
@@ -708,7 +686,7 @@ namespace ThriftBook_phase2.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("rolesDemoSSD.Models.Profile", "Buyer")
+                    b.HasOne("rolesDemoSSD.Models.Profile", "Profile")
                         .WithMany("BookRatings")
                         .HasForeignKey("BuyerId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -716,18 +694,7 @@ namespace ThriftBook_phase2.Migrations
 
                     b.Navigation("Book");
 
-                    b.Navigation("Buyer");
-                });
-
-            modelBuilder.Entity("ThriftBook_phase2.Models.Cart", b =>
-                {
-                    b.HasOne("ThriftBook_phase2.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("rolesDemoSSD.Models.Invoice", b =>
@@ -736,12 +703,12 @@ namespace ThriftBook_phase2.Migrations
                         .WithMany("Invoices")
                         .HasForeignKey("BookId");
 
-                    b.HasOne("rolesDemoSSD.Models.Profile", "Buyer")
+                    b.HasOne("rolesDemoSSD.Models.Profile", "Profile")
                         .WithMany("Invoices")
                         .HasForeignKey("BuyerId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Buyer");
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("ThriftBook_phase2.Models.Book", b =>

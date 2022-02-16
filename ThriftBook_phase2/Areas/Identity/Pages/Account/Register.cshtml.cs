@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -46,9 +47,21 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Invalid email Address")]
             [Display(Name = "Email")]
             public string Email { get; set; }
+
+            [Display(Name = "First Name")]
+            [Required(ErrorMessage = "First name required.")]
+            [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This is not a valid first name.")]
+            [StringLength(50, ErrorMessage = "Name must be maximum of 50 characters.")]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Last Name")]
+            [Required(ErrorMessage = "Last name required.")]
+            [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This is not a valid last name.")]
+            [StringLength(50, ErrorMessage = "Name must be maximum of 50 characters.")]
+            public string LastName { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -56,10 +69,24 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Key]
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            public int BuyerId { get; set; }
+
+            public string City { get; set; }
+            public string Street { get; set; }
+
+            [Display(Name = "Postal Code")]
+            public string PostalCode { get; set; }
+
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)

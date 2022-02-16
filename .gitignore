@@ -11,7 +11,7 @@
 *.sln.docstates
 
 *sql.db*
-\\ThriftBook_phase2\\Migrations
+ThriftBook_phase2/Migrations/
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)

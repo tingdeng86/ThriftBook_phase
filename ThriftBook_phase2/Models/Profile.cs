@@ -10,7 +10,6 @@ namespace rolesDemoSSD.Models
 {
     public class Profile
     {
-        //[Key]
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BuyerId { get; set; }
 

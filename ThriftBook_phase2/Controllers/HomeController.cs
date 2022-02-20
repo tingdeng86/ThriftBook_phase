@@ -35,18 +35,6 @@ namespace ThriftBook_phase2.Controllers
             return View(bookView);
         }
 
-        //[Authorize]
-        //public IActionResult SecureArea()
-        //{
-
-        //    string userName = User.Identity.Name;
-
-
-        //    var registeredUser = _context.MyRegisteredUsers.Where(ru => ru.Email == userName)
-        //                        .FirstOrDefault();// Use FirstOrDefault() when getting one item
-
-        //    return View(registeredUser);
-        //}
 
         public IActionResult Privacy()
         {

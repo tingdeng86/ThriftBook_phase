@@ -19,7 +19,7 @@ namespace ThriftBook_phase2.Data
         public DbSet<Book> Book { get; set; }
         public DbSet<BookRating> BookRating { get; set; }
         public DbSet<BookInvoice> BookInvoice { get; set; }
-        public DbSet<Buyer> Buyer { get; set; }
+        public DbSet<Profile> Profile { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
 
@@ -32,7 +32,7 @@ namespace ThriftBook_phase2.Data
                .HasKey(bi => new { bi.TransactionId });
             // Define foreign keys here. Do not use foreign key annotations.
             modelBuilder.Entity<Invoice>()
-                .HasOne(c => c.Buyer)
+                .HasOne(c => c.Profile)
                 .WithMany(c => c.Invoices)
                 .HasForeignKey(fk => new { fk.BuyerId })
                 .OnDelete(DeleteBehavior.Restrict);
@@ -60,7 +60,7 @@ namespace ThriftBook_phase2.Data
                 .HasForeignKey(fk => new { fk.BookId })
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<BookRating>()
-                .HasOne(c => c.Buyer)
+                .HasOne(c => c.Profile)
                 .WithMany(c => c.BookRatings)
                 .HasForeignKey(fk => new { fk.BuyerId })
                 .OnDelete(DeleteBehavior.Restrict);
@@ -128,8 +128,8 @@ namespace ThriftBook_phase2.Data
                 }
                 );
 
-            modelBuilder.Entity<Buyer>().HasData(
-                new Buyer
+            modelBuilder.Entity<Profile>().HasData(
+                new Profile
                 {
                     BuyerId = 1,
                     FirstName = "Keanu",
@@ -140,7 +140,7 @@ namespace ThriftBook_phase2.Data
                     PostalCode = "90210",
                     PhoneNumber = "123-456-7890"
                 },
-                new Buyer
+                new Profile
                 {
                     BuyerId = 2,
                     FirstName = "Tiger",
@@ -151,7 +151,7 @@ namespace ThriftBook_phase2.Data
                     PostalCode = "10101",
                     PhoneNumber = "210-654-3218"
                 },
-                new Buyer
+                new Profile
                 {
                     BuyerId = 3,
                     FirstName = "Homer",
@@ -162,7 +162,7 @@ namespace ThriftBook_phase2.Data
                     PostalCode = "12121",
                     PhoneNumber = "123-321-3165"
                 },
-                new Buyer
+                new Profile
                 {
                     BuyerId = 4,
                     FirstName = "Daenerys",
@@ -173,7 +173,7 @@ namespace ThriftBook_phase2.Data
                     PostalCode = "13337",
                     PhoneNumber = "654-321-6458"
                 },
-                new Buyer
+                new Profile
                 {
                     BuyerId = 5,
                     FirstName = "Ting",

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using ThriftBook_phase2.Models;
+using ThriftBook_phase2.ViewModels;
 
 namespace ThriftBook_phase2.Data
 {
@@ -292,5 +293,7 @@ namespace ThriftBook_phase2.Data
                }
             );
         }
+
+        public DbSet<ThriftBook_phase2.ViewModels.BookVM> BookVM { get; set; }
     }
 }

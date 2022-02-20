@@ -40,7 +40,7 @@ namespace ThriftBook_phase2.Repositories
             return singleBookRating;
         }
 
-        public IQueryable<BookRating> AllSingleBookRatings(Profile currentRegisteredUser, int bookId)
+        public IQueryable<BookRating> AllSingleBookRatings(int bookId)
         {
             //Getting ALL BookRatings for a SPECIFIC book
             var allBookRatings = from br in _context.BookRating
@@ -52,6 +52,8 @@ namespace ThriftBook_phase2.Repositories
                                  };
             return allBookRatings;
         }
+
+
 
     }
 }

@@ -26,20 +26,30 @@ namespace ThriftBook_phase2.Controllers
             return View(); 
         }
 
-
-
             public IActionResult CurrentBookRating(int bookId)
         {
+            //Getting SINGLE BookRating obj made by the current user for a SPECIFIC book
+            ////////////////////////////////////////////////////////////////////////
             //Getting current user profile object
             string userEmail = User.Identity.Name;
             ProfileRepo prRepo = new ProfileRepo(_context);
             var currentRegisteredUser = prRepo.GetLoggedInUser(userEmail);
-            //Seeking book review for the registered/signed-in user by book id passed from the link in html (ViewBooks)
-            BookRatingRepo brRepo = new BookRatingRepo(_context);
-            var allBookRatings = brRepo.SingleBookRating(currentRegisteredUser, bookId);
-            
 
-            return View(currentRegisteredUser);
+            //Seeking book review for the registered/signed-in user by book id passed from the link in html (ViewBooks).
+            BookRatingRepo brRepo = new BookRatingRepo(_context);
+            var singleBookRatingByUser = brRepo.SingleBookRating(currentRegisteredUser, bookId);
+
+            return View(singleBookRatingByUser);
+        }
+
+
+        public IActionResult GetAllBookRatings(int bookId)
+        {
+            //Getting ALL BookRatings for a SPECIFIC book, id of which is passed from the HTML (ViewBooks) page. 
+
+            BookRatingRepo brRepo = new BookRatingRepo(_context);
+            var AllSingleBookRatings = brRepo.AllSingleBookRatings(bookId);
+            return View(AllSingleBookRatings);
         }
     }
 }

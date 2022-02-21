@@ -25,10 +25,49 @@ namespace ThriftBook_phase2.Controllers
         }
             
         //Display Index with Detail view
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
-            var bookView = _context.Book;
-            return View(bookView);
+            ViewBag.TitleSortParam = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewBag.AuthorSortParam = String.IsNullOrEmpty(sortOrder) ? "author_desc" : "";
+            ViewBag.GenreSortParam = String.IsNullOrEmpty(sortOrder) ? "genre_desc" : "";
+            ViewBag.QualitySortParam = String.IsNullOrEmpty(sortOrder) ? "quality_desc" : "";
+            ViewBag.QuantitySortParam = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
+            ViewBag.PriceSortParam = sortOrder == "Price" ? "price_desc" : "Price";
+
+            var books = from b in _context.Book
+                        select b;
+
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(b => b.Title.ToLower().Contains(searchString) || b.Author.ToLower().Contains(sortOrder));
+            }
+
+            switch(sortOrder)
+            {
+                case "title_desc":
+                    books = books.OrderByDescending(s => s.Title);
+                    break;
+                case "author_desc":
+                    books = books.OrderByDescending(s => s.Author);
+                    break;
+                case "genre_desc":
+                    books = books.OrderByDescending(s => s.Gennre);
+                    break;
+                case "quality_desc":
+                    books = books.OrderByDescending(s => s.BookQuality);
+                    break;
+                case "Quantity":
+                    books = books.OrderBy(s => s.BookQuantity);
+                    break;
+                case "Price":
+                    books = books.OrderBy(s => s.Price);
+                    break;
+                default:
+                    books = books.OrderBy(s => s.Title);
+                    break;
+            }
+            
+            return View(books.ToList());
         }        
 
         public ActionResult Details(int bookID)

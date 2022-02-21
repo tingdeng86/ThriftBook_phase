@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using ThriftBook_phase2.Data;
 using Microsoft.AspNetCore.Authorization;
-
 namespace ThriftBook_phase2.Repositories
 {
     public class ProfileRepo
@@ -28,21 +27,35 @@ namespace ThriftBook_phase2.Repositories
 
         public void EditingUserInfo(Profile currentUserProfile, string userEmail)
         {
-
-            //var currentUser = _context.Profile.Where(ru => ru.Email == userName)
-            //        .FirstOrDefault();
-            //ProfileRepo prRepo = new ProfileRepo(_context);
             var currentRegisteredUser = GetLoggedInUser(userEmail);
-
-            currentRegisteredUser.FirstName = currentUserProfile.FirstName;
-            currentRegisteredUser.LastName = currentUserProfile.LastName;
-            currentRegisteredUser.Email = currentUserProfile.Email;
-            currentRegisteredUser.City = currentUserProfile.City;
-            currentRegisteredUser.Street = currentUserProfile.Street;
-            currentRegisteredUser.PostalCode = currentUserProfile.PostalCode;
-            currentRegisteredUser.PhoneNumber = currentUserProfile.PhoneNumber;
-            _context.SaveChanges();
-
+            try
+            {
+                currentRegisteredUser.FirstName = currentUserProfile.FirstName;
+                currentRegisteredUser.LastName = currentUserProfile.LastName;
+                currentRegisteredUser.Email = currentUserProfile.Email;
+                currentRegisteredUser.City = currentUserProfile.City;
+                currentRegisteredUser.Street = currentUserProfile.Street;
+                currentRegisteredUser.PostalCode = currentUserProfile.PostalCode;
+                currentRegisteredUser.PhoneNumber = currentUserProfile.PhoneNumber;
+            }
+            catch (Exception ex)
+            {
+                //Need to add exception hangling here. ViewBag, since the method returns nothing?
+            }
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                //Need to add exception hangling here. ViewBag, since the method returns nothing?
+            }
         }
+
+        //Question for Pat: 
+        //is there a neet for a separate method to save to db? there's only one line of text _context.SaveChanges() which is much shorter than creating a separate
+        //method and passing the object there, finding the logged in user again. 
+        //
+
     }
 }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "ViewBooks";
 }
 
-<h1>ViewBooks</h1>
+<h1>Available Books</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -43,7 +43,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.Title)               
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Author)
@@ -58,7 +58,7 @@
                 @Html.DisplayFor(modelItem => item.BookQuantity)
             </td>
             <td>
-                <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Alternate Text" />
+                <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Book-Image" />
             </td>
             <td>
                 $@Html.DisplayFor(modelItem => item.Price)
@@ -68,7 +68,7 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
+                @Html.ActionLink("Add To Cart", "Details", new { BookID = item.BookId}) |
                 <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
             </td>
         </tr>

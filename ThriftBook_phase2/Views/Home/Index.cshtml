@@ -14,25 +14,27 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    @*@Html.DisplayNameFor(model => model.Title)*@
+                    @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Author)
+                    @*@Html.DisplayNameFor(model => model.Author)*@
+                    @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParam })
                 </th>
                 <th>
-                    Genre
+                    @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
                 </th>
                 <th>
-                    Quality
+                    @Html.ActionLink("Quality", "Index", new { sortOrder = ViewBag.QualitySortParam })
                 </th>
                 <th>
-                    Quantity
+                    @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParam })
                 </th>
                 <th>
                     Photo
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Price)
+                    @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParam })
                 </th>
                 <th>
                     Store Name

@@ -72,5 +72,7 @@
 </table>
 <p>Total Items: @ViewBag.TotalItems</p>
 <p>Subtotal: $@ViewBag.SubTotal</p>
-@Html.ActionLink("AddToCart1", "AddToCart", new { id = 1 })
-@Html.ActionLink("AddToCart2", "AddToCart", new { id = 2 })
+<p>Tax: $@ViewBag.Tax</p>
+<p>Total: $@ViewBag.Total</p>
+@Html.ActionLink("Proceed to Checkout", "Checkout")
+@*@Html.ActionLink("AddToCart2", "AddToCart", new { id = 2 })*@

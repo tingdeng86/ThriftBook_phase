@@ -227,13 +227,13 @@ namespace ThriftBook_phase2.Migrations
                     b.Property<string>("BookQuality")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("BookQuantity")
+                    b.Property<int>("BookQuantity")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Gennre")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StoreName")
@@ -372,7 +372,7 @@ namespace ThriftBook_phase2.Migrations
                     b.Property<string>("Comments")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal?>("Rating")
+                    b.Property<decimal>("Rating")
                         .HasColumnType("TEXT");
 
                     b.HasKey("BookId", "BuyerId");
@@ -419,6 +419,61 @@ namespace ThriftBook_phase2.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ThriftBook_phase2.Models.IPN", b =>
+                {
+                    b.Property<string>("paymentID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("cart")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("create_time")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("currency")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("custom")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("intent")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("payerCountryCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("payerEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("payerFirstName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("payerID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("payerLastName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("payerMiddleName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("payerStatus")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("paymentMethod")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("paymentState")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("paymentID");
+
+                    b.ToTable("IPNs");
+                });
+
             modelBuilder.Entity("rolesDemoSSD.Models.Invoice", b =>
                 {
                     b.Property<int>("TransactionId")
@@ -428,13 +483,13 @@ namespace ThriftBook_phase2.Migrations
                     b.Property<int?>("BookId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("BuyerId")
+                    b.Property<int>("BuyerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("DateOfTransaction")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal?>("TotalPrice")
+                    b.Property<decimal>("TotalPrice")
                         .HasColumnType("TEXT");
 
                     b.HasKey("TransactionId");
@@ -706,7 +761,8 @@ namespace ThriftBook_phase2.Migrations
                     b.HasOne("rolesDemoSSD.Models.Profile", "Profile")
                         .WithMany("Invoices")
                         .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Profile");
                 });

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace ThriftBook_phase2.Controllers
     // The annotation could include a comma separated list or different
     // roles.
     //[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Manager")]
     public class UserRoleController : Controller
     {
         private ApplicationDbContext _context;

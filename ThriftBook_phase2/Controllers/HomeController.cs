@@ -10,6 +10,7 @@ using ThriftBook_phase2.Data;
 using ThriftBook_phase2.Models;
 using ThriftBook_phase2.Repositories;
 using ThriftBook_phase2.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace ThriftBook_phase2.Controllers
 {
@@ -27,6 +28,10 @@ namespace ThriftBook_phase2.Controllers
         //Display Index with Detail view
         public IActionResult Index(string sortOrder, string searchString)
         {
+
+            HttpContext.Session.SetString("DUMB", "DUMB");          
+           
+
             ViewBag.TitleSortParam = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewBag.AuthorSortParam = String.IsNullOrEmpty(sortOrder) ? "author_desc" : "";
             ViewBag.GenreSortParam = String.IsNullOrEmpty(sortOrder) ? "genre_desc" : "";
@@ -68,6 +73,7 @@ namespace ThriftBook_phase2.Controllers
             }
             
             return View(books.ToList());
+
         }        
 
         public ActionResult Details(int bookID)
@@ -141,6 +147,25 @@ namespace ThriftBook_phase2.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
+        public ActionResult AddToCart(int id)
+        {
+            string sessionId = HttpContext.Session.Id;
+            CartRepo cartRepo = new CartRepo(_context);
+            var cartItem = cartRepo.Find(id, sessionId);
+            if (cartItem == null)
+            {
+                int cartItemId = cartRepo.Add(id, sessionId);
+                return RedirectToAction("Details", "Cart", new { id = cartItemId });
+            }
+            else
+            {
+                // If the item does exist in the cart,                  
+                // then add one to the quantity.
+                cartRepo.increaseQuantity(cartItem.CartItemId);
+                return RedirectToAction("Details", "Cart", new { id = cartItem.CartItemId });
+            }
+        }
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

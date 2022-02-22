@@ -419,59 +419,93 @@ namespace ThriftBook_phase2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ThriftBook_phase2.Models.IPN", b =>
+            modelBuilder.Entity("ThriftBook_phase2.Models.Cart", b =>
                 {
-                    b.Property<string>("paymentID")
+                    b.Property<int>("CartItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SessionId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("amount")
+                    b.HasKey("CartItemId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Cart");
+                });
+
+            modelBuilder.Entity("ThriftBook_phase2.ViewModels.BookVM", b =>
+                {
+                    b.Property<int>("BookID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Author")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("cart")
+                    b.Property<string>("BookPhoto")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("create_time")
+                    b.Property<string>("BookQuality")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("currency")
+                    b.Property<int>("BookQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Genre")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("custom")
+                    b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("intent")
+                    b.Property<string>("StoreName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("payerCountryCode")
+                    b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("payerEmail")
+                    b.HasKey("BookID");
+
+                    b.ToTable("BookVM");
+                });
+
+            modelBuilder.Entity("ThriftBook_phase2.ViewModels.CartVM", b =>
+                {
+                    b.Property<int>("CartItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("BookPhoto")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("payerFirstName")
+                    b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("payerID")
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SessionId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("payerLastName")
+                    b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("payerMiddleName")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("TotalQuantity")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("payerStatus")
-                        .HasColumnType("TEXT");
+                    b.HasKey("CartItemId");
 
-                    b.Property<string>("paymentMethod")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("paymentState")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("paymentID");
-
-                    b.ToTable("IPNs");
+                    b.ToTable("CartVM");
                 });
 
             modelBuilder.Entity("rolesDemoSSD.Models.Invoice", b =>
@@ -750,6 +784,17 @@ namespace ThriftBook_phase2.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("ThriftBook_phase2.Models.Cart", b =>
+                {
+                    b.HasOne("ThriftBook_phase2.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("rolesDemoSSD.Models.Invoice", b =>

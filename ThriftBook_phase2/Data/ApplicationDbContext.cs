@@ -22,6 +22,7 @@ namespace ThriftBook_phase2.Data
         public DbSet<Profile> Profile { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<Cart> Cart { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -294,6 +295,9 @@ namespace ThriftBook_phase2.Data
             );
         }
 
+        public DbSet<ThriftBook_phase2.ViewModels.CartVM> CartVM { get; set; }
+
         public DbSet<ThriftBook_phase2.ViewModels.BookVM> BookVM { get; set; }
+
     }
 }

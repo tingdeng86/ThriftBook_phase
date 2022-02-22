@@ -68,6 +68,11 @@
     </dl>
 </div>
 <div>
-    @*@Html.ActionLink("Edit", "Edit", new { BookID = Model.BookID }, null)  |*@
+    @Html.ActionLink("AddToCart", "AddToCart", new { id = Model.BookID }, null)  |
     <a asp-action="Index">Back to List</a>
 </div>
+@*<form asp-action="AddToCart" asp-route-id="model.BookID">
+    <div class="form-group">
+        <input type="submit" value="Add to Cart" class="btn btn-primary" />
+    </div>
+</form>*@

@@ -70,6 +70,7 @@
                 <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
                 @Html.ActionLink("Add To Cart", "Details", new { BookID = item.BookId}) |
                 <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+                <a asp-controller="BookRating" asp-action="Create" asp-route-bookId="@item.BookId">Create a Review</a>
             </td>
         </tr>
 }

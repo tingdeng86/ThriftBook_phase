@@ -15,7 +15,7 @@ namespace ThriftBook_phase2.Data
             : base(options)
         {
         }
-
+        public DbSet<IPN> IPNs { get; set; }
         public DbSet<Book> Book { get; set; }
         public DbSet<BookRating> BookRating { get; set; }
         public DbSet<BookInvoice> BookInvoice { get; set; }

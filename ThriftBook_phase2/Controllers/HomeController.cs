@@ -152,8 +152,9 @@ namespace ThriftBook_phase2.Controllers
         {
             string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
+            var book = cartRepo.GetBook(id);
             var cartItem = cartRepo.Find(id, sessionId);
-            if (cartItem == null)
+            if (cartItem == null && book.BookQuantity>0)
             {
                 int cartItemId = cartRepo.Add(id, sessionId);
                 return RedirectToAction("Details", "Cart", new { id = cartItemId });

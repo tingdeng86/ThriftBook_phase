@@ -134,5 +134,31 @@ namespace ThriftBook_phase2.Repositories
             }
             return cartItem;
         }
+
+        public IQueryable<Book> UpdateBooks(string sessionId)
+        {
+            var query = GetLists(sessionId);
+            foreach(var item in query)
+            {
+                Book book = (from b in _context.Book
+                             where b.BookId == item.BookId
+                             select b).FirstOrDefault();
+                book.BookQuantity = book.BookQuantity - item.Quantity;
+                
+            }
+            _context.SaveChanges();
+            var books = from b in _context.Book
+                        from q in query
+                        where b.BookId == q.BookId
+                        select b;
+            return books;
+        }
+
+        public Book GetBook(int id)
+        {
+            Book book = (from b in _context.Book
+                         select b).FirstOrDefault();
+            return book;
+        }
     }
 }

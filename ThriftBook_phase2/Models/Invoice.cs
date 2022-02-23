@@ -14,7 +14,7 @@ namespace rolesDemoSSD.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransactionId { get; set; }
         public int BuyerId { get; set; }
-        public decimal TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }       
         public DateTime? DateOfTransaction { get; set; }
 
         public virtual Profile Profile { get; set; }

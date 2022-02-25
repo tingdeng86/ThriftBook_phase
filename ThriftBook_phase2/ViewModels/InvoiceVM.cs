@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+
+using System.ComponentModel;
+
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,12 +12,17 @@ namespace ThriftBook_phase2.ViewModels
 {
     public class InvoiceVM
     {
-        [Key, Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string TransactionId { get; set; }
+
+        [Key]
+        [DisplayName("Transaction ID")]
+        public int TransactionId { get; set; }
+        [DisplayName("Buyer ID")]
         public int BuyerId { get; set; }
+        [DisplayName("Total Price")]
         public decimal TotalPrice { get; set; }
+        [DisplayName("Transaction Date")]
         public DateTime? DateOfTransaction { get; set; }
-        public int BookId { get; set; }
+       
+
     }
 }

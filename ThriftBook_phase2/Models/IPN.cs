@@ -12,7 +12,6 @@ namespace ThriftBook_phase2.Models
         // This lets you link the request to paypal with the response.
         public string custom { get; set; }
 
-
         [Key, Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string TransactionId { get; set; }

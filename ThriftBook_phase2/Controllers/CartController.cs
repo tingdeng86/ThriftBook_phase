@@ -79,9 +79,16 @@ namespace ThriftBook_phase2.Controllers
         }
 
         [Authorize]
-        public ActionResult Checkout()
+        public ActionResult Checkout(string sessionId, decimal totalPayment)
         {
-            return RedirectToAction("Index", "Cart");
+            string userEmail = User.Identity.Name;
+            ProfileRepo prRepo = new ProfileRepo(_context);
+            int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+
+            PaymentRepo pmRepo = new PaymentRepo(_context);
+            IPN currentOrder = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+            return View(currentOrder);
+            //return RedirectToAction("Index", "Cart");
         }
     }
 }

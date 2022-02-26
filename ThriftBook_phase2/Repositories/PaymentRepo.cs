@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ThriftBook_phase2.Data;
 using ThriftBook_phase2.Models;
+using ThriftBook_phase2.ViewModels;
 
 namespace ThriftBook_phase2.Repositories
 {
@@ -12,31 +13,24 @@ namespace ThriftBook_phase2.Repositories
     public class PaymentRepo
     {
         private readonly ApplicationDbContext _context;
+
+        public object ViewData { get; private set; }
+
         public PaymentRepo(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IPN GetOrderData(string sessionId, decimal totalPrice, int buyerId)
+        public IQueryable<CartVM> GetOrderData(string sessionId, decimal totalPrice, int buyerId)
         {
-            //ProfileRepo prRepo = new ProfileRepo(_context);
-            //int currentUserId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+            //List<Cart> BooksBought = GetBooksBySession(sessionId);
 
-            List<Cart> BooksBought = GetBooksBySession(sessionId);
+            CartRepo cartRepo = new CartRepo(_context);
+            IQueryable<CartVM> BooksBought = cartRepo.GetLists(sessionId);
+            ViewData["TotalPrice"] = "Dana";
+            ViewData["BuyerID"] = buyerId;
 
-            foreach (var eachBookBought in BooksBought)
-            {
-                var variable = eachBookBought.BookId;
-                var lll = eachBookBought.Quantity;
-            }
-
-            IPN currentCheckout = new IPN()
-            {
-                BuyerId = buyerId,
-                TotalPrice = totalPrice,
-                DateOfTransaction = DateTime.Now
-            };
-            return currentCheckout;
+            return BooksBought;
         }
 
         public List<Cart> GetBooksBySession(string sessionId)

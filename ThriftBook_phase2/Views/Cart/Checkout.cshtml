@@ -1,4 +1,4 @@
-﻿@model ThriftBook_phase2.Models.IPN
+﻿@model IEnumerable<ThriftBook_phase2.ViewModels.CartVM>
 
 @{
     ViewData["Title"] = "Checkout";
@@ -6,55 +6,68 @@
 
 <h1>Checkout</h1>
 
-<div>
-    <h4>IPN</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.custom)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.custom)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BuyerId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BuyerId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfTransaction)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOfTransaction)
-        </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Create_time)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Create_time)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.payerEmail)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.payerEmail)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.paymentState)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.paymentState)
-        </dd>*@
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.TransactionId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SessionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookPhoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalQuantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SessionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookPhoto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalQuantity)
+            </td>
+            @ViewBag.TotalPrice
+            @ViewBag.BuyerId
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CartItemId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CartItemId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CartItemId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

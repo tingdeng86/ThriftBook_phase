@@ -40,7 +40,6 @@ namespace ThriftBook_phase2.Controllers
         }
 
 
-
         public ActionResult Home()
         {
             return RedirectToAction("Index", "Home");
@@ -79,15 +78,16 @@ namespace ThriftBook_phase2.Controllers
         }
 
         [Authorize]
-        public ActionResult Checkout(string sessionId, decimal totalPayment)
+        public IActionResult Checkout(string sessionId, decimal totalPayment)
         {
             string userEmail = User.Identity.Name;
             ProfileRepo prRepo = new ProfileRepo(_context);
             int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
 
             PaymentRepo pmRepo = new PaymentRepo(_context);
-            IPN currentOrder = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
-            return View(currentOrder);
+            var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+            return View(cartObject);
+
             //return RedirectToAction("Index", "Cart");
         }
     }

@@ -18,7 +18,7 @@ namespace ThriftBook_phase2.Models
         public int BuyerId { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime? DateOfTransaction { get; set; }
-        public List<int> BookIds { get; set; }
+        public int BookId { get; set; }
 
         //public string cart { get; set; }
         //public string Create_time { get; set; }

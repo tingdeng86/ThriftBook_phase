@@ -21,7 +21,7 @@ namespace ThriftBook_phase2.Controllers
         // Home page shows list of items. Item price is set through ViewBag.
         public IActionResult Index()
         {
-            ViewBag.TotalPrice = "3.55";
+            //ViewBag.TotalPrice = "3.55";
             var items = _context.IPNs;
             return View(items);
         }
@@ -43,10 +43,11 @@ namespace ThriftBook_phase2.Controllers
             return Json(ipn);
         }
 
+
         // Show transaction detail. 
         public IActionResult FinishShopping(string paymentID)
         {
-            IPN transaction = _context.IPNs.Where(t => t.paymentID == paymentID).FirstOrDefault();
+            IPN transaction = _context.IPNs.Where(t => t.TransactionId == paymentID).FirstOrDefault();
             return View(transaction);
         }
 

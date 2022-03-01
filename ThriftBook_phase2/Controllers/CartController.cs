@@ -34,11 +34,10 @@ namespace ThriftBook_phase2.Controllers
             var subTotals = cartRepo.GetSubTotal(sessionId);
             ViewData["TotalItems"] = totalItems;
             ViewData["SubTotal"] = subTotals;
-            ViewData["Tax"] = subTotals*0.12m;
-            ViewData["Total"] = subTotals*1.12m;
+            ViewData["Tax"] = Math.Round(subTotals * 0.12m, 2, MidpointRounding.ToEven);
+            ViewData["Total"] = Math.Round(subTotals * 1.12m, 2, MidpointRounding.ToEven);
             return View(query);
         }
-
 
 
         public ActionResult Home()
@@ -79,9 +78,19 @@ namespace ThriftBook_phase2.Controllers
         }
 
         [Authorize]
-        public ActionResult Checkout()
+        public IActionResult Checkout(string sessionId, decimal totalPayment)
         {
-            return RedirectToAction("Index", "Cart");
+            ViewData["TotalPrice"] = totalPayment;
+
+            string userEmail = User.Identity.Name;
+            ProfileRepo prRepo = new ProfileRepo(_context);
+            int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+            ViewData["BuyerID"] = buyerId;
+
+            PaymentRepo pmRepo = new PaymentRepo(_context);
+            var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+            return View(cartObject);
+            //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
         }
     }
 }

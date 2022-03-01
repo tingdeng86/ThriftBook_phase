@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,27 +12,25 @@ namespace ThriftBook_phase2.Models
         // This lets you link the request to paypal with the response.
         public string custom { get; set; }
 
-        [Display(Name = "ID")]
-        [Key] // Define primary key.
-        public string paymentID { get; set; }
-        public string cart { get; set; }
-        public string create_time { get; set; }
+        [Key, Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string TransactionId { get; set; }
+        public int BuyerId { get; set; }
+        public decimal TotalPrice { get; set; }
+        public DateTime? DateOfTransaction { get; set; }
+        public int BookId { get; set; }
+
+        //public string cart { get; set; }
+        //public string Create_time { get; set; }
 
         // Payer data.
-        public string payerID { get; set; }
-        public string payerFirstName { get; set; }
-        public string payerLastName { get; set; }
-        public string payerMiddleName { get; set; }
-        public string payerEmail { get; set; }
-        public string payerCountryCode { get; set; }
-        public string payerStatus { get; set; }
+        //public string payerEmail { get; set; }
 
         // Payment data.
-        public string amount { get; set; }
-        public string currency { get; set; }
-        public string intent { get; set; }
-        public string paymentMethod { get; set; }
-        public string paymentState { get; set; }
+        //public string amount { get; set; }
+        //public string currency { get; set; }
+        //public string paymentMethod { get; set; }
+        //public string paymentState { get; set; }
 
     }
 }

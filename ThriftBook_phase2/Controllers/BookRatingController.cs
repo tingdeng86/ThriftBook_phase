@@ -81,7 +81,7 @@ namespace ThriftBook_phase2.Controllers
             BookRatingRepo brRepo = new BookRatingRepo(_context);
             brRepo.CreateReview(newBookRating, userEmail);
 
-            return RedirectToAction(nameof(CurrentBookRating), new {newBookRating.BookId});
+            return RedirectToAction("CurrentBookRating", "BookRating", new { newBookRating.BookId });
 
         }
 
@@ -110,7 +110,7 @@ namespace ThriftBook_phase2.Controllers
 
             BookRatingRepo brRepo = new BookRatingRepo(_context);
             brRepo.EditReview(editedBookRating, userEmail);
-            return RedirectToAction(nameof(CurrentBookRating), new { editedBookRating.BookId});
+            return RedirectToAction("CurrentBookRating", "BookRating", new { editedBookRating.BookId});
         }
 
 

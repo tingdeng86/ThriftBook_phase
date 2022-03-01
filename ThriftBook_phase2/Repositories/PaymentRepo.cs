@@ -23,12 +23,8 @@ namespace ThriftBook_phase2.Repositories
 
         public IQueryable<CartVM> GetOrderData(string sessionId, decimal totalPrice, int buyerId)
         {
-            //List<Cart> BooksBought = GetBooksBySession(sessionId);
-
             CartRepo cartRepo = new CartRepo(_context);
             IQueryable<CartVM> BooksBought = cartRepo.GetLists(sessionId);
-            ViewData["TotalPrice"] = "Dana";
-            ViewData["BuyerID"] = buyerId;
 
             return BooksBought;
         }

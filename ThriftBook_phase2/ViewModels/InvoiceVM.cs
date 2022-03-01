@@ -18,6 +18,14 @@ namespace ThriftBook_phase2.ViewModels
         public decimal TotalPrice { get; set; }
         [DisplayName("Transaction Date")]
         public DateTime? DateOfTransaction { get; set; }
-       
-    }
+        [DisplayName("First Name")]
+        public string FirstName { get; set; }
+        [DisplayName("Last Name")]
+        public string LastName { get; set; }
+        [DisplayName("Phone Number")]
+        public string PhoneNumber { get; set; }
+        [DisplayName("Postal Code")]
+        public string PostalCode { get; set; }       
+
+    } 
 }

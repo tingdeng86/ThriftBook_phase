@@ -19,14 +19,19 @@ namespace ThriftBook_phase2.Repositories
 
         public IQueryable<InvoiceVM> GetAll()
         {
-            var query = from v in db.Invoice                       
-
-                        select new InvoiceVM()
-                        {                                                        
-                            TransactionId = v.TransactionId,
-                            BuyerId = v.BuyerId,
-                            TotalPrice = v.TotalPrice,
-                            DateOfTransaction = v.DateOfTransaction                          
+            var query = from i in db.Invoice
+                        from b in db.Profile
+                        where i.BuyerId == b.BuyerId
+                        select new InvoiceVM
+                        {
+                            TransactionId = i.TransactionId,
+                            BuyerId = i.BuyerId,
+                            TotalPrice = i.TotalPrice,
+                            DateOfTransaction = i.DateOfTransaction,
+                            FirstName = b.FirstName,
+                            LastName = b.LastName,
+                            PhoneNumber = b.PhoneNumber,
+                            PostalCode = b.PostalCode
                         };
             return query;
         }

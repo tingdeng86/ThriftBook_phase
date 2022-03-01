@@ -39,8 +39,6 @@ namespace ThriftBook_phase2.Controllers
             return View(query);
         }
 
-
-
         public ActionResult Home()
         {
             return RedirectToAction("Index", "Home");
@@ -78,10 +76,13 @@ namespace ThriftBook_phase2.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Checkout()
         {
-            return RedirectToAction("Index", "Cart");
+            string sessionId = HttpContext.Session.Id;
+            CartRepo cartRepo = new CartRepo(_context);
+            var books = cartRepo.UpdateBooks(sessionId);
+            return View(books);
         }
     }
 }

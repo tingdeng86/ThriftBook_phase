@@ -36,8 +36,8 @@ namespace ThriftBook_phase2.Controllers
             var subTotals = cartRepo.GetSubTotal(sessionId);
             ViewData["TotalItems"] = totalItems;
             ViewData["SubTotal"] = subTotals;
-            ViewData["Tax"] = subTotals*0.12m;
-            ViewData["Total"] = subTotals*1.12m;
+            ViewData["Tax"] = Math.Round(subTotals * 0.12m, 2, MidpointRounding.ToEven);
+            ViewData["Total"] = Math.Round(subTotals * 1.12m, 2, MidpointRounding.ToEven);
             return View(query);
         }
 

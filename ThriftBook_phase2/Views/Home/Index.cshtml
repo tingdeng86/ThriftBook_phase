@@ -13,22 +13,21 @@
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    @*@Html.DisplayNameFor(model => model.Title)*@
+                <th>                  
                     @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam })
                 </th>
                 <th>
-                    @*@Html.DisplayNameFor(model => model.Author)*@
-                    @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParam })
+                    @Html.DisplayNameFor(model => model.Author)                 
                 </th>
                 <th>
                     @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
                 </th>
                 <th>
-                    @Html.ActionLink("Quality", "Index", new { sortOrder = ViewBag.QualitySortParam })
+                    @Html.DisplayNameFor(model => model.BookQuality)
+                  
                 </th>
                 <th>
-                    @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParam })
+                    @Html.DisplayNameFor(model => model.BookQuantity)                 
                 </th>
                 <th>
                     Photo

@@ -14,6 +14,8 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.SessionId)
+                @{ 
+                }
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BookId)
@@ -40,7 +42,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.SessionId)
                 </td>
+
                 <td>
+
+                <td asp-for="@item.BookId">
+
                     @Html.DisplayFor(modelItem => item.BookId)
                 </td>
                 <td>
@@ -69,11 +75,19 @@
         }
     </tbody>
 </table>
+
 <p>Total Items: @ViewBag.TotalItems</p>
 <p>Subtotal: $@ViewBag.SubTotal</p>
 <p>Tax: $@ViewBag.Tax</p>
 <p>Total: $@ViewBag.Total</p>
+
 @Html.ActionLink("Checkout Test ", "Checkout")
 <br />
 @Html.ActionLink("Continue Shopping", "Home")
+
+
+@Html.ActionLink("Proceed to Checkout", "Checkout", new { TotalPrice = ViewBag.Total, SessionId = Model.ToList().FirstOrDefault().SessionId })
+
+
+
 @*@Html.ActionLink("AddToCart2", "AddToCart", new { id = 2 })*@

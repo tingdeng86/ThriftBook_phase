@@ -53,7 +53,33 @@ namespace ThriftBook_phase2.Repositories
             return allBookRatings;
         }
 
+        public void CreateReview(BookRating newBookRating, string userEmail)
+        {
+            _context.BookRating.Add(newBookRating);
+            _context.SaveChanges();
+        }
 
 
-    }
+        public void EditReview(BookRating editedBookReview, string userEmail)
+        {
+
+            ProfileRepo prRepo = new ProfileRepo(_context);
+            //Obtaining the BuyerID from the object of the registered in user and insert into object
+            // of newly created book rating.
+            BookRating editedReview = new BookRating
+            {
+                BuyerId = prRepo.GetLoggedInUser(userEmail).BuyerId,
+                Rating = editedBookReview.Rating,
+                Comments = editedBookReview.Comments
+            };
+
+        }
+
+
+        public void UpdateDb()
+        {
+
+        }
+
+        }
 }

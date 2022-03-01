@@ -15,7 +15,7 @@ namespace ThriftBook_phase2.Data
             : base(options)
         {
         }
-
+        public DbSet<IPN> IPNs { get; set; }
         public DbSet<Book> Book { get; set; }
         public DbSet<BookRating> BookRating { get; set; }
         public DbSet<BookInvoice> BookInvoice { get; set; }
@@ -298,6 +298,8 @@ namespace ThriftBook_phase2.Data
         public DbSet<ThriftBook_phase2.ViewModels.CartVM> CartVM { get; set; }
 
         public DbSet<ThriftBook_phase2.ViewModels.BookVM> BookVM { get; set; }
+
+        public DbSet<ThriftBook_phase2.ViewModels.InvoiceVM> InvoiceVM { get; set; }
 
     }
 }

@@ -39,6 +39,10 @@ namespace ThriftBook_phase2.Controllers
             return View(query);
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         public ActionResult Home()
         {
             return RedirectToAction("Index", "Home");
@@ -76,6 +80,7 @@ namespace ThriftBook_phase2.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
+<<<<<<< HEAD
         //[Authorize]
         public ActionResult Checkout()
         {
@@ -83,6 +88,22 @@ namespace ThriftBook_phase2.Controllers
             CartRepo cartRepo = new CartRepo(_context);
             var books = cartRepo.UpdateBooks(sessionId);
             return View(books);
+=======
+        [Authorize]
+        public IActionResult Checkout(string sessionId, decimal totalPayment)
+        {
+            ViewData["TotalPrice"] = totalPayment;
+
+            string userEmail = User.Identity.Name;
+            ProfileRepo prRepo = new ProfileRepo(_context);
+            int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+            ViewData["BuyerID"] = buyerId;
+
+            PaymentRepo pmRepo = new PaymentRepo(_context);
+            var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+            return View(cartObject);
+            //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
+>>>>>>> master
         }
     }
 }

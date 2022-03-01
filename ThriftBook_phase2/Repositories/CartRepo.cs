@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using rolesDemoSSD.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -160,5 +161,27 @@ namespace ThriftBook_phase2.Repositories
                          select b).FirstOrDefault();
             return book;
         }
+
+        public Invoice CreateTransaction(decimal totalPrice, int buyerId, DateTime date)
+        {
+            Invoice invoice = new Invoice()
+            {
+                BuyerId = buyerId,
+                TotalPrice = totalPrice,
+                DateOfTransaction = date
+            };
+            _context.Invoice.Add(invoice);
+            _context.SaveChanges();
+            return invoice;
+        }
+
+        //public IQueryable<BookInvoice> CreateBookInvoice(string sessionId, int transationId)
+        //{
+        //    var query = GetLists(sessionId);
+        //    foreach(var item in query)
+        //    {
+        //        BookInvoice bookInvoice = new BookInvoice
+        //    }
+        //}
     }
 }

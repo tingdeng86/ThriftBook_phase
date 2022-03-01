@@ -15,7 +15,7 @@ namespace rolesDemoSSD.Models
         public int TransactionId { get; set; }
         public int BuyerId { get; set; }
         public decimal TotalPrice { get; set; }       
-        public DateTime? DateOfTransaction { get; set; }
+        public DateTime DateOfTransaction { get; set; }
 
         public virtual Profile Profile { get; set; }
         public virtual ICollection<BookInvoice> BookInvoices { get; set; }

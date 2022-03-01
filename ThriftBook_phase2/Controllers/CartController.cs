@@ -10,6 +10,7 @@ using ThriftBook_phase2.Models;
 using ThriftBook_phase2.ViewModels;
 using ThriftBook_phase2.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using rolesDemoSSD.Models;
 
 namespace ThriftBook_phase2.Controllers
 {
@@ -26,7 +27,8 @@ namespace ThriftBook_phase2.Controllers
         public IActionResult Index()
         {
             //sessionId changes all the time, after setting, it would not change
-            
+            HttpContext.Session.SetString("DUMB", "DUMB");
+
             string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
             var query = cartRepo.GetLists(sessionId);
@@ -39,10 +41,6 @@ namespace ThriftBook_phase2.Controllers
             return View(query);
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         public ActionResult Home()
         {
             return RedirectToAction("Index", "Home");
@@ -80,30 +78,43 @@ namespace ThriftBook_phase2.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-<<<<<<< HEAD
+
         //[Authorize]
-        public ActionResult Checkout()
+        public ActionResult CheckoutTest()
         {
             string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
             var books = cartRepo.UpdateBooks(sessionId);
             return View(books);
-=======
-        [Authorize]
-        public IActionResult Checkout(string sessionId, decimal totalPayment)
-        {
-            ViewData["TotalPrice"] = totalPayment;
+        }
 
+            [Authorize]
+        public IActionResult Checkout(string sessionId, decimal totalPayment)
+            {
+                ViewData["TotalPrice"] = totalPayment;
+
+                string userEmail = User.Identity.Name;
+                ProfileRepo prRepo = new ProfileRepo(_context);
+                int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+                ViewData["BuyerID"] = buyerId;
+
+                PaymentRepo pmRepo = new PaymentRepo(_context);
+                var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+                return View(cartObject);
+                //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
+
+            }
+
+        [Authorize]
+        public ActionResult CreateTransaction(decimal totalPrice, string sessionId)
+        {
             string userEmail = User.Identity.Name;
             ProfileRepo prRepo = new ProfileRepo(_context);
             int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
-            ViewData["BuyerID"] = buyerId;
-
-            PaymentRepo pmRepo = new PaymentRepo(_context);
-            var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
-            return View(cartObject);
-            //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
->>>>>>> master
+            DateTime date = DateTime.Now;
+            CartRepo cartRepo = new CartRepo(_context);
+            Invoice invoice = cartRepo.CreateTransaction(totalPrice, buyerId, date);
+            return View(invoice);
         }
     }
 }

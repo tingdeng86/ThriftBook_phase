@@ -21,7 +21,7 @@ namespace ThriftBook_phase2.ViewModels
         [DisplayName("Total Price")]
         public decimal TotalPrice { get; set; }
         [DisplayName("Transaction Date")]
-        public DateTime? DateOfTransaction { get; set; }
+        public DateTime?DateOfTransaction { get; set; }
         [DisplayName("Book Id")]
         public int BookId { get; set; }
 

@@ -21,28 +21,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a asp-area="" class="nav-link text-dark" asp-controller="Role" asp-action="Index">
-                                Roles
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-area="" class="nav-link text-dark" asp-controller="UserRole" asp-action="Index">
-                                User Roles
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BuyerList" asp-action="Index">Buyer List</a>
-                        </li>
+
+
                         @using (Html.BeginForm())
                         {
                             <li>
@@ -52,6 +32,8 @@
                                 </div>
                             </li>
                         }
+
+
                         @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
                         {
                             <li class="nav-item">
@@ -64,6 +46,11 @@
                                     User Roles
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a asp-area="" class="nav-link text-dark" asp-controller="Buyer" asp-action="Index">
+                                    Buyers
+                                </a>
+                            </li>
                         }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index">Profile</a>
@@ -71,7 +58,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
                         </li>
-                    </ul>                  
+
+
+                    </ul>
+                  
                     <partial name="_LoginPartial" />
                 </div>
             </div>

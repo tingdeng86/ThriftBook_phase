@@ -1,4 +1,4 @@
-﻿@model rolesDemoSSD.Models.Invoice
+﻿@model IEnumerable<ThriftBook_phase2.Models.BookInvoice>
 
 @{
     ViewData["Title"] = "CreateTransaction";
@@ -6,31 +6,44 @@
 
 <h1>CreateTransaction</h1>
 
-<div>
-    <h4>Invoice</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfTransaction)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOfTransaction)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Profile)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Profile.Email)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.TransactionId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Quantity
+            </th>
+            <th>
+                TransactionID
+            </th>
+            <th>
+                BookID
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransactionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookId)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.ActionLink("Checkout Test ", "CheckoutTest", new { transactionId = Model.First().TransactionId })

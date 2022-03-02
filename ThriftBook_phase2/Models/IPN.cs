@@ -20,17 +20,17 @@ namespace ThriftBook_phase2.Models
         public DateTime? DateOfTransaction { get; set; }
         public int BookId { get; set; }
 
-        //public string cart { get; set; }
-        //public string Create_time { get; set; }
+        public string cart { get; set; }
+        public string Create_time { get; set; }
 
-        // Payer data.
-        //public string payerEmail { get; set; }
+        //Payer data.
+        public string payerEmail { get; set; }
 
-        // Payment data.
-        //public string amount { get; set; }
-        //public string currency { get; set; }
-        //public string paymentMethod { get; set; }
-        //public string paymentState { get; set; }
+        //Payment data.
+        public string amount { get; set; }
+        public string currency { get; set; }
+        public string paymentMethod { get; set; }
+        public string paymentState { get; set; }
 
     }
 }

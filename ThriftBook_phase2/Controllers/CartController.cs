@@ -90,7 +90,31 @@ namespace ThriftBook_phase2.Controllers
             PaymentRepo pmRepo = new PaymentRepo(_context);
             var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
             return View(cartObject);
-            //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
         }
+
+
+        //// This method receives and stores the Paypal transaction details.
+        //[HttpPost]
+        //public JsonResult PaySuccess([FromBody] IPN ipn)
+        //{
+        //    try
+        //    {
+        //        _context.IPNs.Add(ipn);
+        //        _context.SaveChanges();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(ex.Message);
+        //    }
+        //    return Json(ipn);
+        //}
+
+        //// Show transaction detail. 
+        //public IActionResult FinishShopping(string paymentID)
+        //{
+        //    IPN transaction = _context.IPNs.Where(t => t.TransactionId == paymentID).FirstOrDefault();
+        //    return View(transaction);
+        //}
+
     }
 }

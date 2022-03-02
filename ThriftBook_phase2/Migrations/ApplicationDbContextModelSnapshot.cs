@@ -443,7 +443,23 @@ namespace ThriftBook_phase2.Migrations
 
             modelBuilder.Entity("ThriftBook_phase2.Models.IPN", b =>
                 {
-                    b.Property<string>("paymentID")
+                    b.Property<string>("TransactionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BuyerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Create_time")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DateOfTransaction")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("TotalPrice")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("amount")
@@ -452,37 +468,13 @@ namespace ThriftBook_phase2.Migrations
                     b.Property<string>("cart")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("create_time")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("currency")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("custom")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("intent")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("payerCountryCode")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("payerEmail")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("payerFirstName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("payerID")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("payerLastName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("payerMiddleName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("payerStatus")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("paymentMethod")
@@ -491,7 +483,7 @@ namespace ThriftBook_phase2.Migrations
                     b.Property<string>("paymentState")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("paymentID");
+                    b.HasKey("TransactionId");
 
                     b.ToTable("IPNs");
                 });
@@ -569,10 +561,31 @@ namespace ThriftBook_phase2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("BookId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("BuyerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("DateOfTransaction")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("TotalPrice")

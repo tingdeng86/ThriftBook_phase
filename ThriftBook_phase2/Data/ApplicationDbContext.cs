@@ -308,5 +308,7 @@ namespace ThriftBook_phase2.Data
 
         public DbSet<ThriftBook_phase2.ViewModels.InvoiceVM> InvoiceVM { get; set; }
 
+        public DbSet<ThriftBook_phase2.ViewModels.InvoiceDetailVM> InvoiceDetailVM { get; set; }
+
     }
 }

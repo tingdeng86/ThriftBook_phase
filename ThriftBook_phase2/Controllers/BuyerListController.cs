@@ -33,8 +33,9 @@ namespace ThriftBook_phase2.Controllers
         public ActionResult Details(int transactionID)
         {
             InvoiceRepo iRepo = new InvoiceRepo(_context);
-            InvoiceVM bVM = iRepo.Get(transactionID);
-            return View(bVM);
+            IQueryable<InvoiceDetailVM> iVM = iRepo.Get(transactionID);
+            ViewBag.TotalAmount = iVM.Sum(x => (double)x.Price);
+            return View(iVM);
         }
     }
 }

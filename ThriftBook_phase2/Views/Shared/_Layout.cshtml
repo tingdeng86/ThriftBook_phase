@@ -52,11 +52,37 @@
                                 </a>
                             </li>
                         }
+                        @using Microsoft.AspNetCore.Http;
+
+                        @{
+                            var totalItems = Context.Session.GetInt32("CartItems");
+                            if (totalItems > 0)
+                            {
+                                <li class="nav-item">
+                                    <a asp-area="" class="nav-link text-dark" asp-controller="Cart" asp-action="Index">
+                                        Cart @totalItems
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                    <li class="nav-item">
+                                        <a asp-area="" class="nav-link text-dark" asp-controller="Cart" asp-action="Index">
+                                            Cart 0
+                                        </a>
+                                    </li>
+                            }
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index">Profile</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="" class="nav-link text-dark" asp-controller="Buyer" asp-action="Index">
+                                Buyers
+                            </a>
                         </li>
 
 

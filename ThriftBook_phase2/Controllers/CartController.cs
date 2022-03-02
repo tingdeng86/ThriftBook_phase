@@ -24,6 +24,7 @@ namespace ThriftBook_phase2.Controllers
             _logger = logger;
             _context = context;
         }
+        const string CARTITEMS= "CartItems";
         public IActionResult Index()
         {
             //sessionId changes all the time, after setting, it would not change
@@ -34,7 +35,9 @@ namespace ThriftBook_phase2.Controllers
             var query = cartRepo.GetLists(sessionId);
             var totalItems = cartRepo.GetTotalItems(sessionId);
             var subTotals = cartRepo.GetSubTotal(sessionId);
-            ViewData["TotalItems"] = totalItems;
+            HttpContext.Session.SetInt32(CARTITEMS, totalItems);
+            
+            ViewData["TotalItems"] = HttpContext.Session.GetInt32(CARTITEMS);
             ViewData["SubTotal"] = subTotals;
             ViewData["Tax"] = Math.Round(subTotals * 0.12m, 2, MidpointRounding.ToEven);
             ViewData["Total"] = Math.Round(subTotals * 1.12m, 2, MidpointRounding.ToEven);
@@ -80,11 +83,11 @@ namespace ThriftBook_phase2.Controllers
 
 
         //[Authorize]
-        public ActionResult CheckoutTest()
+        public ActionResult CheckoutTest(int transactionId)
         {
             string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
-            var books = cartRepo.UpdateBooks(sessionId);
+            var books = cartRepo.UpdateBooks(transactionId);
             return View(books);
         }
 
@@ -106,15 +109,17 @@ namespace ThriftBook_phase2.Controllers
             }
 
         [Authorize]
-        public ActionResult CreateTransaction(decimal totalPrice, string sessionId)
+        public IActionResult CreateTransaction(decimal totalPrice)
         {
+            string sessionId = HttpContext.Session.Id;
             string userEmail = User.Identity.Name;
             ProfileRepo prRepo = new ProfileRepo(_context);
             int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
             DateTime date = DateTime.Now;
             CartRepo cartRepo = new CartRepo(_context);
-            Invoice invoice = cartRepo.CreateTransaction(totalPrice, buyerId, date);
-            return View(invoice);
+            int transactionId = cartRepo.CreateTransaction(totalPrice, buyerId, date);
+            var query = cartRepo.CreateBookInvoice(sessionId, transactionId);
+            return View(query);
         }
     }
 }

@@ -77,6 +77,16 @@ namespace ThriftBook_phase2.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
+
+        //// Home page shows list of items. Item price is set through ViewBag.
+        //public IActionResult Payment()
+        //{
+        //    ViewBag.TotalPrice = "3.55";
+        //    var items = _context.IPNs;
+        //    return View(items);
+        //}
+
+
         [Authorize]
         public IActionResult Checkout(string sessionId, decimal totalPayment)
         {

@@ -25,6 +25,9 @@ namespace ThriftBook_phase2.Controllers
             _context = context;
         }
         const string CARTITEMS= "CartItems";
+        decimal TOTAL_PRICE = 0m;
+
+
         public IActionResult Index()
         {
             //sessionId changes all the time, after setting, it would not change
@@ -81,7 +84,7 @@ namespace ThriftBook_phase2.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-<<<<<<< HEAD
+
 
         //// Home page shows list of items. Item price is set through ViewBag.
         //public IActionResult Payment()
@@ -93,11 +96,8 @@ namespace ThriftBook_phase2.Controllers
 
 
         [Authorize]
-        public IActionResult Checkout(string sessionId, decimal totalPayment)
-        {
-            ViewData["TotalPrice"] = totalPayment;
-=======
->>>>>>> master
+       
+
 
         //[Authorize]
         // update book test
@@ -123,7 +123,6 @@ namespace ThriftBook_phase2.Controllers
                 var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
                 return View(cartObject);
                 //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
-
             }
 
         [Authorize]
@@ -133,44 +132,65 @@ namespace ThriftBook_phase2.Controllers
             string userEmail = User.Identity.Name;
             ProfileRepo prRepo = new ProfileRepo(_context);
             int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
-<<<<<<< HEAD
+
             ViewData["BuyerID"] = buyerId;
 
-            PaymentRepo pmRepo = new PaymentRepo(_context);
-            var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
-            return View(cartObject);
-=======
+            //PaymentRepo pmRepo = new PaymentRepo(_context);
+            //var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+            //return View(cartObject);
+
             DateTime date = DateTime.Now;
             CartRepo cartRepo = new CartRepo(_context);
             int transactionId = cartRepo.CreateTransaction(totalPrice, buyerId, date);
             var query = cartRepo.CreateBookInvoice(sessionId, transactionId);
             return View(query);
->>>>>>> master
+
         }
 
 
-        //// This method receives and stores the Paypal transaction details.
-        //[HttpPost]
-        //public JsonResult PaySuccess([FromBody] IPN ipn)
-        //{
-        //    try
-        //    {
-        //        _context.IPNs.Add(ipn);
-        //        _context.SaveChanges();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(ex.Message);
-        //    }
-        //    return Json(ipn);
-        //}
+        // This method receives and stores the Paypal transaction details.
+        [HttpPost]
+        public JsonResult PaySuccess([FromBody] IPN ipn)
+        {
+            CartRepo cartRepo = new CartRepo(_context);
+            int buyerId = ipn.custom[0];
+            string sessionId = HttpContext.Session.Id;
+            try
+            {
+                //ipn.BuyerId = ipn.custom[0];
+                //ipn.unitPrice = ipn.custom.Split(",")[1];
+                _context.IPNs.Add(ipn);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+            try
+            {
+                //var transactionId = cartRepo.CreateTransaction(invoice.TotalPrice, invoice.BuyerId, invoice.DateOfTransaction);
+                //var bookInv = cartRepo.CreateBookInvoice(invoice.);
+                decimal totalAmount = Convert.ToDecimal(ipn.amount);
+                var transactionId = cartRepo.CreateTransaction(totalAmount, buyerId, DateTime.Parse(ipn.Create_time));
+                var bookInv = cartRepo.CreateBookInvoice(sessionId, transactionId);
 
-        //// Show transaction detail. 
-        //public IActionResult FinishShopping(string paymentID)
-        //{
-        //    IPN transaction = _context.IPNs.Where(t => t.TransactionId == paymentID).FirstOrDefault();
-        //    return View(transaction);
-        //}
+                //var booksUpdated = cartRepo.UpdateBooks(transactionId);
+                //return View(booksUpdated);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
 
+            return Json(ipn);
+
+        }
+
+        // Show transaction detail. 
+        public IActionResult FinishShopping(string paymentID)
+        {
+            IPN transaction = _context.IPNs.Where(t => t.TransactionId == paymentID).FirstOrDefault();
+            return View(transaction);
+        }
     }
 }

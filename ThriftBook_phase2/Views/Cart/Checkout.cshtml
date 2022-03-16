@@ -110,8 +110,8 @@
 
                         // The custom property value that you send to Paypal for a
                         // payment request is returned in Paypal's reponse.
-                        custom: 'Custom data goes here!',
-                        amount: { total: "2", currency: 'USD' }
+                        custom: @ViewBag.BuyerId,
+                        amount: { total: @ViewBag.TotalPrice, currency: 'CAD'}
                     }
                     ]
                 }
@@ -156,7 +156,8 @@
                     success: function (msg) {
                         console.log("Data: " + JSON.stringify(data));
                         window.location.href
-                        ="/Home/FinishShopping?paymentID=" + data.paymentID;
+                            //= "/Home/FinishShopping?paymentID=" + data.paymentID;
+                            = "/Cart/FinishShopping?paymentID=" + data.paymentID;
                     },
                     //after fail
                     error: function (msg) {

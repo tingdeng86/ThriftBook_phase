@@ -6,22 +6,26 @@
 
 <div class="text-center">
     <h1>Available Books</h1>
-
     <p>
         <a asp-action="Create">Create New</a>
     </p>
     <p>@ViewBag.NoBooksMessage</p>
     <table class="table">
+        <p>
+            Sort by: @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam }) |
+            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam }) |
+            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParam })
+        </p>       
         <thead>
             <tr>
                 <th>
-                    @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam })
+                    @Html.DisplayNameFor(model => model.Title)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Author)
                 </th>
                 <th>
-                    @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
+                    @Html.DisplayNameFor(model => model.Gennre)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.BookQuality)
@@ -34,7 +38,7 @@
                     Photo
                 </th>
                 <th>
-                    @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParam })
+                    @Html.DisplayNameFor(model => model.Price)
                 </th>
                 <th>
                     Store Name

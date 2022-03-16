@@ -114,6 +114,23 @@ namespace ThriftBook_phase2.Repositories
                 return false;
             }
         }
+
+        public void DeleteCarts(string sessionId)
+        {
+            var query = from c in _context.Cart
+                        where c.SessionId == sessionId
+                        select c;
+            if (query != null)
+            {
+                foreach (var item in query)
+                {
+                    _context.Cart.Remove(item);
+                }
+                _context.SaveChanges();
+            }
+
+
+        }
         public Cart increaseQuantity(int id)
         {
             var cartItem = GetCartItem(id);

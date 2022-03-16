@@ -89,6 +89,8 @@ namespace ThriftBook_phase2.Controllers
             string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
             var books = cartRepo.UpdateBooks(transactionId);
+            //cartRepo.DeleteCarts(sessionId);
+            HttpContext.Session.SetInt32(CARTITEMS, 0);
             return View(books);
         }
 

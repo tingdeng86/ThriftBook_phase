@@ -4,6 +4,7 @@ using rolesDemoSSD.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using ThriftBook_phase2.Data;
 using ThriftBook_phase2.Repositories;
@@ -33,8 +34,37 @@ namespace ThriftBook_phase2.Controllers
         public ActionResult Details(int transactionID)
         {
             InvoiceRepo iRepo = new InvoiceRepo(_context);
-            InvoiceVM bVM = iRepo.Get(transactionID);
-            return View(bVM);
+            IQueryable<InvoiceDetailVM> iVM = iRepo.Get(transactionID);
+            ViewBag.TotalAmount = iVM.Sum(x => (double)x.Price);
+            return View(iVM);
+        }
+
+        public IActionResult ExportToCSV()
+        {
+            InvoiceRepo iRepo = new InvoiceRepo(_context);
+            IQueryable<InvoiceVM> iVM = iRepo.GetAll();
+            var builder = new StringBuilder();
+            builder.AppendLine("Buyer ID,Total Price,Transaction Date,First Name,Last Name,Phone Number,Email,Postal Code");
+            foreach (var item in iVM)
+            {
+                builder.AppendLine($"{item.BuyerId},{item.TotalPrice}, {item.DateOfTransaction}, {item.FirstName}, {item.LastName}, {item.PhoneNumber}, {item.Email}, {item.PostalCode}");
+
+            }
+            return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "invoice.csv");
+        }
+
+        public IActionResult ExportToCSVDetails(int transactionID)
+        {
+            InvoiceRepo iRepo = new InvoiceRepo(_context);
+            IQueryable<InvoiceDetailVM> iVM = iRepo.Get(transactionID);
+            var builder = new StringBuilder();
+            builder.AppendLine("Buyer ID, Price,Transaction Date, Book Title, Book Genre, Book ID");
+            foreach (var item in iVM)
+            {
+                builder.AppendLine($"{item.BuyerId},{item.Price}, {item.DateOfTransaction}, {item.Title}, {item.Genre}, {item.BookId}");
+
+            }
+            return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "invoice.csv");
         }
     }
 }

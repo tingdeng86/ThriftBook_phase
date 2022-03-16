@@ -28,6 +28,8 @@ namespace ThriftBook_phase2.ViewModels
         public string LastName { get; set; }
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
+        [DisplayName("Email")]
+        public string Email { get; set; }
         [DisplayName("Postal Code")]
         public string PostalCode { get; set; }       
 

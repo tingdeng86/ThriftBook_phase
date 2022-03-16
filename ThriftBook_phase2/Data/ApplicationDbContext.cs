@@ -266,31 +266,38 @@ namespace ThriftBook_phase2.Data
                {
                    TransactionId = 100001,
                    BookId = 1,
+                   Quantity = 1,
                },
                new BookInvoice
                {
                    TransactionId = 100001,
                    BookId = 5,
+                   Quantity = 1,
+
                },
                new BookInvoice
                {
                    TransactionId = 100002,
                    BookId = 2,
+                   Quantity = 1,
                },
                new BookInvoice
                {
                    TransactionId = 100002,
                    BookId = 4,
+                   Quantity = 1,
                },
                new BookInvoice
                {
                    TransactionId = 100003,
                    BookId = 3,
+                   Quantity = 1,
                },
                new BookInvoice
                {
                    TransactionId = 100003,
                    BookId = 5,
+                   Quantity = 1,
                }
             );
         }

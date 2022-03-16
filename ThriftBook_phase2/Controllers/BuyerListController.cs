@@ -21,23 +21,20 @@ namespace ThriftBook_phase2.Controllers
             _context = context;
         }
 
-        public IActionResult Index(decimal SalesTotal)
-        {
-            var buyerList = from bl in _context.Invoice
-                        select bl;
-
-            ViewBag.TotalAmount = buyerList.Sum(x => (double)x.TotalPrice);
-          
-            return View(buyerList);
+        public IActionResult Index()
+        {            
+            InvoiceRepo iRepo = new InvoiceRepo(_context);
+            IQueryable<InvoiceVM> iVM = iRepo.GetAll();
+           
+            ViewBag.TotalAmount = iVM.Sum(x => (double)x.TotalPrice);          
+            return View(iVM);
         }
 
         public ActionResult Details(int transactionID)
         {
             InvoiceRepo iRepo = new InvoiceRepo(_context);
             InvoiceVM bVM = iRepo.Get(transactionID);
-
             return View(bVM);
-
         }
     }
 }

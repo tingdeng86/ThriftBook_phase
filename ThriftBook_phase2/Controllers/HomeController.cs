@@ -29,14 +29,10 @@ namespace ThriftBook_phase2.Controllers
         public IActionResult Index(string sortOrder, string searchString)
         {
 
-            HttpContext.Session.SetString("DUMB", "DUMB");          
+            HttpContext.Session.SetString("DUMB", "DUMB");
            
-
-            ViewBag.TitleSortParam = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
-            ViewBag.AuthorSortParam = String.IsNullOrEmpty(sortOrder) ? "author_desc" : "";
-            ViewBag.GenreSortParam = String.IsNullOrEmpty(sortOrder) ? "genre_desc" : "";
-            ViewBag.QualitySortParam = String.IsNullOrEmpty(sortOrder) ? "quality_desc" : "";
-            ViewBag.QuantitySortParam = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
+            ViewBag.TitleSortParam = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";           
+            ViewBag.GenreSortParam = String.IsNullOrEmpty(sortOrder) ? "genre_desc" : "";                        
             ViewBag.PriceSortParam = sortOrder == "Price" ? "price_desc" : "Price";
 
             var books = from b in _context.Book
@@ -51,21 +47,12 @@ namespace ThriftBook_phase2.Controllers
             {
                 case "title_desc":
                     books = books.OrderByDescending(s => s.Title);
-                    break;
-                case "author_desc":
-                    books = books.OrderByDescending(s => s.Author);
-                    break;
+                    break;               
                 case "genre_desc":
-                    books = books.OrderByDescending(s => s.Gennre);
-                    break;
-                case "quality_desc":
-                    books = books.OrderByDescending(s => s.BookQuality);
-                    break;
-                case "Quantity":
-                    books = books.OrderBy(s => s.BookQuantity);
-                    break;
+                    books = books.OrderBy(s => s.Gennre);
+                    break;                             
                 case "Price":
-                    books = books.OrderBy(s => s.Price);
+                    books = books.OrderBy(s => (double)s.Price);
                     break;
                 default:
                     books = books.OrderBy(s => s.Title);
@@ -152,8 +139,13 @@ namespace ThriftBook_phase2.Controllers
         {
             string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
+            var book = cartRepo.GetBook(id);
             var cartItem = cartRepo.Find(id, sessionId);
-            if (cartItem == null)
+            // update the amount of total items in the session
+            var totalItems = HttpContext.Session.GetInt32("CartItems");
+            totalItems =  totalItems == null ? 1 : totalItems + 1;
+            HttpContext.Session.SetInt32("CartItems", (int)totalItems);
+            if (cartItem == null && book.BookQuantity>0)
             {
                 int cartItemId = cartRepo.Add(id, sessionId);
                 return RedirectToAction("Details", "Cart", new { id = cartItemId });

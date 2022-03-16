@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using rolesDemoSSD.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -133,6 +134,67 @@ namespace ThriftBook_phase2.Repositories
                 _context.SaveChanges();
             }
             return cartItem;
+        }
+
+        public IQueryable<Book> UpdateBooks(int transactionId)
+        {
+            var bookInvoices = from b in _context.BookInvoice
+                               where b.TransactionId == transactionId
+                               select b;
+            foreach (var item in bookInvoices)
+            {
+                Book book = (from b in _context.Book
+                             where b.BookId == item.BookId
+                             select b).FirstOrDefault();
+                book.BookQuantity = book.BookQuantity - item.Quantity;
+                
+            }
+            _context.SaveChanges();
+            var books = from b in _context.Book
+                        from q in bookInvoices
+                        where b.BookId == q.BookId
+                        select b;
+            return books;
+        }
+
+        public Book GetBook(int id)
+        {
+            Book book = (from b in _context.Book
+                         select b).FirstOrDefault();
+            return book;
+        }
+
+        public int CreateTransaction(decimal totalPrice, int buyerId, DateTime date)
+        {
+            Invoice invoice = new Invoice()
+            {
+                BuyerId = buyerId,
+                TotalPrice = totalPrice,
+                DateOfTransaction = date
+            };
+            _context.Invoice.Add(invoice);
+            _context.SaveChanges();
+            return invoice.TransactionId;
+        }
+
+        public IQueryable<BookInvoice> CreateBookInvoice(string sessionId, int transactionId)
+        {
+            var query = GetLists(sessionId);
+            foreach (var item in query)
+            {
+                BookInvoice bookInvoice = new BookInvoice
+                {
+                    TransactionId = transactionId,
+                    BookId = item.BookId,
+                    Quantity = item.Quantity
+                };
+                _context.BookInvoice.Add(bookInvoice);
+            }
+            _context.SaveChanges();
+            var bookInvoices = from b in _context.BookInvoice
+                        where b.TransactionId== transactionId
+                        select b;
+            return bookInvoices;
         }
     }
 }

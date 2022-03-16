@@ -10,6 +10,7 @@ using ThriftBook_phase2.Models;
 using ThriftBook_phase2.ViewModels;
 using ThriftBook_phase2.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using rolesDemoSSD.Models;
 
 namespace ThriftBook_phase2.Controllers
 {
@@ -23,22 +24,25 @@ namespace ThriftBook_phase2.Controllers
             _logger = logger;
             _context = context;
         }
+        const string CARTITEMS= "CartItems";
         public IActionResult Index()
         {
             //sessionId changes all the time, after setting, it would not change
-            
+            HttpContext.Session.SetString("DUMB", "DUMB");
+
             string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
             var query = cartRepo.GetLists(sessionId);
             var totalItems = cartRepo.GetTotalItems(sessionId);
             var subTotals = cartRepo.GetSubTotal(sessionId);
-            ViewData["TotalItems"] = totalItems;
+            HttpContext.Session.SetInt32(CARTITEMS, totalItems);
+            
+            ViewData["TotalItems"] = HttpContext.Session.GetInt32(CARTITEMS);
             ViewData["SubTotal"] = subTotals;
-            ViewData["Tax"] = subTotals*0.12m;
-            ViewData["Total"] = subTotals*1.12m;
+            ViewData["Tax"] = Math.Round(subTotals * 0.12m, 2, MidpointRounding.ToEven);
+            ViewData["Total"] = Math.Round(subTotals * 1.12m, 2, MidpointRounding.ToEven);
             return View(query);
         }
-
 
         public ActionResult Home()
         {
@@ -77,6 +81,7 @@ namespace ThriftBook_phase2.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
+<<<<<<< HEAD
 
         //// Home page shows list of items. Item price is set through ViewBag.
         //public IActionResult Payment()
@@ -91,15 +96,56 @@ namespace ThriftBook_phase2.Controllers
         public IActionResult Checkout(string sessionId, decimal totalPayment)
         {
             ViewData["TotalPrice"] = totalPayment;
+=======
+>>>>>>> master
 
+        //[Authorize]
+        // update book test
+        public ActionResult CheckoutTest(int transactionId)
+        {
+            string sessionId = HttpContext.Session.Id;
+            CartRepo cartRepo = new CartRepo(_context);
+            var books = cartRepo.UpdateBooks(transactionId);
+            return View(books);
+        }
+
+            [Authorize]
+        public IActionResult Checkout(string sessionId, decimal totalPayment)
+            {
+                ViewData["TotalPrice"] = totalPayment;
+
+                string userEmail = User.Identity.Name;
+                ProfileRepo prRepo = new ProfileRepo(_context);
+                int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+                ViewData["BuyerID"] = buyerId;
+
+                PaymentRepo pmRepo = new PaymentRepo(_context);
+                var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+                return View(cartObject);
+                //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
+
+            }
+
+        [Authorize]
+        public IActionResult CreateTransaction(decimal totalPrice)
+        {
+            string sessionId = HttpContext.Session.Id;
             string userEmail = User.Identity.Name;
             ProfileRepo prRepo = new ProfileRepo(_context);
             int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+<<<<<<< HEAD
             ViewData["BuyerID"] = buyerId;
 
             PaymentRepo pmRepo = new PaymentRepo(_context);
             var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
             return View(cartObject);
+=======
+            DateTime date = DateTime.Now;
+            CartRepo cartRepo = new CartRepo(_context);
+            int transactionId = cartRepo.CreateTransaction(totalPrice, buyerId, date);
+            var query = cartRepo.CreateBookInvoice(sessionId, transactionId);
+            return View(query);
+>>>>>>> master
         }
 
 

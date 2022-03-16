@@ -40,7 +40,7 @@ namespace ThriftBook_phase2
 
             services.AddSession(options => {
                 // Set timeout.
-                options.IdleTimeout = TimeSpan.FromMinutes(2);
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
             });
 
         }

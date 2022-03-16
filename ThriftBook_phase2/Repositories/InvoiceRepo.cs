@@ -66,6 +66,15 @@ namespace ThriftBook_phase2.Repositories
             return lists;
         }
 
+        //Test
+        public IQueryable<InvoiceDetailVM> GetWithBuyerID(int buyerID)
+        {
+            var query = GetMore();
+            var lists = from q in query
+                        where q.BuyerId == buyerID
+                        select q;
 
+            return lists;
+        }
     }
 }

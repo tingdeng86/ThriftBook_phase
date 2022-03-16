@@ -62,6 +62,12 @@
                 </td>
             </tr>
         }
+        <div class="text-center">
+            <form method="post" asp-controller="BuyerList" asp-action="ExportToCSVDetails">
+                <input type="text" id="transactionID" name="transactionid" hidden value="@Model.FirstOrDefault().TransactionId"/>
+                <input type="submit" value="Export to CSV"/>
+            </form>
+        </div>
     </tbody>
     <tfoot>
         <tr>
@@ -69,8 +75,6 @@
                 Total Sales:
             </td>
             <td> $@ViewBag.TotalAmount </td>
-
         </tr>
-
     </tfoot>
 </table>

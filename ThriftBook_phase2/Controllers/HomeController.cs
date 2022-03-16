@@ -141,6 +141,10 @@ namespace ThriftBook_phase2.Controllers
             CartRepo cartRepo = new CartRepo(_context);
             var book = cartRepo.GetBook(id);
             var cartItem = cartRepo.Find(id, sessionId);
+            // update the amount of total items in the session
+            var totalItems = HttpContext.Session.GetInt32("CartItems");
+            totalItems =  totalItems == null ? 1 : totalItems + 1;
+            HttpContext.Session.SetInt32("CartItems", (int)totalItems);
             if (cartItem == null && book.BookQuantity>0)
             {
                 int cartItemId = cartRepo.Add(id, sessionId);

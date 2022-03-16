@@ -83,6 +83,7 @@ namespace ThriftBook_phase2.Controllers
 
 
         //[Authorize]
+        // update book test
         public ActionResult CheckoutTest(int transactionId)
         {
             string sessionId = HttpContext.Session.Id;

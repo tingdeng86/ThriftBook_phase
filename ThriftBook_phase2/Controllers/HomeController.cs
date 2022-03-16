@@ -41,7 +41,8 @@ namespace ThriftBook_phase2.Controllers
             if(!String.IsNullOrEmpty(searchString))
             {
                 books = books.Where(b => b.Title.ToLower().Contains(searchString) || b.Title.Contains(searchString) || b.Author.ToLower().Contains(sortOrder) || b.Author.Contains(sortOrder));
-            }
+                ViewBag.NoBooksMessage = "The book " + searchString + " is currently not in stock";
+            } 
 
             switch(sortOrder)
             {

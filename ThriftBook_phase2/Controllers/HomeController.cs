@@ -30,7 +30,12 @@ namespace ThriftBook_phase2.Controllers
         {
 
             //HttpContext.Session.SetString("DUMB", "DUMB");
-           
+            //get totalItems of cart
+            string sessionId = GetSessionId();
+            CartRepo cartRepo = new CartRepo(_context);
+            var totalItems = cartRepo.GetTotalItems(sessionId);
+            HttpContext.Session.SetInt32("CartItems", totalItems);
+
             ViewBag.TitleSortParam = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";           
             ViewBag.GenreSortParam = String.IsNullOrEmpty(sortOrder) ? "genre_desc" : "";                        
             ViewBag.PriceSortParam = sortOrder == "Price" ? "price_desc" : "Price";

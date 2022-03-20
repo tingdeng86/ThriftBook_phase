@@ -16,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Invoice)
+                Transaction ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Book)
+                Book ID
             </th>
             <th></th>
         </tr>
@@ -32,10 +32,10 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Invoice.TransactionId)
+                    @Html.DisplayFor(modelItem => item.TransactionId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Book.BookId)
+                    @Html.DisplayFor(modelItem => item.BookId)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

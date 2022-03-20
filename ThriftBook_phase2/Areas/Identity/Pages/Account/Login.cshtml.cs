@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using ThriftBook_phase2.Repositories;
+using ThriftBook_phase2.Data;
 
 namespace ThriftBook_phase2.Areas.Identity.Pages.Account
 {
@@ -20,14 +23,17 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ApplicationDbContext _context;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -52,6 +58,25 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
 
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
+        }
+
+        public string GetSessionId()
+        {
+            if (HttpContext.Session.GetString("SessionId") == null)
+            {
+                if (!string.IsNullOrWhiteSpace(HttpContext.User.Identity.Name))
+                {
+
+                    HttpContext.Session.SetString("SessionId", HttpContext.User.Identity.Name);
+                }
+                else
+                {
+                    // Generate a new random GUID using System.Guid class.     
+                    Guid tempSessionId = Guid.NewGuid();
+                    HttpContext.Session.SetString("SessionId", tempSessionId.ToString());
+                }
+            }
+            return HttpContext.Session.GetString("SessionId");
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -85,6 +110,15 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    // get the cart table, and update the sessionId by using username
+                   
+                    string sessionId = GetSessionId();
+                    CartRepo cartRepo = new CartRepo(_context);
+                    cartRepo.MigrateCart(sessionId, Input.Email);
+                    HttpContext.Session.SetString("SessionId", Input.Email);
+
+                    var totalItems = cartRepo.GetTotalItems(Input.Email);
+                    HttpContext.Session.SetInt32("CartItems", totalItems);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

@@ -29,7 +29,7 @@ namespace ThriftBook_phase2.Controllers
         public IActionResult Index(string sortOrder, string searchString)
         {
 
-            HttpContext.Session.SetString("DUMB", "DUMB");
+            //HttpContext.Session.SetString("DUMB", "DUMB");
            
             ViewBag.TitleSortParam = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";           
             ViewBag.GenreSortParam = String.IsNullOrEmpty(sortOrder) ? "genre_desc" : "";                        
@@ -135,9 +135,29 @@ namespace ThriftBook_phase2.Controllers
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
+        public string GetSessionId()
+        {
+            if (HttpContext.Session.GetString("SessionId") == null)
+            {
+                if (!string.IsNullOrWhiteSpace(HttpContext.User.Identity.Name))
+                {
+
+                    HttpContext.Session.SetString("SessionId", HttpContext.User.Identity.Name);
+                }
+                else
+                {
+                    // Generate a new random GUID using System.Guid class.     
+                    Guid tempSessionId = Guid.NewGuid();
+                    HttpContext.Session.SetString("SessionId", tempSessionId.ToString());
+                }
+            }
+            return HttpContext.Session.GetString("SessionId");
+        }
+
         public ActionResult AddToCart(int id)
         {
-            string sessionId = HttpContext.Session.Id;
+            string sessionId = GetSessionId();
+            //string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
             var book = cartRepo.GetBook(id);
             var cartItem = cartRepo.Find(id, sessionId);

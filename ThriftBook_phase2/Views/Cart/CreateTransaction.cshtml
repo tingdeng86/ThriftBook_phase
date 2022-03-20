@@ -13,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                Quantity
+                @Html.DisplayNameFor(model => model.Quantity)
             </th>
             <th>
-                TransactionID
+                @Html.DisplayNameFor(model => model.Invoice)
             </th>
             <th>
-                BookID
+                @Html.DisplayNameFor(model => model.Book)
             </th>
             <th></th>
         </tr>
@@ -32,10 +32,10 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TransactionId)
+                    @Html.DisplayFor(modelItem => item.Invoice.TransactionId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BookId)
+                    @Html.DisplayFor(modelItem => item.Book.BookId)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
@@ -46,4 +46,5 @@
         }
     </tbody>
 </table>
+
 @Html.ActionLink("Checkout Test ", "CheckoutTest", new { transactionId = Model.First().TransactionId })

@@ -30,6 +30,8 @@ namespace ThriftBook_phase2.Repositories
             return cart.CartItemId;
         }
 
+       
+
         public Cart Find(int id, string sessionId)
         {
             var cartItem = _context.Cart.Where(
@@ -115,7 +117,7 @@ namespace ThriftBook_phase2.Repositories
             }
         }
 
-        public void DeleteCarts(string sessionId)
+        public void EmptyCarts(string sessionId)
         {
             var query = from c in _context.Cart
                         where c.SessionId == sessionId
@@ -212,6 +214,16 @@ namespace ThriftBook_phase2.Repositories
                         where b.TransactionId== transactionId
                         select b;
             return bookInvoices;
+        }
+
+        public void MigrateCart(string sessionId, string userName)
+        {
+            var shoppingCart = _context.Cart.Where(c => c.SessionId == sessionId);
+            foreach (var item in shoppingCart)
+            {
+                item.SessionId = userName;
+            }
+             _context.SaveChanges();
         }
     }
 }

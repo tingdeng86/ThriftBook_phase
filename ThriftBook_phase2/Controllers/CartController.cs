@@ -25,18 +25,43 @@ namespace ThriftBook_phase2.Controllers
             _context = context;
         }
         const string CARTITEMS= "CartItems";
+
+        public string GetSessionId()
+        {
+            if (HttpContext.Session.GetString("SessionId") == null)
+            {
+                if (!string.IsNullOrWhiteSpace(HttpContext.User.Identity.Name))
+                {
+
+                    HttpContext.Session.SetString("SessionId", HttpContext.User.Identity.Name);
+                }
+                else
+                {
+                    // Generate a new random GUID using System.Guid class.     
+                    Guid tempSessionId = Guid.NewGuid();
+                    HttpContext.Session.SetString("SessionId", tempSessionId.ToString());
+                }
+            }
+            return HttpContext.Session.GetString("SessionId");
+        }
+
         public IActionResult Index()
         {
+            string sessionId = GetSessionId();
+            //string aa = sessionID..Guid;
             //sessionId changes all the time, after setting, it would not change
-            HttpContext.Session.SetString("DUMB", "DUMB");
+            //HttpContext.Session.SetString("DUMB", "DUMB");
 
-            string sessionId = HttpContext.Session.Id;
+            //string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
             var query = cartRepo.GetLists(sessionId);
             var totalItems = cartRepo.GetTotalItems(sessionId);
             var subTotals = cartRepo.GetSubTotal(sessionId);
             HttpContext.Session.SetInt32(CARTITEMS, totalItems);
-            
+
+            //HttpContext.Session.SetString("cart", new Cart {
+                
+            //})
             ViewData["TotalItems"] = HttpContext.Session.GetInt32(CARTITEMS);
             ViewData["SubTotal"] = subTotals;
             ViewData["Tax"] = Math.Round(subTotals * 0.12m, 2, MidpointRounding.ToEven);
@@ -46,6 +71,7 @@ namespace ThriftBook_phase2.Controllers
 
         public ActionResult Home()
         {
+
             return RedirectToAction("Index", "Home");
         }
         public ActionResult Details(int id)
@@ -86,10 +112,10 @@ namespace ThriftBook_phase2.Controllers
         // update book test
         public ActionResult CheckoutTest(int transactionId)
         {
-            string sessionId = HttpContext.Session.Id;
+            string sessionId = GetSessionId();
             CartRepo cartRepo = new CartRepo(_context);
             var books = cartRepo.UpdateBooks(transactionId);
-            cartRepo.DeleteCarts(sessionId);
+            cartRepo.EmptyCarts(sessionId);
             var totalItems = cartRepo.GetTotalItems(sessionId);
             HttpContext.Session.SetInt32(CARTITEMS, totalItems);
             return View(books);
@@ -115,14 +141,17 @@ namespace ThriftBook_phase2.Controllers
         [Authorize]
         public IActionResult CreateTransaction(decimal totalPrice)
         {
-            string sessionId = HttpContext.Session.Id;
+            string sessionId = GetSessionId(); ;
             string userEmail = User.Identity.Name;
+            CartRepo cartRepo = new CartRepo(_context);
+            cartRepo.MigrateCart(sessionId, userEmail);
+            HttpContext.Session.SetString("SessionId", userEmail);
+            string newSessionId = HttpContext.Session.GetString("SessionId");
             ProfileRepo prRepo = new ProfileRepo(_context);
             int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
             DateTime date = DateTime.Now;
-            CartRepo cartRepo = new CartRepo(_context);
             int transactionId = cartRepo.CreateTransaction(totalPrice, buyerId, date);
-            var query = cartRepo.CreateBookInvoice(sessionId, transactionId);
+            var query = cartRepo.CreateBookInvoice(newSessionId, transactionId);
             return View(query);
         }
     }

@@ -140,12 +140,13 @@ namespace ThriftBook_phase2.Controllers
             }
 
         [Authorize]
-        public IActionResult CreateTransaction(decimal totalPrice)
+        public IActionResult CreateTransactionTest(decimal totalPrice)
         {
             string sessionId = GetSessionId(); ;
             string userEmail = User.Identity.Name;
             CartRepo cartRepo = new CartRepo(_context);
-            cartRepo.MigrateCart(sessionId, userEmail);
+
+            //cartRepo.MigrateCart(sessionId, userEmail);
             HttpContext.Session.SetString("SessionId", userEmail);
             string newSessionId = HttpContext.Session.GetString("SessionId");
             ProfileRepo prRepo = new ProfileRepo(_context);

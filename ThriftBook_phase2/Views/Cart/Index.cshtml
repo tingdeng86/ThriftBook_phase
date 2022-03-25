@@ -87,7 +87,7 @@
 
     @*@Html.ActionLink("Proceed to Checkout", "Checkout", new { TotalPrice = ViewBag.Total, SessionId = Model.ToList().FirstOrDefault().SessionId })*@
     <br />
-    @Html.ActionLink("Transaction", "CreateTransaction", new { totalPrice = ViewBag.Total })
+    @Html.ActionLink("Transaction", "CreateTransactionTest", new { totalPrice = ViewBag.Total })
 
 }
 else

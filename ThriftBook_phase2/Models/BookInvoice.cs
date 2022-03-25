@@ -10,8 +10,9 @@ namespace ThriftBook_phase2.Models
 {
     public class BookInvoice
     {
-        [Key, Column(Order = 0)]
-        public int TransactionId { get; set; }
+        //[Key, Column(Order = 0)]
+        [Key]
+        public string PaymentId { get; set; }
         [Key, Column(Order = 1)]
         public int BookId { get; set; }
         public int Quantity { get; set; }

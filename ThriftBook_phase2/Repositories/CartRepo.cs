@@ -155,10 +155,10 @@ namespace ThriftBook_phase2.Repositories
             return cartItem;
         }
 
-        public IQueryable<Book> UpdateBooks(int transactionId)
+        public IQueryable<Book> UpdateBooks(string paymentId)
         {
             var bookInvoices = from b in _context.BookInvoice
-                               where b.TransactionId == transactionId
+                               where b.PaymentId == paymentId
                                select b;
             foreach (var item in bookInvoices)
             {
@@ -183,6 +183,7 @@ namespace ThriftBook_phase2.Repositories
             return book;
         }
 
+<<<<<<< HEAD
         //public int CreateTransaction(decimal totalPrice, int buyerId, DateTime date)
         //{
         //    Invoice invoice = new Invoice()
@@ -217,13 +218,47 @@ namespace ThriftBook_phase2.Repositories
         //    return bookInvoices;
         //}
         public void MigrateCart(string sessionId, string userName)
+=======
+        public string CreateTransaction(decimal totalPrice, int buyerId, DateTime date, string paymentId)
+        {
+            Invoice invoice = new Invoice()
+            {
+                BuyerId = buyerId,
+                TotalPrice = totalPrice,
+                DateOfTransaction = date,
+                PaymentId = paymentId
+            };
+            _context.Invoice.Add(invoice);
+            _context.SaveChanges();
+            //return invoice.PaymentId;
+            return invoice.PaymentId;
+        }
+
+        public IQueryable<BookInvoice> CreateBookInvoice(string sessionId, string paymentId)
+>>>>>>> master
         {
             var shoppingCart = _context.Cart.Where(c => c.SessionId == sessionId);
             foreach (var item in shoppingCart)
             {
+<<<<<<< HEAD
                 item.SessionId = userName;
             }
             _context.SaveChanges();
+=======
+                BookInvoice bookInvoice = new BookInvoice
+                {
+                    PaymentId = paymentId,
+                    BookId = item.BookId,
+                    Quantity = item.Quantity
+                };
+                _context.BookInvoice.Add(bookInvoice);
+            }
+            _context.SaveChanges();
+            var bookInvoices = from b in _context.BookInvoice
+                        where b.PaymentId == paymentId
+                               select b;
+            return bookInvoices;
+>>>>>>> master
         }
     }
 

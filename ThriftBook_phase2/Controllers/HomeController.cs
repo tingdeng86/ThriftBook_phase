@@ -65,6 +65,8 @@ namespace ThriftBook_phase2.Controllers
                     books = books.OrderBy(s => s.Title);
                     break;
             }            
+
+            
             return View(books.ToList());
         }
         

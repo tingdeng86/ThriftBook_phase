@@ -42,6 +42,7 @@
     <tbody>
         @foreach (var item in Model)
         {
+
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.BuyerId)
@@ -68,11 +69,40 @@
                 @Html.DisplayFor(modelItem => item.PostalCode)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TransactionId">Edit</a> |
-                @Html.ActionLink("Details", "Details", new { transactionID = item.TransactionId }) |
-                <a asp-action="Delete" asp-route-id="@item.TransactionId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.PaymentId">Edit</a> |
+                @Html.ActionLink("Details", "Details", new { paymentId = item.PaymentId }) |
+                <a asp-action="Delete" asp-route-id="@item.PaymentId">Delete</a>
             </td>
         </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BuyerId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfTransaction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostalCode)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PaymentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PaymentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PaymentId">Delete</a>
+                </td>
+            </tr>
         }
         <div class="text-center">
             <form method="post" asp-controller="BuyerList" asp-action="ExportToCSV">

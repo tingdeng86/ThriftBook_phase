@@ -69,7 +69,7 @@ namespace ThriftBook_phase2.Repositories
         //    var lists = from q in query
         //                where q.PaymentId == paymentId
         //                select q;
-
+               
         //    return lists;
         //}
 

@@ -32,7 +32,7 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TransactionId)
+                    @Html.DisplayFor(modelItem => item.PaymentId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BookId)
@@ -46,5 +46,9 @@
         }
     </tbody>
 </table>
+<<<<<<< HEAD
 
 @Html.ActionLink("Checkout Test ", "CheckoutTest", new { transactionId = Model.First().TransactionId })
+=======
+@Html.ActionLink("Checkout Test ", "CheckoutTest", new { transactionId = Model.First().PaymentId })
+>>>>>>> master

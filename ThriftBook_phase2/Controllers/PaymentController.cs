@@ -47,7 +47,7 @@ namespace ThriftBook_phase2.Controllers
         // Show transaction detail. 
         public IActionResult FinishShopping(string paymentID)
         {
-            IPN transaction = _context.IPNs.Where(t => t.TransactionId == paymentID).FirstOrDefault();
+            IPN transaction = _context.IPNs.Where(t => t.PaymentId == paymentID).FirstOrDefault();
             return View(transaction);
         }
 

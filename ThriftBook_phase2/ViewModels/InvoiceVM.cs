@@ -15,7 +15,7 @@ namespace ThriftBook_phase2.ViewModels
 
         [Key]
         [DisplayName("Transaction ID")]
-        public int TransactionId { get; set; }
+        public string PaymentId { get; set; }
         [DisplayName("Buyer ID")]
         public int BuyerId { get; set; }
         [DisplayName("Total Price")]

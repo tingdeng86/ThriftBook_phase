@@ -61,6 +61,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.TotalQuantity)
                 </td>
+
+
                 @ViewBag.TotalPrice
                 @ViewBag.BuyerId
                 <td>
@@ -111,7 +113,8 @@
                         // The custom property value that you send to Paypal for a
                         // payment request is returned in Paypal's reponse.
                         custom: @ViewBag.BuyerId,
-                        amount: { total: @ViewBag.TotalPrice, currency: 'CAD'}
+                        amount: { total: @ViewBag.TotalPrice, currency: 'CAD' }
+                        @*amount: { total: @ViewBag.TotalPayment, currency: 'CAD'}*@
                     }
                     ]
                 }
@@ -147,7 +150,7 @@
                 // You can now show a confirmation message to the customer
                 $.ajax({
                     type: "post",
-                    url: "/Payment/PaySuccess",
+                    url: "/Cart/PaySuccess",
                     data: JSON.stringify(dataObject),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -157,6 +160,7 @@
                         console.log("Data: " + JSON.stringify(data));
                         window.location.href
                             //= "/Home/FinishShopping?paymentID=" + data.paymentID;
+                            //= "/Cart/FinishShopping?paymentID=" + JSON.stringify(payment);
                             = "/Cart/FinishShopping?paymentID=" + data.paymentID;
                     },
                     //after fail

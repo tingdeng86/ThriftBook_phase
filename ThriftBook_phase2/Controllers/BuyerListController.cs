@@ -30,10 +30,10 @@ namespace ThriftBook_phase2.Controllers
             return View(iVM);
         }
 
-        public ActionResult Details(int transactionID)
+        public ActionResult Details(string paymentId)
         {
             InvoiceRepo iRepo = new InvoiceRepo(_context);
-            InvoiceVM bVM = iRepo.Get(transactionID);
+            InvoiceVM bVM = iRepo.Get(paymentId);
             return View(bVM);
         }
     }

@@ -24,7 +24,7 @@ namespace ThriftBook_phase2.Repositories
                         where i.BuyerId == b.BuyerId
                         select new InvoiceVM
                         {
-                            TransactionId = i.TransactionId,
+                            PaymentId = i.PaymentId,
                             BuyerId = i.BuyerId,
                             TotalPrice = i.TotalPrice,
                             DateOfTransaction = i.DateOfTransaction,
@@ -36,10 +36,10 @@ namespace ThriftBook_phase2.Repositories
             return query;
         }
 
-        public InvoiceVM Get(int transactionID)
+        public InvoiceVM Get(string paymentId)
         {
             var query = GetAll()
-                .Where(i => i.TransactionId == transactionID)
+                .Where(i => i.PaymentId == paymentId)
                 .FirstOrDefault();
             return query;
         }

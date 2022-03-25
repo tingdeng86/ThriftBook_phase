@@ -16,7 +16,7 @@
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.SessionId)
-                    
+
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.BookId)
@@ -86,8 +86,10 @@
 
 
     @*@Html.ActionLink("Proceed to Checkout", "Checkout", new { TotalPrice = ViewBag.Total, SessionId = Model.ToList().FirstOrDefault().SessionId })*@
+    @Html.ActionLink("Proceed to Checkout", "Checkout", new { totalPayment = ViewBag.Total})
+
     <br />
-    @Html.ActionLink("Transaction", "CreateTransaction")
+    @*@Html.ActionLink("Transaction", "CreateTransaction")*@
 
 }
 else

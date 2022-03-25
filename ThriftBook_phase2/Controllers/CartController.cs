@@ -42,6 +42,7 @@ namespace ThriftBook_phase2.Controllers
                     HttpContext.Session.SetString("SessionId", tempSessionId.ToString());
                 }
             }
+
             return HttpContext.Session.GetString("SessionId");
         }
 

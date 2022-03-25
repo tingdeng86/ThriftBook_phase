@@ -114,7 +114,7 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
                    
                     string sessionId = GetSessionId();
                     CartRepo cartRepo = new CartRepo(_context);
-                    cartRepo.MigrateCart(sessionId, Input.Email);
+                    //cartRepo.MigrateCart(sessionId, Input.Email);
                     HttpContext.Session.SetString("SessionId", Input.Email);
 
                     var totalItems = cartRepo.GetTotalItems(Input.Email);

@@ -24,7 +24,7 @@ namespace ThriftBook_phase2.Repositories
                         where i.BuyerId == b.BuyerId
                         select new InvoiceVM
                         {
-                            TransactionId = i.TransactionId,
+                            PaymentId = i.PaymentId,
                             BuyerId = i.BuyerId,
                             TotalPrice = i.TotalPrice,
                             DateOfTransaction = i.DateOfTransaction,
@@ -37,6 +37,7 @@ namespace ThriftBook_phase2.Repositories
             return query;
         }
 
+<<<<<<< HEAD
         public IQueryable<InvoiceDetailVM> GetMore()
         {
             var query = from bi in db.BookInvoice
@@ -53,6 +54,13 @@ namespace ThriftBook_phase2.Repositories
                             Title = b.Title,
                             Genre = b.Gennre                            
                         };
+=======
+        public InvoiceVM Get(string paymentId)
+        {
+            var query = GetAll()
+                .Where(i => i.PaymentId == paymentId)
+                .FirstOrDefault();
+>>>>>>> BookReview-and-PaymentController
             return query;
         }
 

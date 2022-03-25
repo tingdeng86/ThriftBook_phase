@@ -31,9 +31,10 @@ namespace ThriftBook_phase2.Controllers
             return View(iVM);
         }
 
-        public ActionResult Details(int transactionID)
+        public ActionResult Details(string paymentId)
         {
             InvoiceRepo iRepo = new InvoiceRepo(_context);
+<<<<<<< HEAD
             IQueryable<InvoiceDetailVM> iVM = iRepo.Get(transactionID);
             ViewBag.TotalAmount = iVM.Sum(x => (double)x.Price);
             return View(iVM);
@@ -65,6 +66,10 @@ namespace ThriftBook_phase2.Controllers
 
             }
             return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "invoice.csv");
+=======
+            InvoiceVM bVM = iRepo.Get(paymentId);
+            return View(bVM);
+>>>>>>> BookReview-and-PaymentController
         }
     }
 }

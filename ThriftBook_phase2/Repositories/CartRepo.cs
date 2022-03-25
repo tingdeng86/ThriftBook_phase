@@ -136,10 +136,10 @@ namespace ThriftBook_phase2.Repositories
             return cartItem;
         }
 
-        public IQueryable<Book> UpdateBooks(int transactionId)
+        public IQueryable<Book> UpdateBooks(string paymentId)
         {
             var bookInvoices = from b in _context.BookInvoice
-                               where b.TransactionId == transactionId
+                               where b.PaymentId == paymentId
                                select b;
             foreach (var item in bookInvoices)
             {
@@ -164,27 +164,29 @@ namespace ThriftBook_phase2.Repositories
             return book;
         }
 
-        public int CreateTransaction(decimal totalPrice, int buyerId, DateTime date)
+        public string CreateTransaction(decimal totalPrice, int buyerId, DateTime date, string paymentId)
         {
             Invoice invoice = new Invoice()
             {
                 BuyerId = buyerId,
                 TotalPrice = totalPrice,
-                DateOfTransaction = date
+                DateOfTransaction = date,
+                PaymentId = paymentId
             };
             _context.Invoice.Add(invoice);
             _context.SaveChanges();
-            return invoice.TransactionId;
+            //return invoice.PaymentId;
+            return invoice.PaymentId;
         }
 
-        public IQueryable<BookInvoice> CreateBookInvoice(string sessionId, int transactionId)
+        public IQueryable<BookInvoice> CreateBookInvoice(string sessionId, string paymentId)
         {
             var query = GetLists(sessionId);
             foreach (var item in query)
             {
                 BookInvoice bookInvoice = new BookInvoice
                 {
-                    TransactionId = transactionId,
+                    PaymentId = paymentId,
                     BookId = item.BookId,
                     Quantity = item.Quantity
                 };
@@ -192,8 +194,8 @@ namespace ThriftBook_phase2.Repositories
             }
             _context.SaveChanges();
             var bookInvoices = from b in _context.BookInvoice
-                        where b.TransactionId== transactionId
-                        select b;
+                        where b.PaymentId == paymentId
+                               select b;
             return bookInvoices;
         }
     }

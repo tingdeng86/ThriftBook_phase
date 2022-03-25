@@ -30,7 +30,7 @@ namespace ThriftBook_phase2.Data
             // to the base class is also needed at the start of the method.
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Invoice>()
-               .HasKey(bi => new { bi.TransactionId });
+               .HasKey(bi => new { bi.PaymentId });
             // Define foreign keys here. Do not use foreign key annotations.
             modelBuilder.Entity<Invoice>()
                 .HasOne(c => c.Profile)
@@ -39,7 +39,7 @@ namespace ThriftBook_phase2.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<BookInvoice>()
-               .HasKey(bi => new { bi.BookId, bi.TransactionId });
+               .HasKey(bi => new { bi.BookId, bi.PaymentId });
             // Define foreign keys here. Do not use foreign key annotations.
             modelBuilder.Entity<BookInvoice>()
                 .HasOne(c => c.Book)
@@ -49,7 +49,7 @@ namespace ThriftBook_phase2.Data
             modelBuilder.Entity<BookInvoice>()
                 .HasOne(c => c.Invoice)
                 .WithMany(c => c.BookInvoices)
-                .HasForeignKey(fk => new { fk.TransactionId })
+                .HasForeignKey(fk => new { fk.PaymentId })
                 .OnDelete(DeleteBehavior.Restrict);
             base.OnModelCreating(modelBuilder);
 
@@ -240,21 +240,21 @@ namespace ThriftBook_phase2.Data
             modelBuilder.Entity<Invoice>().HasData(
                new Invoice
                {
-                   TransactionId = 100001,
+                   PaymentId = "100001",
                    BuyerId = 1,
                    TotalPrice = 21.50m,
                    DateOfTransaction = new DateTime(2021 - 10 - 16)                   
                },               
                new Invoice
                {
-                     TransactionId = 100002,
-                     BuyerId = 2,
+                   PaymentId = "100002",
+                   BuyerId = 2,
                      TotalPrice = 22,
                      DateOfTransaction = new DateTime(2021 - 11 - 03)
                },
                 new Invoice
                 {
-                    TransactionId = 100003,
+                    PaymentId = "100003",
                     BuyerId = 3,
                     TotalPrice = 13.75m,
                     DateOfTransaction = new DateTime(2021 - 12 - 10)
@@ -264,38 +264,38 @@ namespace ThriftBook_phase2.Data
             modelBuilder.Entity<BookInvoice>().HasData(
                new BookInvoice
                {
-                   TransactionId = 100001,
+                   PaymentId = "100001",
                    BookId = 1,
                    Quantity = 1,
                },
                new BookInvoice
                {
-                   TransactionId = 100001,
+                   PaymentId = "100001",
                    BookId = 5,
                    Quantity = 1,
 
                },
                new BookInvoice
                {
-                   TransactionId = 100002,
+                   PaymentId = "100002",
                    BookId = 2,
                    Quantity = 1,
                },
                new BookInvoice
                {
-                   TransactionId = 100002,
+                   PaymentId = "100002",
                    BookId = 4,
                    Quantity = 1,
                },
                new BookInvoice
                {
-                   TransactionId = 100003,
+                   PaymentId = "100003",
                    BookId = 3,
                    Quantity = 1,
                },
                new BookInvoice
                {
-                   TransactionId = 100003,
+                   PaymentId = "100003",
                    BookId = 5,
                    Quantity = 1,
                }
@@ -308,7 +308,7 @@ namespace ThriftBook_phase2.Data
 
         public DbSet<ThriftBook_phase2.ViewModels.InvoiceVM> InvoiceVM { get; set; }
 
-        public DbSet<ThriftBook_phase2.ViewModels.InvoiceDetailVM> InvoiceDetailVM { get; set; }
+        public DbSet<ThriftBook_phase2.ViewModels.OrderDetailVM> OrderDetailVM { get; set; }
 
     }
 }

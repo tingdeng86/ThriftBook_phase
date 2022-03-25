@@ -58,11 +58,9 @@ namespace ThriftBook_phase2.Controllers
                 default:
                     books = books.OrderBy(s => s.Title);
                     break;
-<<<<<<< HEAD
             }            
-=======
-            }
->>>>>>> BookReview-and-PaymentController
+
+            
             return View(books.ToList());
         }
         

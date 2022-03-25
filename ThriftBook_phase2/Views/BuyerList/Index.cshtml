@@ -42,7 +42,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-<<<<<<< HEAD
+
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.BuyerId)
@@ -69,12 +69,12 @@
                 @Html.DisplayFor(modelItem => item.PostalCode)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TransactionId">Edit</a> |
-                @Html.ActionLink("Details", "Details", new { transactionID = item.TransactionId }) |
-                <a asp-action="Delete" asp-route-id="@item.TransactionId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.PaymentId">Edit</a> |
+                @Html.ActionLink("Details", "Details", new { paymentId = item.PaymentId }) |
+                <a asp-action="Delete" asp-route-id="@item.PaymentId">Delete</a>
             </td>
         </tr>
-=======
+
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.BuyerId)
@@ -103,7 +103,6 @@
                     <a asp-action="Delete" asp-route-id="@item.PaymentId">Delete</a>
                 </td>
             </tr>
->>>>>>> BookReview-and-PaymentController
         }
         <div class="text-center">
             <form method="post" asp-controller="BuyerList" asp-action="ExportToCSV">

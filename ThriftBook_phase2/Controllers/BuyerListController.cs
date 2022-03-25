@@ -31,14 +31,13 @@ namespace ThriftBook_phase2.Controllers
             return View(iVM);
         }
 
-        public ActionResult Details(string paymentId)
-        {
-            InvoiceRepo iRepo = new InvoiceRepo(_context);
-<<<<<<< HEAD
-            IQueryable<InvoiceDetailVM> iVM = iRepo.Get(transactionID);
-            ViewBag.TotalAmount = iVM.Sum(x => (double)x.Price);
-            return View(iVM);
-        }
+        //public ActionResult Details(string paymentId)
+        //{
+        //    InvoiceRepo iRepo = new InvoiceRepo(_context);
+        //    IQueryable<InvoiceDetailVM> iVM = iRepo.Get(paymentId);
+        //    ViewBag.TotalAmount = iVM.Sum(x => (double)x.Price);
+        //    return View(iVM);
+        //}
 
         public IActionResult ExportToCSV()
         {
@@ -54,22 +53,21 @@ namespace ThriftBook_phase2.Controllers
             return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "invoice.csv");
         }
 
-        public IActionResult ExportToCSVDetails(int transactionID)
-        {
-            InvoiceRepo iRepo = new InvoiceRepo(_context);
-            IQueryable<InvoiceDetailVM> iVM = iRepo.Get(transactionID);
-            var builder = new StringBuilder();
-            builder.AppendLine("Buyer ID, Price,Transaction Date, Book Title, Book Genre, Book ID");
-            foreach (var item in iVM)
-            {
-                builder.AppendLine($"{item.BuyerId},{item.Price}, {item.DateOfTransaction}, {item.Title}, {item.Genre}, {item.BookId}");
+        //public IActionResult ExportToCSVDetails(string paymentId)
+        //{
+        //    InvoiceRepo iRepo = new InvoiceRepo(_context);
+        //    IQueryable<InvoiceDetailVM> iVM = iRepo.Get(paymentId);
+        //    var builder = new StringBuilder();
+        //    builder.AppendLine("Buyer ID, Price,Transaction Date, Book Title, Book Genre, Book ID");
+        //    foreach (var item in iVM)
+        //    {
+        //        builder.AppendLine($"{item.BuyerId},{item.Price}, {item.DateOfTransaction}, {item.Title}, {item.Genre}, {item.BookId}");
 
-            }
-            return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "invoice.csv");
-=======
-            InvoiceVM bVM = iRepo.Get(paymentId);
-            return View(bVM);
->>>>>>> BookReview-and-PaymentController
-        }
+        //    }
+        //    return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "invoice.csv");
+
+        //    InvoiceVM bVM = iRepo.Get(paymentId);
+        //    return View(bVM);
+        //}
     }
 }

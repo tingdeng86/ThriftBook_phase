@@ -111,50 +111,50 @@ namespace ThriftBook_phase2.Controllers
 
         //[Authorize]
         // update book test
-        public ActionResult CheckoutTest(int transactionId)
-        {
-            string sessionId = GetSessionId();
-            CartRepo cartRepo = new CartRepo(_context);
-            var books = cartRepo.UpdateBooks(transactionId);
-            cartRepo.EmptyCarts(sessionId);
-            var totalItems = cartRepo.GetTotalItems(sessionId);
-            HttpContext.Session.SetInt32(CARTITEMS, totalItems);
-            return View(books);
-        }
+        //public ActionResult CheckoutTest(int transactionId)
+        //{
+        //    string sessionId = GetSessionId();
+        //    CartRepo cartRepo = new CartRepo(_context);
+        //    var books = cartRepo.UpdateBooks(transactionId);
+        //    cartRepo.EmptyCarts(sessionId);
+        //    var totalItems = cartRepo.GetTotalItems(sessionId);
+        //    HttpContext.Session.SetInt32(CARTITEMS, totalItems);
+        //    return View(books);
+        //}
 
-            [Authorize]
-        public IActionResult Checkout(string sessionId, decimal totalPayment)
-            {
-                ViewData["TotalPrice"] = totalPayment;
+            //[Authorize]
+        //public IActionResult Checkout(string sessionId, decimal totalPayment)
+        //    {
+        //        ViewData["TotalPrice"] = totalPayment;
 
-                string userEmail = User.Identity.Name;
-                ProfileRepo prRepo = new ProfileRepo(_context);
-                int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
-                ViewData["BuyerID"] = buyerId;
+        //        string userEmail = User.Identity.Name;
+        //        ProfileRepo prRepo = new ProfileRepo(_context);
+        //        int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+        //        ViewData["BuyerID"] = buyerId;
 
-                PaymentRepo pmRepo = new PaymentRepo(_context);
-                var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
-                return View(cartObject);
-                //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
+        //        PaymentRepo pmRepo = new PaymentRepo(_context);
+        //        var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+        //        return View(cartObject);
+        //        //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
 
-            }
+        //    }
 
-        [Authorize]
-        public IActionResult CreateTransactionTest(decimal totalPrice)
-        {
-            string sessionId = GetSessionId(); ;
-            string userEmail = User.Identity.Name;
-            CartRepo cartRepo = new CartRepo(_context);
+        //[Authorize]
+        //public IActionResult CreateTransactionTest(decimal totalPrice)
+        //{
+        //    string sessionId = GetSessionId(); ;
+        //    string userEmail = User.Identity.Name;
+        //    CartRepo cartRepo = new CartRepo(_context);
 
-            //cartRepo.MigrateCart(sessionId, userEmail);
-            HttpContext.Session.SetString("SessionId", userEmail);
-            string newSessionId = HttpContext.Session.GetString("SessionId");
-            ProfileRepo prRepo = new ProfileRepo(_context);
-            int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
-            DateTime date = DateTime.Now;
-            int transactionId = cartRepo.CreateTransaction(totalPrice, buyerId, date);
-            var query = cartRepo.CreateBookInvoice(newSessionId, transactionId);
-            return View(query);
-        }
+        //    //cartRepo.MigrateCart(sessionId, userEmail);
+        //    HttpContext.Session.SetString("SessionId", userEmail);
+        //    string newSessionId = HttpContext.Session.GetString("SessionId");
+        //    ProfileRepo prRepo = new ProfileRepo(_context);
+        //    int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+        //    DateTime date = DateTime.Now;
+        //    int transactionId = cartRepo.CreateTransaction(totalPrice, buyerId, date);
+        //    var query = cartRepo.CreateBookInvoice(newSessionId, transactionId);
+        //    return View(query);
+        //}
     }
 }

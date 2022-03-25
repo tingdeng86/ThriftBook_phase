@@ -183,39 +183,39 @@ namespace ThriftBook_phase2.Repositories
             return book;
         }
 
-        public int CreateTransaction(decimal totalPrice, int buyerId, DateTime date)
-        {
-            Invoice invoice = new Invoice()
-            {
-                BuyerId = buyerId,
-                TotalPrice = totalPrice,
-                DateOfTransaction = date,
+        //public int CreateTransaction(decimal totalPrice, int buyerId, DateTime date)
+        //{
+        //    Invoice invoice = new Invoice()
+        //    {
+        //        BuyerId = buyerId,
+        //        TotalPrice = totalPrice,
+        //        DateOfTransaction = date,
                
-            };
-            _context.Invoice.Add(invoice);
-            _context.SaveChanges();
-            return invoice.TransactionId;
-        }
+        //    };
+        //    _context.Invoice.Add(invoice);
+        //    _context.SaveChanges();
+        //    return invoice.TransactionId;
+        //}
 
-        public IQueryable<BookInvoice> CreateBookInvoice(string sessionId, int transactionId)
-        {
-            var query = GetLists(sessionId);
-            foreach (var item in query)
-            {
-                BookInvoice bookInvoice = new BookInvoice
-                {
-                    TransactionId = transactionId,
-                    BookId = item.BookId,
-                    Quantity = item.Quantity
-                };
-                _context.BookInvoice.Add(bookInvoice);
-            }
-            _context.SaveChanges();
-            var bookInvoices = from b in _context.BookInvoice
-                        where b.TransactionId== transactionId
-                        select b;
-            return bookInvoices;
-        }
+        //public IQueryable<BookInvoice> CreateBookInvoice(string sessionId, int transactionId)
+        //{
+        //    var query = GetLists(sessionId);
+        //    foreach (var item in query)
+        //    {
+        //        BookInvoice bookInvoice = new BookInvoice
+        //        {
+        //            TransactionId = transactionId,
+        //            BookId = item.BookId,
+        //            Quantity = item.Quantity
+        //        };
+        //        _context.BookInvoice.Add(bookInvoice);
+        //    }
+        //    _context.SaveChanges();
+        //    var bookInvoices = from b in _context.BookInvoice
+        //                where b.TransactionId== transactionId
+        //                select b;
+        //    return bookInvoices;
+        //}
         public void MigrateCart(string sessionId, string userName)
         {
             var shoppingCart = _context.Cart.Where(c => c.SessionId == sessionId);

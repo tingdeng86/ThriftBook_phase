@@ -11,6 +11,7 @@ using ThriftBook_phase2.Models;
 using ThriftBook_phase2.Repositories;
 using ThriftBook_phase2.ViewModels;
 using Microsoft.AspNetCore.Http;
+using System.Text;
 
 namespace ThriftBook_phase2.Controllers
 {
@@ -29,6 +30,7 @@ namespace ThriftBook_phase2.Controllers
         public IActionResult Index(string sortOrder, string searchString)
         {
 
+<<<<<<< HEAD
             //HttpContext.Session.SetString("DUMB", "DUMB");
             //get totalItems of cart
             string sessionId = GetSessionId();
@@ -36,6 +38,9 @@ namespace ThriftBook_phase2.Controllers
             var totalItems = cartRepo.GetTotalItems(sessionId);
             HttpContext.Session.SetInt32("CartItems", totalItems);
 
+=======
+            HttpContext.Session.SetString("DUMB", "DUMB");           
+>>>>>>> master
             ViewBag.TitleSortParam = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";           
             ViewBag.GenreSortParam = String.IsNullOrEmpty(sortOrder) ? "genre_desc" : "";                        
             ViewBag.PriceSortParam = sortOrder == "Price" ? "price_desc" : "Price";
@@ -46,7 +51,8 @@ namespace ThriftBook_phase2.Controllers
             if(!String.IsNullOrEmpty(searchString))
             {
                 books = books.Where(b => b.Title.ToLower().Contains(searchString) || b.Title.Contains(searchString) || b.Author.ToLower().Contains(sortOrder) || b.Author.Contains(sortOrder));
-            }
+                ViewBag.NoBooksMessage = "The book " + searchString + " is currently not in stock";
+            } 
 
             switch(sortOrder)
             {
@@ -62,27 +68,25 @@ namespace ThriftBook_phase2.Controllers
                 default:
                     books = books.OrderBy(s => s.Title);
                     break;
-            }
-            
+            }            
             return View(books.ToList());
-
-        }        
+        }
+        
 
         public ActionResult Details(int bookID)
         {
             BookDetailVMRepo bdRepo = new BookDetailVMRepo(_context);
-            BookVM bVM = bdRepo.Get(bookID);
-            
+            BookVM bVM = bdRepo.Get(bookID);            
             return View(bVM);
 
-        }        
+        }
+          
 
         [HttpGet]
         public ActionResult Edit(int bookID)
         {
             BookDetailVMRepo bdRepo = new BookDetailVMRepo(_context);
             BookVM bVM = bdRepo.Get(bookID);
-
             return View(bVM);
         }
 
@@ -183,6 +187,9 @@ namespace ThriftBook_phase2.Controllers
                 return RedirectToAction("Details", "Cart", new { id = cartItem.CartItemId });
             }
         }
+
+
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

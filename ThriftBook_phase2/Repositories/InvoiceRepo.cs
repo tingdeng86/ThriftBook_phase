@@ -31,19 +31,50 @@ namespace ThriftBook_phase2.Repositories
                             FirstName = b.FirstName,
                             LastName = b.LastName,
                             PhoneNumber = b.PhoneNumber,
-                            PostalCode = b.PostalCode
+                            PostalCode = b.PostalCode,
+                            Email = b.Email
                         };
             return query;
         }
 
-        public InvoiceVM Get(int transactionID)
+        public IQueryable<InvoiceDetailVM> GetMore()
         {
-            var query = GetAll()
-                .Where(i => i.TransactionId == transactionID)
-                .FirstOrDefault();
+            var query = from bi in db.BookInvoice
+                        from b in db.Book
+                        from i in db.Invoice
+                        where bi.TransactionId == i.TransactionId && bi.BookId == b.BookId
+                        select new InvoiceDetailVM
+                        {
+                            TransactionId = i.TransactionId,
+                            BuyerId = i.BuyerId,
+                            Price = b.Price,
+                            DateOfTransaction = i.DateOfTransaction,
+                            BookId = b.BookId,
+                            Title = b.Title,
+                            Genre = b.Gennre                            
+                        };
             return query;
         }
 
+        public IQueryable<InvoiceDetailVM> Get(int transactionID)
+        {
+            var query = GetMore();
+            var lists = from q in query
+                        where q.TransactionId == transactionID
+                        select q;
+               
+            return lists;
+        }
 
+        //Test
+        public IQueryable<InvoiceDetailVM> GetWithBuyerID(int buyerID)
+        {
+            var query = GetMore();
+            var lists = from q in query
+                        where q.BuyerId == buyerID
+                        select q;
+
+            return lists;
+        }
     }
 }

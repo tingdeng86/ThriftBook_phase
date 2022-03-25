@@ -10,24 +10,25 @@
     <p>
         <a asp-action="Create">Create New</a>
     </p>
+    <p>@ViewBag.NoBooksMessage</p>
     <table class="table">
         <thead>
             <tr>
-                <th>                  
+                <th>
                     @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Author)                 
+                    @Html.DisplayNameFor(model => model.Author)
                 </th>
                 <th>
                     @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.BookQuality)
-                  
+
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.BookQuantity)                 
+                    @Html.DisplayNameFor(model => model.BookQuantity)
                 </th>
                 <th>
                     Photo

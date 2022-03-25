@@ -4,11 +4,8 @@
     ViewData["Title"] = "All Invoices";
 }
 
-<h1>Index</h1>
+<h1>All Invoices</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -67,14 +64,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PostalCode)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TransactionId">Edit</a> |
-                @Html.ActionLink("Details", "Details", new { transactionID = item.TransactionId }) |
-                <a asp-action="Delete" asp-route-id="@item.TransactionId">Delete</a>
+            <td>              
+                @Html.ActionLink("Details", "Details", new { transactionID = item.TransactionId })               
             </td>
         </tr>
         }
-        <div class="text-center">
+        <div class="text-left">
             <form method="post" asp-controller="BuyerList" asp-action="ExportToCSV">
                 <input type="submit" value="Export to CSV" />               
             </form>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using rolesDemoSSD.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,6 +38,8 @@ namespace ThriftBook_phase2.Repositories
             return query;
         }
 
+  
+
         public IQueryable<InvoiceDetailVM> GetMore()
         {
             var query = from bi in db.BookInvoice
@@ -64,9 +67,32 @@ namespace ThriftBook_phase2.Repositories
                         select q;
                
             return lists;
-        }
+        }   
 
-        //Test
+        /*    public InvoiceVM GetEdit(int transactionID)
+            {
+                var query = GetAll()
+                    .Where(b => b.TransactionId == transactionID)
+                    .FirstOrDefault();
+                return query;
+            }*/
+
+        /*        public bool Update(InvoiceVM iVM)
+                {
+                    InvoiceVM invoice = db.InvoiceVM
+                        .Where(b => b.TransactionId == iVM.TransactionId).FirstOrDefault();
+
+                    invoice.TotalPrice = iVM.TransactionId;
+                    invoice.DateOfTransaction = iVM.DateOfTransaction;
+                    invoice.FirstName = iVM.FirstName;
+                    invoice.LastName = iVM.LastName;
+                    invoice.PhoneNumber = iVM.PhoneNumber;
+                    invoice.Email = iVM.Email;
+                    invoice.PostalCode = iVM.PostalCode;
+                    db.SaveChanges();
+                    return true;
+                }*/
+
         public IQueryable<InvoiceDetailVM> GetWithBuyerID(int buyerID)
         {
             var query = GetMore();

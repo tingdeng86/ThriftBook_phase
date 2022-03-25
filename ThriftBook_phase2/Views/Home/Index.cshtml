@@ -75,7 +75,7 @@
                         @Html.DisplayFor(modelItem => item.StoreName)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
+                        @Html.ActionLink("Edit", "Edit", new { BookID = item.BookId }) |
                         @Html.ActionLink("Add To Cart", "Details", new { BookID = item.BookId }) |
                         <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
                     </td>

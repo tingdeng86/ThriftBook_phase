@@ -19,11 +19,11 @@ namespace ThriftBook_phase2.ViewModels
         [DisplayName("Author")]
         public string Author { get; set; }
         [Required]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^\D+$", ErrorMessage = "Use letters only please")]
         [DisplayName("Genre")]
         public string Genre { get; set; }
         [Required]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Use letters only please")]
         [DisplayName("Book Quality")]
         public string BookQuality { get; set; }
         [Required]

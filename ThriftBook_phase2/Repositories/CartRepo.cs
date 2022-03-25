@@ -215,6 +215,16 @@ namespace ThriftBook_phase2.Repositories
                         where b.TransactionId== transactionId
                         select b;
             return bookInvoices;
-        }  
+        }
+        public void MigrateCart(string sessionId, string userName)
+        {
+            var shoppingCart = _context.Cart.Where(c => c.SessionId == sessionId);
+            foreach (var item in shoppingCart)
+            {
+                item.SessionId = userName;
+            }
+            _context.SaveChanges();
+        }
     }
+
 }

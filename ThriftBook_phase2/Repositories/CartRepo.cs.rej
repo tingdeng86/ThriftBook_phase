@@ -1,0 +1,17 @@
+diff a/ThriftBook_phase2/Repositories/CartRepo.cs b/ThriftBook_phase2/Repositories/CartRepo.cs	(rejected hunks)
+@@ -215,5 +215,15 @@
+                         select b;
+             return bookInvoices;
+         }
++
++        public void MigrateCart(string sessionId, string userName)
++        {
++            var shoppingCart = _context.Cart.Where(c => c.SessionId == sessionId);
++            foreach (var item in shoppingCart)
++            {
++                item.SessionId = userName;
++            }
++             _context.SaveChanges();
++        }
+     }
+ }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -30,6 +31,8 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+            Guid tempSessionId = Guid.NewGuid();
+            HttpContext.Session.SetString("SessionId", tempSessionId.ToString());
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);

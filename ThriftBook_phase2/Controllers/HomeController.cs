@@ -30,17 +30,13 @@ namespace ThriftBook_phase2.Controllers
         public IActionResult Index(string sortOrder, string searchString)
         {
 
-<<<<<<< HEAD
+
             //HttpContext.Session.SetString("DUMB", "DUMB");
             //get totalItems of cart
             string sessionId = GetSessionId();
             CartRepo cartRepo = new CartRepo(_context);
             var totalItems = cartRepo.GetTotalItems(sessionId);
             HttpContext.Session.SetInt32("CartItems", totalItems);
-
-=======
-            HttpContext.Session.SetString("DUMB", "DUMB");           
->>>>>>> master
             ViewBag.TitleSortParam = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";           
             ViewBag.GenreSortParam = String.IsNullOrEmpty(sortOrder) ? "genre_desc" : "";                        
             ViewBag.PriceSortParam = sortOrder == "Price" ? "price_desc" : "Price";

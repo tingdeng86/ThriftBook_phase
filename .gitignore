@@ -3,8 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-## "ApiKey": "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"
-
 # User-specific files
 *.rsuser
 *.suo

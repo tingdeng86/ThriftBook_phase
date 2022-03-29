@@ -90,7 +90,9 @@ namespace ThriftBook_phase2.Controllers
             [Authorize]
         public IActionResult Checkout(decimal totalPayment)
             {
+            int currentIndex = 0;
             string sessionId = HttpContext.Session.Id;
+            bool indicator = false;
 
             ViewData["TotalPrice"] = totalPayment;
 
@@ -100,12 +102,33 @@ namespace ThriftBook_phase2.Controllers
                 ViewData["BuyerID"] = buyerId;
 
                 PaymentRepo pmRepo = new PaymentRepo(_context);
-                var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+                var cartObjects = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+            //var newCartObj = cartObjects;
 
-                //perform a check of books (by Id) in db to make sure there's enough:
-                //var amountOfBooks = cartObject.Where()
+            //perform a check of books (by Id) in db to make sure there's enough:
+            CartRepo cartRepo = new CartRepo(_context);
 
-                return View(cartObject);
+            //cartObjects.ToList()[0].isValid = true;
+            //cartObjects.ToList()[0].Price = 13m;
+            //var price = cartObjects.ToList()[0].Price;
+            //bool value = cartObjects.ToList()[0].isValid;
+
+            foreach (var booksObj in cartObjects.ToList())
+            {
+                booksObj.isValid = cartRepo.GetBooks(booksObj);
+                //if (booksObj.isValid == true) {
+                //    indicator = cartRepo.GetBooks(booksObj);
+                //    ValidateOrder(booksObj);
+                //    cartObjects.ToList()[currentIndex] = ValidateOrder(booksObj);
+                    //cartObjects.ToList()[currentIndex].isValid = true;
+                    //currentIndex = currentIndex + 1;
+                //}
+                //if (purchasePossible == false)
+                //{
+                //    return StatusCode(StatusCodes.Status500InternalServerError);
+                //}
+            }
+            return View(cartObjects);
                 //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
             }
 
@@ -143,6 +166,14 @@ namespace ThriftBook_phase2.Controllers
 
             return Json(ipn);
 
+        }
+
+        // Show transaction detail. 
+        private CartVM ValidateOrder(CartVM bookObj)
+        {
+            bookObj.isValid = true;
+
+            return bookObj;
         }
 
         // Show transaction detail. 

@@ -31,7 +31,8 @@ namespace ThriftBook_phase2.Repositories
                                    DateOfTransaction = i.DateOfTransaction,
                                    BookId = bi.BookId,
                                    Quantity = bi.Quantity,
-                                   BookTitle = b.Title
+                                   BookTitle = b.Title,
+                                   Price = b.Price
                                };
             return orderDetails;
         }

@@ -199,28 +199,23 @@ namespace ThriftBook_phase2.Repositories
             return bookInvoices;
         }
 
-        public int GetBooks(int currentBookId)
+        //public int GetBooks(CartVM currentBook, int cartBookQuantity)
+        public Boolean GetBooks(CartVM currentBook)
         {
-
+            int numberOfBooksInDb = -1;
             var query = from b in _context.Book
-                        where b.BookId == currentBookId
-                        select b.BookQuantity;
+                        where b.BookId == currentBook.BookId
+                        select b;
             foreach (var item in query)
             {
-                
+                numberOfBooksInDb = item.BookQuantity;
+
+                if (item.BookQuantity < currentBook.Quantity)
+                {
+                    return false;
+                }
             }
-                //select new CartVM()
-                //{
-                //    CartItemId = c.CartItemId,
-                //    SessionId = c.SessionId,
-                //    BookId = c.BookId,
-                //    Title = b.Title,
-                //    BookPhoto = b.BookPhoto,
-                //    Price = b.Price,
-                //    TotalQuantity = b.BookQuantity,
-                //    Quantity = c.Quantity,
-                //};
-                return query;
+            return true;
         }
     }
 }

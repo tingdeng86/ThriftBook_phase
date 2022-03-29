@@ -3,63 +3,59 @@
 @{
     ViewData["Title"] = "FinishShopping";
     string transactionTime = Model.FirstOrDefault().DateOfTransaction.ToString("dd/MMM/yyyy hh:mm");
-    string amount = Model.FirstOrDefault().TotalPrice.ToString();
+    string amount = Model.FirstOrDefault().TotalPrice.ToString("c");
 }
 
-<h1>FinishShopping</h1>
-
+<h3>Thank you for your purchase</h3>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <h1>Thank you for your purchase</h1>
-<br/>
+<br />
 <h3>Time of Purchase @transactionTime</h3>
-<h3>Your total $@amount</h3>
+
 <table class="table">
     <thead>
         <tr>
-            @*<th>
-                @Html.DisplayNameFor(model => model.BuyerId)
-            </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
+                @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfTransaction)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Book)
             </th>
+            <th>
+                Amount
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.BuyerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfTransaction)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookTitle)
-            </td>
-            @*<td>
-                <a asp-action="Edit" asp-route-id="@item.PaymentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PaymentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PaymentId">Delete</a>
-            </td>*@
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.Price) CAD
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookTitle)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.Price) CAD
+                </td>
+                @*<td>
+                        <a asp-action="Edit" asp-route-id="@item.PaymentId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.PaymentId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.PaymentId">Delete</a>
+                    </td>*@
+            </tr>
+        }
     </tbody>
 </table>
+<h3>Your total @amount</h3>

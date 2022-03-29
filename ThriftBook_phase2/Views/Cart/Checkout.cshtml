@@ -39,6 +39,17 @@
     <tbody>
         @foreach (var item in Model)
         {
+            //if (item.isValid)
+            //if (item.isValid)
+            if (item.isValid)
+            {
+
+            }
+            else
+            {
+                <tr><td colspan="7"><h4 class="text-danger">Some items in your cart are out of stock</h4></td></tr>
+
+            }
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.SessionId)
@@ -65,12 +76,9 @@
 
                 @ViewBag.TotalPrice
                 @ViewBag.BuyerId
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CartItemId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.CartItemId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CartItemId">Delete</a>
-                </td>
+
             </tr>
+        }
         }
     </tbody>
 </table>

@@ -198,5 +198,29 @@ namespace ThriftBook_phase2.Repositories
                                select b;
             return bookInvoices;
         }
+
+        public int GetBooks(int currentBookId)
+        {
+
+            var query = from b in _context.Book
+                        where b.BookId == currentBookId
+                        select b.BookQuantity;
+            foreach (var item in query)
+            {
+                
+            }
+                //select new CartVM()
+                //{
+                //    CartItemId = c.CartItemId,
+                //    SessionId = c.SessionId,
+                //    BookId = c.BookId,
+                //    Title = b.Title,
+                //    BookPhoto = b.BookPhoto,
+                //    Price = b.Price,
+                //    TotalQuantity = b.BookQuantity,
+                //    Quantity = c.Quantity,
+                //};
+                return query;
+        }
     }
 }

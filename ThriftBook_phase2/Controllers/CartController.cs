@@ -87,17 +87,6 @@ namespace ThriftBook_phase2.Controllers
         [Authorize]
        
 
-
-        //[Authorize]
-        // update book test
-        public ActionResult CheckoutTest(string paymentId)
-        {
-            string sessionId = HttpContext.Session.Id;
-            CartRepo cartRepo = new CartRepo(_context);
-            var books = cartRepo.UpdateBooks(paymentId);
-            return View(books);
-        }
-
             [Authorize]
         public IActionResult Checkout(decimal totalPayment)
             {
@@ -112,6 +101,10 @@ namespace ThriftBook_phase2.Controllers
 
                 PaymentRepo pmRepo = new PaymentRepo(_context);
                 var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+
+                //perform a check of books (by Id) in db to make sure there's enough:
+                //var amountOfBooks = cartObject.Where()
+
                 return View(cartObject);
                 //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
             }
@@ -155,10 +148,13 @@ namespace ThriftBook_phase2.Controllers
         // Show transaction detail. 
         public IActionResult FinishShopping(string paymentID)
         {
+            //obtaining the object of the current order being placed:
             OrderDetailRepo coRepo = new OrderDetailRepo(_context);
             var currentOrder = coRepo.GetOrder(paymentID);
+            //updating books:
             CartRepo cartRepo = new CartRepo(_context);
             var books = cartRepo.UpdateBooks(paymentID);
+
             return View(currentOrder);
         }
     }

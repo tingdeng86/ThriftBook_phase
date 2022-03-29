@@ -84,17 +84,6 @@ namespace ThriftBook_phase2.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-
-
-        //// Home page shows list of items. Item price is set through ViewBag.
-        //public IActionResult Payment()
-        //{
-        //    ViewBag.TotalPrice = "3.55";
-        //    var items = _context.IPNs;
-        //    return View(items);
-        //}
-
-
         [Authorize]
        
 
@@ -126,26 +115,6 @@ namespace ThriftBook_phase2.Controllers
                 return View(cartObject);
                 //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
             }
-
-
-        //[Authorize]
-        //public IActionResult CreateTransaction(decimal totalPrice)
-        //{
-        //    string sessionId = HttpContext.Session.Id;
-        //    string userEmail = User.Identity.Name;
-        //    ProfileRepo prRepo = new ProfileRepo(_context);
-        //    int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
-
-        //    ViewData["BuyerID"] = buyerId;
-
-        //    DateTime date = DateTime.Now;
-        //    CartRepo cartRepo = new CartRepo(_context);
-        //    int transactionId = cartRepo.CreateTransaction(totalPrice, buyerId, date);
-        //    var query = cartRepo.CreateBookInvoice(sessionId, transactionId);
-        //    return View(query);
-
-        //}
-
 
         // This method receives and stores the Paypal transaction details.
         [HttpPost]

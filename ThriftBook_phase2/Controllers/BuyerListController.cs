@@ -23,54 +23,21 @@ namespace ThriftBook_phase2.Controllers
         }
 
         public IActionResult Index()
-        {            
+        {
             InvoiceRepo iRepo = new InvoiceRepo(_context);
             IQueryable<InvoiceVM> iVM = iRepo.GetAll();
-           
-            ViewBag.TotalAmount = iVM.Sum(x => (double)x.TotalPrice);          
+
+            ViewBag.TotalAmount = iVM.Sum(x => (double)x.TotalPrice);
             return View(iVM);
         }
 
-        //public ActionResult Details(string paymentId)
-        //{
-        //    InvoiceRepo iRepo = new InvoiceRepo(_context);
-        //    IQueryable<InvoiceDetailVM> iVM = iRepo.Get(paymentId);
-        //    ViewBag.TotalAmount = iVM.Sum(x => (double)x.Price);
-        //    return View(iVM);
-        //}
-
-/*        public ActionResult Delete(int transactionID)
+        public ActionResult Details(string paymentId)
         {
-            ViewData["Message"] = "";
-            try
-            {
-                InvoiceRepo iRepo = new InvoiceRepo(_context);
-                iRepo.Delete(transactionID);
-                ViewData["Message"] = "Deleted successfully";
-            }
-            catch (Exception e)
-            {
-                ViewData["Message"] = e.Message;
-            }
-            return RedirectToAction("BuyerList", "Home", new { message = ViewData["Message"] });
-        }*/
-
-        /*       [HttpGet]
-               public ActionResult Edit(int transactionID)
-               {
-                   InvoiceRepo iRepo = new InvoiceRepo(_context);
-                   InvoiceVM iVM = iRepo.GetEdit(transactionID);
-                   return View(iVM);
-               }
-
-               [HttpPost]
-               public ActionResult Edit(InvoiceVM iVM)
-               {
-                   InvoiceRepo bdRepo = new InvoiceRepo(_context);
-                   bdRepo.Update(iVM);
-                   return RedirectToAction(nameof(Details), new { TransactionID = iVM.TransactionId, TotalPrice = iVM.TotalPrice, DateOfTransaction = iVM.DateOfTransaction, FirstName = iVM.FirstName, LastName = iVM.LastName, PhoneNumber = iVM.PhoneNumber, Email = iVM.Email, PostalCode = iVM.PostalCode });
-
-               }*/
+            InvoiceRepo iRepo = new InvoiceRepo(_context);
+            IQueryable<InvoiceDetailVM> iVM = iRepo.Get(paymentId);
+            ViewBag.TotalAmount = iVM.Sum(x => (double)x.Price);
+            return View(iVM);
+        }
 
         public IActionResult ExportToCSV()
         {
@@ -86,21 +53,18 @@ namespace ThriftBook_phase2.Controllers
             return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "invoice.csv");
         }
 
-        //public IActionResult ExportToCSVDetails(string paymentId)
-        //{
-        //    InvoiceRepo iRepo = new InvoiceRepo(_context);
-        //    IQueryable<InvoiceDetailVM> iVM = iRepo.Get(paymentId);
-        //    var builder = new StringBuilder();
-        //    builder.AppendLine("Buyer ID, Price,Transaction Date, Book Title, Book Genre, Book ID");
-        //    foreach (var item in iVM)
-        //    {
-        //        builder.AppendLine($"{item.BuyerId},{item.Price}, {item.DateOfTransaction}, {item.Title}, {item.Genre}, {item.BookId}");
+        public IActionResult ExportToCSVDetails(string paymentId)
+        {
+            InvoiceRepo iRepo = new InvoiceRepo(_context);
+            IQueryable<InvoiceDetailVM> iVM = iRepo.Get(paymentId);
+            var builder = new StringBuilder();
+            builder.AppendLine("Buyer ID, Price,Transaction Date, Book Title, Book Genre, Book ID");
+            foreach (var item in iVM)
+            {
+                builder.AppendLine($"{item.BuyerId},{item.Price}, {item.DateOfTransaction}, {item.Title}, {item.Genre}, {item.BookId}");
 
-        //    }
-        //    return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "invoice.csv");
-
-        //    InvoiceVM bVM = iRepo.Get(paymentId);
-        //    return View(bVM);
-        //}
+            }
+            return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "invoice.csv");
+        }
     }
 }

@@ -22,8 +22,8 @@ namespace ThriftBook_phase2.Data.Service
         {
             var apiKey = _configuration.GetSection("SendGrid")["ApiKey"];
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("slee1005@my.bcit.ca", "Simon Lee");
-            var subject = payload.Subject;
+            var from = new EmailAddress("craig_watson@bcit.ca", "Craig Watson"); 
+            var subject = payload.Subject; 
             var to = new EmailAddress(payload.Email
                                      , $"{payload.FirstName} {payload.LastName}");
             var textContent = payload.Body;
@@ -37,3 +37,4 @@ namespace ThriftBook_phase2.Data.Service
         }
     }
 }
+//"slee1005@my.bcit.ca", "ThriftBook"

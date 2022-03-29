@@ -50,16 +50,33 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Use another service to log in.</h4>
+            <h4>Summary (ID, Logins)</h4>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
                     <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
+                        <table>
+                            <tr>
+                                <th> No. </th>
+                                <th> Role </th>
+                                <th> ID(email) </th>
+                                <th> Password </th>
+                            </tr>
+                            <tr>
+                                <td> 1 </td>
+                                <td> Admin </td>
+                                <td> slee1005@my.bcit.ca </td>
+                                <td> Racoons#2022</td>
+                            </tr>
+                            <tr>
+                                <td> 2 </td>
+                                <td> Manager </td>
+                                <td> accept96@gmail.com </td>
+                                <td> Racoons#2022</td>
+                            </tr>
+
+                        </table>
                     </div>
                 }
                 else

@@ -25,7 +25,7 @@ namespace ThriftBook_phase2.Repositories
                         where i.BuyerId == b.BuyerId
                         select new InvoiceVM
                         {
-                            TransactionId = i.TransactionId,
+                            PaymentId = i.PaymentId,
                             BuyerId = i.BuyerId,
                             TotalPrice = i.TotalPrice,
                             DateOfTransaction = i.DateOfTransaction,
@@ -45,10 +45,10 @@ namespace ThriftBook_phase2.Repositories
             var query = from bi in db.BookInvoice
                         from b in db.Book
                         from i in db.Invoice
-                        where bi.TransactionId == i.TransactionId && bi.BookId == b.BookId
+                        where bi.PaymentId == i.PaymentId && bi.BookId == b.BookId
                         select new InvoiceDetailVM
                         {
-                            TransactionId = i.TransactionId,
+                            PaymentId = i.PaymentId,
                             BuyerId = i.BuyerId,
                             Price = b.Price,
                             DateOfTransaction = i.DateOfTransaction,
@@ -59,39 +59,15 @@ namespace ThriftBook_phase2.Repositories
             return query;
         }
 
-        public IQueryable<InvoiceDetailVM> Get(int transactionID)
+        public IQueryable<InvoiceDetailVM> Get(int paymentID)
         {
             var query = GetMore();
             var lists = from q in query
-                        where q.TransactionId == transactionID
+                        where q.PaymentId == paymentID
                         select q;
                
             return lists;
         }   
-
-        /*    public InvoiceVM GetEdit(int transactionID)
-            {
-                var query = GetAll()
-                    .Where(b => b.TransactionId == transactionID)
-                    .FirstOrDefault();
-                return query;
-            }*/
-
-        /*        public bool Update(InvoiceVM iVM)
-                {
-                    InvoiceVM invoice = db.InvoiceVM
-                        .Where(b => b.TransactionId == iVM.TransactionId).FirstOrDefault();
-
-                    invoice.TotalPrice = iVM.TransactionId;
-                    invoice.DateOfTransaction = iVM.DateOfTransaction;
-                    invoice.FirstName = iVM.FirstName;
-                    invoice.LastName = iVM.LastName;
-                    invoice.PhoneNumber = iVM.PhoneNumber;
-                    invoice.Email = iVM.Email;
-                    invoice.PostalCode = iVM.PostalCode;
-                    db.SaveChanges();
-                    return true;
-                }*/
 
         public IQueryable<InvoiceDetailVM> GetWithBuyerID(int buyerID)
         {

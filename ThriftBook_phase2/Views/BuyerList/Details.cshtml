@@ -56,7 +56,7 @@
         }
         <div class="text-left">
             <form method="post" asp-controller="BuyerList" asp-action="ExportToCSVDetails">
-                <input type="text" id="transactionID" name="transactionid" hidden value="@Model.FirstOrDefault().TransactionId"/>
+                <input type="text" id="transactionID" name="paymentid" hidden value="@Model.FirstOrDefault().PaymentId"/>
                 <input type="submit" value="Export to CSV"/>
             </form>
         </div>

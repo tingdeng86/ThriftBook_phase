@@ -111,7 +111,7 @@ namespace ThriftBook_phase2.Controllers
             [Authorize]
         public IActionResult Checkout(decimal totalPayment)
             {
-            string sessionId = HttpContext.Session.Id;
+            string sessionId = GetSessionId();
 
             ViewData["TotalPrice"] = totalPayment;
 
@@ -138,7 +138,7 @@ namespace ThriftBook_phase2.Controllers
             int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
 
             string paymentId = ipn.PaymentId;
-            string sessionId = HttpContext.Session.Id;
+            string sessionId = GetSessionId();
             try
             {
                 _context.IPNs.Add(ipn);
@@ -170,6 +170,9 @@ namespace ThriftBook_phase2.Controllers
             var currentOrder = coRepo.GetOrder(paymentID);
             CartRepo cartRepo = new CartRepo(_context);
             var books = cartRepo.UpdateBooks(paymentID);
+            string sessionId = GetSessionId();
+            cartRepo.EmptyCarts(sessionId);
+            HttpContext.Session.SetInt32(CARTITEMS, 0);
             return View(currentOrder);
         }
 

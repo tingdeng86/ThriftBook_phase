@@ -17,7 +17,6 @@ namespace ThriftBook_phase2.Repositories
         {
             db = context;
         }
-
         public IQueryable<InvoiceVM> GetAll()
         {
             var query = from i in db.Invoice
@@ -37,8 +36,6 @@ namespace ThriftBook_phase2.Repositories
                         };
             return query;
         }
-
-
 
         public IQueryable<InvoiceDetailVM> GetMore()
         {
@@ -60,6 +57,7 @@ namespace ThriftBook_phase2.Repositories
         }
 
         public IQueryable<InvoiceDetailVM> Get(string paymentID)
+
         {
             var query = GetMore();
             var lists = from q in query
@@ -67,7 +65,7 @@ namespace ThriftBook_phase2.Repositories
                         select q;
 
             return lists;
-        }
+        }   
 
         public IQueryable<InvoiceDetailVM> GetWithBuyerID(int buyerID)
         {

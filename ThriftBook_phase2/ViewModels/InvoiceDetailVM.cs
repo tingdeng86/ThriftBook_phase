@@ -10,7 +10,9 @@ namespace ThriftBook_phase2.ViewModels
     public class InvoiceDetailVM
     {
         [Key]
-        [DisplayName("Transaction ID")]
+
+
+        [DisplayName("Payment ID")]
         public string PaymentId { get; set; }
         [DisplayName("Buyer ID")]
         public int BuyerId { get; set; }

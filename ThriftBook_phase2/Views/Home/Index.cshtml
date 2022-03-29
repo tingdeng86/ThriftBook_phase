@@ -9,98 +9,54 @@
     <p>@ViewBag.NoBooksMessage</p>
     <table class="table">
         <p class="text-center">
-            <div class="items"
-            @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
+            <div class="items">
+                @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
             </div>
-            <div class="items"
-            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam })
+            <div class="items">
+                @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam })
             </div>
-            <div class="items"
-            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParam })
+            <div class="items">
+                @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParam })
             </div>
             @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
             {
                 <a asp-action="Create" class="create-book">Create New</a>
             }
-            </p>
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Author)
-                </th>
-                <th>
-                   Genre
-                </th>
-                <th>
-                   Quality
-
-                </th>
-                <th>
-                   Quantity
-                </th>
-                <th>
-                    Photo
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    Store
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+        </p>
+        <div class="cards-container">
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Author)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gennre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookQuality)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookQuantity)
-                    </td>
-                    <td>
-                        <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Book-Image" />
-                    </td>
-                    <td>
-                        $@Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StoreName)
-                    </td>
-                    <td>
-                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
-                        {
-                            @Html.ActionLink("Edit", "Edit", new { BookID = item.BookId }) <span>|</span>
-                            @Html.ActionLink("Add To Cart", "Details", new { BookID = item.BookId }) <span>|</span>
-                            <a asp-action="Delete" asp-route-id="@item.BookId"> Delete </a>
-                        }
-                        else
-                        {
-                    <div class="add-to-cartbtn">                        
-                         @Html.ActionLink("Add To Cart", "Details", new { BookID = item.BookId })
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                        </svg>                       
+
+                <div class="card bg-light mb-3" style="width: 18rem;">
+                    <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Book-Image" class="book-img"/>
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Author)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Gennre)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.BookQuality)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.BookQuantity) in stock</p>
+                        <p class="card-text">$@Html.DisplayFor(modelItem => item.Price)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.StoreName)</p>
+                        <p class="card-text">
+                            @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { BookID = item.BookId }) <span>|</span>
+                                @Html.ActionLink("Add To Cart", "Details", new { BookID = item.BookId }) <span>|</span>
+                                <a asp-action="Delete" asp-route-id="@item.BookId"> Delete </a>
+                            }
+                            else
+                            {
+                                <div class="add-to-cartbtn">
+                                    @Html.ActionLink("Add To Cart", "Details", new { BookID = item.BookId })
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                    </svg>
+                                </div>
+                            }
+                        </p>
                     </div>
-                            
-                        }
-                    </td>
-                </tr>
+                </div>
             }
-        </tbody>
+        </div>               
     </table>
 </div>

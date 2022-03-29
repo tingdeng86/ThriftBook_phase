@@ -5,39 +5,50 @@
 }
 
 <div class="text-center">
-    <h1>Available Books</h1>
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+    <h1 class="available-books">Available Books</h1>
     <p>@ViewBag.NoBooksMessage</p>
     <table class="table">
+        <p class="text-center">
+            <div class="items"
+            @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
+            </div>
+            <div class="items"
+            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam })
+            </div>
+            <div class="items"
+            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParam })
+            </div>
+            @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+            {
+                <a asp-action="Create" class="create-book">Create New</a>
+            }
+            </p>
         <thead>
             <tr>
                 <th>
-                    @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam })
+                    @Html.DisplayNameFor(model => model.Title)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Author)
                 </th>
                 <th>
-                    @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
+                   Genre
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.BookQuality)
+                   Quality
 
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.BookQuantity)
+                   Quantity
                 </th>
                 <th>
                     Photo
                 </th>
                 <th>
-                    @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParam })
+                    @Html.DisplayNameFor(model => model.Price)
                 </th>
                 <th>
-                    Store Name
+                    Store
                 </th>
                 <th></th>
             </tr>
@@ -71,9 +82,22 @@
                         @Html.DisplayFor(modelItem => item.StoreName)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
-                        @Html.ActionLink("Add To Cart", "Details", new { BookID = item.BookId }) |
-                        <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { BookID = item.BookId }) <span>|</span>
+                            @Html.ActionLink("Add To Cart", "Details", new { BookID = item.BookId }) <span>|</span>
+                            <a asp-action="Delete" asp-route-id="@item.BookId"> Delete </a>
+                        }
+                        else
+                        {
+                    <div class="add-to-cartbtn">                        
+                         @Html.ActionLink("Add To Cart", "Details", new { BookID = item.BookId })
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </svg>                       
+                    </div>
+                            
+                        }
                     </td>
                 </tr>
             }

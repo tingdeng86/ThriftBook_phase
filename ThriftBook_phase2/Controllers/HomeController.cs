@@ -70,7 +70,6 @@ namespace ThriftBook_phase2.Controllers
             return View(books.ToList());
         }
         
-
         public ActionResult Details(int bookID)
         {
             BookDetailVMRepo bdRepo = new BookDetailVMRepo(_context);
@@ -79,7 +78,6 @@ namespace ThriftBook_phase2.Controllers
 
         }
           
-
         [HttpGet]
         public ActionResult Edit(int bookID)
         {
@@ -113,7 +111,6 @@ namespace ThriftBook_phase2.Controllers
             {
                 BookDetailVMRepo bdRepo = new BookDetailVMRepo(_context);
                 book = bdRepo.Add(bVM);
-
                 ViewData["Message"] = "Created successfully";
                 return RedirectToAction("Index", "Home", new { Title = bVM.Title, Author = bVM.Author, Genre = bVM.Genre, BookQuality = bVM.BookQuality, BookQuantity = bVM.BookQuantity, Price = bVM.Price, BookID = bVM.BookID });
             }
@@ -185,8 +182,6 @@ namespace ThriftBook_phase2.Controllers
                 return RedirectToAction("Details", "Cart", new { id = cartItem.CartItemId });
             }
         }
-
-
 
         public IActionResult Error()
         {

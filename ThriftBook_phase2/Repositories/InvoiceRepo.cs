@@ -1,4 +1,5 @@
-﻿using System;
+﻿using rolesDemoSSD.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using ThriftBook_phase2.Data;
 using ThriftBook_phase2.ViewModels;
 
 namespace ThriftBook_phase2.Repositories
-{   
+{
     public class InvoiceRepo
     {
 
@@ -38,50 +39,44 @@ namespace ThriftBook_phase2.Repositories
         }
 
 
-        //public IQueryable<InvoiceDetailVM> GetMore()
-        //{
-        //    var query = from bi in db.BookInvoice
-        //                from b in db.Book
-        //                from i in db.Invoice
-        //                where bi.PaymentId == i.PaymentId && bi.BookId == b.BookId
-        //                select new InvoiceDetailVM
-        //                {
-        //                    PaymentId = i.PaymentId,
-        //                    BuyerId = i.BuyerId,
-        //                    Price = b.Price,
-        //                    DateOfTransaction = i.DateOfTransaction,
-        //                    BookId = b.BookId,
-        //                    Title = b.Title,
-        //                    Genre = b.Gennre
-        //                };
-        //}
-        public InvoiceVM Get(string paymentId)
+
+        public IQueryable<InvoiceDetailVM> GetMore()
         {
-            var query = GetAll()
-                .Where(i => i.PaymentId == paymentId)
-                .FirstOrDefault();
+            var query = from bi in db.BookInvoice
+                        from b in db.Book
+                        from i in db.Invoice
+                        where bi.PaymentId == i.PaymentId && bi.BookId == b.BookId
+                        select new InvoiceDetailVM
+                        {
+                            PaymentId = i.PaymentId,
+                            BuyerId = i.BuyerId,
+                            Price = b.Price,
+                            DateOfTransaction = i.DateOfTransaction,
+                            BookId = b.BookId,
+                            Title = b.Title,
+                            Genre = b.Gennre
+                        };
             return query;
         }
 
-        //public IQueryable<InvoiceDetailVM> Get(string paymentId)
-        //{
-        //    var query = GetMore();
-        //    var lists = from q in query
-        //                where q.PaymentId == paymentId
-        //                select q;
-               
-        //    return lists;
-        //}
+        public IQueryable<InvoiceDetailVM> Get(int paymentID)
+        {
+            var query = GetMore();
+            var lists = from q in query
+                        where q.PaymentId == paymentID
+                        select q;
 
-        //Test
-        //public IQueryable<InvoiceDetailVM> GetWithBuyerID(int buyerID)
-        //{
-        //    var query = GetMore();
-        //    var lists = from q in query
-        //                where q.BuyerId == buyerID
-        //                select q;
+            return lists;
+        }
 
-        //    return lists;
-        //}
+        public IQueryable<InvoiceDetailVM> GetWithBuyerID(int buyerID)
+        {
+            var query = GetMore();
+            var lists = from q in query
+                        where q.BuyerId == buyerID
+                        select q;
+
+            return lists;
+        }
     }
 }

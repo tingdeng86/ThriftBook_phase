@@ -6,9 +6,6 @@
 
 <h1>Details</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -54,15 +51,10 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BookId)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.TransactionId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.TransactionId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.TransactionId">Delete</a>
-                </td>
+                </td>             
             </tr>
         }
-        <div class="text-center">
+        <div class="text-left">
             <form method="post" asp-controller="BuyerList" asp-action="ExportToCSVDetails">
                 <input type="text" id="transactionID" name="transactionid" hidden value="@Model.FirstOrDefault().TransactionId"/>
                 <input type="submit" value="Export to CSV"/>

@@ -39,6 +39,39 @@ namespace ThriftBook_phase2.Controllers
         //    return View(iVM);
         //}
 
+/*        public ActionResult Delete(int transactionID)
+        {
+            ViewData["Message"] = "";
+            try
+            {
+                InvoiceRepo iRepo = new InvoiceRepo(_context);
+                iRepo.Delete(transactionID);
+                ViewData["Message"] = "Deleted successfully";
+            }
+            catch (Exception e)
+            {
+                ViewData["Message"] = e.Message;
+            }
+            return RedirectToAction("BuyerList", "Home", new { message = ViewData["Message"] });
+        }*/
+
+        /*       [HttpGet]
+               public ActionResult Edit(int transactionID)
+               {
+                   InvoiceRepo iRepo = new InvoiceRepo(_context);
+                   InvoiceVM iVM = iRepo.GetEdit(transactionID);
+                   return View(iVM);
+               }
+
+               [HttpPost]
+               public ActionResult Edit(InvoiceVM iVM)
+               {
+                   InvoiceRepo bdRepo = new InvoiceRepo(_context);
+                   bdRepo.Update(iVM);
+                   return RedirectToAction(nameof(Details), new { TransactionID = iVM.TransactionId, TotalPrice = iVM.TotalPrice, DateOfTransaction = iVM.DateOfTransaction, FirstName = iVM.FirstName, LastName = iVM.LastName, PhoneNumber = iVM.PhoneNumber, Email = iVM.Email, PostalCode = iVM.PostalCode });
+
+               }*/
+
         public IActionResult ExportToCSV()
         {
             InvoiceRepo iRepo = new InvoiceRepo(_context);

@@ -25,7 +25,7 @@ namespace ThriftBook_phase2.Controllers
             _context = context;
         }
         const string CARTITEMS= "CartItems";
-<<<<<<< HEAD
+
 
 
         public string GetSessionId()
@@ -48,8 +48,7 @@ namespace ThriftBook_phase2.Controllers
             return HttpContext.Session.GetString("SessionId");
         }
 
-=======
->>>>>>> fe5386b37f30faf706f63bf533e57fdb6d0de659
+
 
 
         public IActionResult Index()
@@ -111,36 +110,6 @@ namespace ThriftBook_phase2.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-
-<<<<<<< HEAD
-
-            //[Authorize]
-        //public IActionResult Checkout(decimal totalPayment)
-        //    {
-        //    string sessionId = HttpContext.Session.Id;
-
-        //    ViewData["TotalPrice"] = totalPayment;
-
-        //        PaymentRepo pmRepo = new PaymentRepo(_context);
-        //        var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
-        //        return View(cartObject);
-                //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
-            //}
-=======
-        [Authorize]
-       
-
-
-        //[Authorize]
-        // update book test
-        public ActionResult CheckoutTest(string paymentId)
-        {
-            string sessionId = HttpContext.Session.Id;
-            CartRepo cartRepo = new CartRepo(_context);
-            var books = cartRepo.UpdateBooks(paymentId);
-            return View(books);
-        }
-
             [Authorize]
         public IActionResult Checkout(decimal totalPayment)
             {
@@ -157,7 +126,7 @@ namespace ThriftBook_phase2.Controllers
                 var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
                 return View(cartObject);
             }
->>>>>>> fe5386b37f30faf706f63bf533e57fdb6d0de659
+
 
 
         // This method receives and stores the Paypal transaction details.

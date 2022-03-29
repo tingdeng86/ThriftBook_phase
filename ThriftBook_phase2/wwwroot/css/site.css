@@ -10,6 +10,10 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+body {
+    background-color: #ebf6ff!important;
+}
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -19,14 +23,14 @@ a, td, th {
     font-family: 'Noto Sans', sans-serif;
 }
 
-.add-to-cartbtn {   
+.add-to-cartbtn {
     background-color: transparent;
     border: 2px solid #1A1A1A;
     border-radius: 15px;
-    box-sizing: border-box;
-    color: #3B3B3B;
+    box-sizing: border-box;    
+    color: black;
     cursor: pointer;
-    display: inline-block;    
+    display: inline-block;
     font-size: 16px;
     font-weight: 600;
     line-height: normal;
@@ -40,12 +44,10 @@ a, td, th {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    width: 150px;   
+    width: 150px;
     will-change: transform;
-    padding-top: 15px;    
+    padding-top: 15px;
 }
-
- 
 
     .add-to-cartbtn:hover > a:hover {
         color: white;
@@ -87,6 +89,11 @@ html {
   html {
     font-size: 16px;
   }
+}
+
+.logo-img {
+    width: 65px;
+    height: 65px;
 }
 
 .border-top {
@@ -206,4 +213,37 @@ img {
 .items:active {
     box-shadow: none;
     transform: translateY(0);
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.card {
+    margin: 20px;
+}
+
+.book-img {
+    width: 287px;
+    height: 350px;
+    object-fit: contain
+}
+
+.card-body {
+    max-height: 382px;
+}
+
+footer {
+    background-color: white;
+    max-height: 65px;
+}
+
+.logo-img1 {
+    width: 50px;
+    height: 50px;
 }

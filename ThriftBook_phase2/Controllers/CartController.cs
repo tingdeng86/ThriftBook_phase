@@ -188,6 +188,8 @@ namespace ThriftBook_phase2.Controllers
         {
             OrderDetailRepo coRepo = new OrderDetailRepo(_context);
             var currentOrder = coRepo.GetOrder(paymentID);
+            CartRepo cartRepo = new CartRepo(_context);
+            var books = cartRepo.UpdateBooks(paymentID);
             return View(currentOrder);
         }
     }

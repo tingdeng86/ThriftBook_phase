@@ -38,11 +38,7 @@ namespace ThriftBook_phase2.Repositories
             return query;
         }
 
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> InvoiceFunctions
 
         public IQueryable<InvoiceDetailVM> GetMore()
         {
@@ -63,7 +59,7 @@ namespace ThriftBook_phase2.Repositories
             return query;
         }
 
-        public IQueryable<InvoiceDetailVM> Get(int paymentID)
+        public IQueryable<InvoiceDetailVM> Get(string paymentID)
         {
             var query = GetMore();
             var lists = from q in query
@@ -71,31 +67,7 @@ namespace ThriftBook_phase2.Repositories
                         select q;
 
             return lists;
-        }   
-
-        /*    public InvoiceVM GetEdit(int transactionID)
-            {
-                var query = GetAll()
-                    .Where(b => b.TransactionId == transactionID)
-                    .FirstOrDefault();
-                return query;
-            }*/
-
-        /*        public bool Update(InvoiceVM iVM)
-                {
-                    InvoiceVM invoice = db.InvoiceVM
-                        .Where(b => b.TransactionId == iVM.TransactionId).FirstOrDefault();
-
-                    invoice.TotalPrice = iVM.TransactionId;
-                    invoice.DateOfTransaction = iVM.DateOfTransaction;
-                    invoice.FirstName = iVM.FirstName;
-                    invoice.LastName = iVM.LastName;
-                    invoice.PhoneNumber = iVM.PhoneNumber;
-                    invoice.Email = iVM.Email;
-                    invoice.PostalCode = iVM.PostalCode;
-                    db.SaveChanges();
-                    return true;
-                }*/
+        }
 
         public IQueryable<InvoiceDetailVM> GetWithBuyerID(int buyerID)
         {

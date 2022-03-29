@@ -18,15 +18,10 @@
 <table class="table">
     <thead>
         <tr>
-            @*<th>
-                @Html.DisplayNameFor(model => model.BuyerId)
-            </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
+                @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfTransaction)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
@@ -39,26 +34,15 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.BuyerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfTransaction)
-            </td>*@
+            <th>
+                @Html.DisplayFor(modelItem => item.Price)
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BookTitle)
             </td>
-            @*<td>
-                <a asp-action="Edit" asp-route-id="@item.PaymentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PaymentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PaymentId">Delete</a>
-            </td>*@
         </tr>
 }
     </tbody>

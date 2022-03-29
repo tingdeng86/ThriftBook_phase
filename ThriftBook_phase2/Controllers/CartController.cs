@@ -25,6 +25,7 @@ namespace ThriftBook_phase2.Controllers
             _context = context;
         }
         const string CARTITEMS= "CartItems";
+<<<<<<< HEAD
 
 
         public string GetSessionId()
@@ -47,6 +48,8 @@ namespace ThriftBook_phase2.Controllers
             return HttpContext.Session.GetString("SessionId");
         }
 
+=======
+>>>>>>> fe5386b37f30faf706f63bf533e57fdb6d0de659
 
 
         public IActionResult Index()
@@ -109,6 +112,7 @@ namespace ThriftBook_phase2.Controllers
         }
 
 
+<<<<<<< HEAD
 
             //[Authorize]
         //public IActionResult Checkout(decimal totalPayment)
@@ -122,6 +126,38 @@ namespace ThriftBook_phase2.Controllers
         //        return View(cartObject);
                 //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
             //}
+=======
+        [Authorize]
+       
+
+
+        //[Authorize]
+        // update book test
+        public ActionResult CheckoutTest(string paymentId)
+        {
+            string sessionId = HttpContext.Session.Id;
+            CartRepo cartRepo = new CartRepo(_context);
+            var books = cartRepo.UpdateBooks(paymentId);
+            return View(books);
+        }
+
+            [Authorize]
+        public IActionResult Checkout(decimal totalPayment)
+            {
+            string sessionId = HttpContext.Session.Id;
+
+            ViewData["TotalPrice"] = totalPayment;
+
+                string userEmail = User.Identity.Name;
+                ProfileRepo prRepo = new ProfileRepo(_context);
+                int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+                ViewData["BuyerID"] = buyerId;
+
+                PaymentRepo pmRepo = new PaymentRepo(_context);
+                var cartObject = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+                return View(cartObject);
+            }
+>>>>>>> fe5386b37f30faf706f63bf533e57fdb6d0de659
 
 
         // This method receives and stores the Paypal transaction details.
@@ -148,7 +184,7 @@ namespace ThriftBook_phase2.Controllers
             try
             {
                 decimal totalAmount = Convert.ToDecimal(ipn.amount);
-                var nnn = cartRepo.CreateTransaction(totalAmount, buyerId, DateTime.Parse(ipn.Create_time), paymentId);
+                var transaction = cartRepo.CreateTransaction(totalAmount, buyerId, DateTime.Parse(ipn.Create_time), paymentId);
                 var bookInv = cartRepo.CreateBookInvoice(sessionId, paymentId);
             }
             catch (Exception ex)
@@ -165,6 +201,8 @@ namespace ThriftBook_phase2.Controllers
         {
             OrderDetailRepo coRepo = new OrderDetailRepo(_context);
             var currentOrder = coRepo.GetOrder(paymentID);
+            CartRepo cartRepo = new CartRepo(_context);
+            var books = cartRepo.UpdateBooks(paymentID);
             return View(currentOrder);
         }
 

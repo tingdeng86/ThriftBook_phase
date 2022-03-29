@@ -159,8 +159,6 @@
                     success: function (msg) {
                         console.log("Data: " + JSON.stringify(data));
                         window.location.href
-                            //= "/Home/FinishShopping?paymentID=" + data.paymentID;
-                            //= "/Cart/FinishShopping?paymentID=" + JSON.stringify(payment);
                             = "/Cart/FinishShopping?paymentID=" + data.paymentID;
                     },
                     //after fail

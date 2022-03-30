@@ -70,7 +70,7 @@
 <div>
     @if (Model.BookQuantity > 0)
     {
-        @Html.ActionLink("AddToCart", "AddToCart", new { id = Model.BookID }, null)
+        @Html.ActionLink("AddToCart", "AddToCart", new { bookId = Model.BookID }, null)
     } else
     {
         <p>Sold Out</p>

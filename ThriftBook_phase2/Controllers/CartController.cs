@@ -75,19 +75,19 @@ namespace ThriftBook_phase2.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult Details(int id)
+        public ActionResult Details(int cartId)
         {
             CartRepo cartRepo = new CartRepo(_context);
-            var cartVM = cartRepo.GetDetail(id);           
+            var cartVM = cartRepo.GetDetail(cartId);           
             return View(cartVM);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int cartId)
         {
             try
             {
                 CartRepo cartRepo = new CartRepo(_context);
-                cartRepo.Delete(id);
+                cartRepo.Delete(cartId);
             }
             catch (Exception e)
             {
@@ -95,16 +95,16 @@ namespace ThriftBook_phase2.Controllers
             }
             return RedirectToAction("Index", "Cart", new { message = ViewData["Message"] });
         }
-        public ActionResult IncreaseOne(int id)
+        public ActionResult IncreaseOne(int cartId)
         {
             CartRepo cartRepo = new CartRepo(_context);
-            cartRepo.increaseQuantity(id);
+            cartRepo.increaseQuantity(cartId);
             return RedirectToAction("Index", "Cart");
         }
-        public ActionResult DecreaseOne(int id)
+        public ActionResult DecreaseOne(int cartId)
         {
             CartRepo cartRepo = new CartRepo(_context);
-            cartRepo.decreaseQuantity(id);
+            cartRepo.decreaseQuantity(cartId);
             return RedirectToAction("Index", "Cart");
         }
 

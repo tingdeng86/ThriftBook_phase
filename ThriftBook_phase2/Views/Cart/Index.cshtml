@@ -9,14 +9,11 @@
 <h1>Index</h1>
 @if (@ViewBag.TotalItems > 0)
 {
-
     <table class="table">
-
         <thead>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.SessionId)
-
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.BookId)
@@ -43,9 +40,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.SessionId)
                     </td>
-
                     <td asp-for="@item.BookId">
-
                         @Html.DisplayFor(modelItem => item.BookId)
                     </td>
                     <td>
@@ -58,17 +53,13 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td>
-                        <a asp-action="DecreaseOne" asp-route-id="@item.CartItemId">-</a>
+                        @Html.ActionLink("-", "DecreaseOne", new { cartId = @item.CartItemId })
                         @Html.DisplayFor(modelItem => item.Quantity)/@Html.DisplayFor(modelItem => item.TotalQuantity)
-                        <a asp-action="IncreaseOne" asp-route-id="@item.CartItemId">+</a>
+                        @Html.ActionLink("+", "IncreaseOne", new { cartId = @item.CartItemId })
                     </td>
                     <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.CartItemId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.CartItemId">Remove</a>
+                        @Html.ActionLink("Details", "Details", new { cartId = @item.CartItemId })|
+                        @Html.ActionLink("Delete", "Delete", new { cartId = @item.CartItemId })
                     </td>
                 </tr>
             }
@@ -79,13 +70,10 @@
     <p>Subtotal: $@ViewBag.SubTotal</p>
     <p>Tax: $@ViewBag.Tax</p>
     <p>Total: $@ViewBag.Total</p>
-
-    @*@Html.ActionLink("Checkout Test ", "CheckoutTest")*@
     <br />
     @Html.ActionLink("Continue Shopping", "Home")
     <br />
     @Html.ActionLink("Proceed to Checkout", "Checkout", new { totalPayment = ViewBag.Total })
-
     <br />
 }
 else
@@ -94,4 +82,3 @@ else
     @Html.ActionLink("Continue Shopping", "Home")
 }
 
-@*@Html.ActionLink("AddToCart2", "AddToCart", new { id = 2 })*@

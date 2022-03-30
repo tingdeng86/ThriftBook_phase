@@ -158,28 +158,28 @@ namespace ThriftBook_phase2.Controllers
             return HttpContext.Session.GetString("SessionId");
         }
 
-        public ActionResult AddToCart(int id)
+        public ActionResult AddToCart(int bookId)
         {
             string sessionId = GetSessionId();
             //string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
-            var book = cartRepo.GetBook(id);
-            var cartItem = cartRepo.Find(id, sessionId);
+            var book = cartRepo.GetBook(bookId);
+            var cartItem = cartRepo.Find(bookId, sessionId);
             // update the amount of total items in the session
             var totalItems = HttpContext.Session.GetInt32("CartItems");
             totalItems =  totalItems == null ? 1 : totalItems + 1;
             HttpContext.Session.SetInt32("CartItems", (int)totalItems);
             if (cartItem == null && book.BookQuantity>0)
             {
-                int cartItemId = cartRepo.Add(id, sessionId);
-                return RedirectToAction("Details", "Cart", new { id = cartItemId });
+                int cartItemId = cartRepo.Add(bookId, sessionId);
+                return RedirectToAction("Details", "Cart", new { cartId = cartItemId });
             }
             else
             {
                 // If the item does exist in the cart,                  
                 // then add one to the quantity.
                 cartRepo.increaseQuantity(cartItem.CartItemId);
-                return RedirectToAction("Details", "Cart", new { id = cartItem.CartItemId });
+                return RedirectToAction("Details", "Cart", new { cartId = cartItem.CartItemId });
             }
         }
 

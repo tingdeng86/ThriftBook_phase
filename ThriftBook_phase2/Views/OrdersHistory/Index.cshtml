@@ -6,7 +6,7 @@
 
 <h1>Index</h1>
 
-@if (@ViewBag.Message == "")
+@if (@ViewBag.Message != "")
 {
     <p>Orders is Empty.</p>
     @Html.ActionLink("Continue Shopping", "Home")

@@ -138,6 +138,19 @@ img {
     width: 150px;
 }
 
+.navbar {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-evenly!important;
+    padding: 0.5rem 1rem;
+}
+
 .search-div {
    
    margin-left: 4em;
@@ -266,4 +279,28 @@ footer {
 
 .identity {
     font-size: 13px;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;    
+}
+
+/*Media Queries*/
+
+@media only screen and (max-width: 1200px) {
+    .search-div {
+        margin-left: 2em;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        align-items: stretch;
+    }
+    }
 }

@@ -179,22 +179,38 @@ namespace ThriftBook_phase2.Repositories
         public Book GetBook(int id)
         {
             Book book = (from b in _context.Book
+                         where b.BookId == id
                          select b).FirstOrDefault();
             return book;
         }
-
-
-
 
         public void MigrateCart(string sessionId, string userName)
         {
              var shoppingCart = _context.Cart.Where(c => c.SessionId == sessionId);
             foreach (var item in shoppingCart)
             {
-                item.SessionId = userName;
+                //solve the problem:If the item does exist in the cart of user's cart before, new cart has the same book, it should merge this book and make sure the quantity is not greater than the book's total quantity.
+                var bookItem = Find(item.BookId, userName);
+                if (bookItem != null)
+                {
+                    var qty = GetBook(item.BookId).BookQuantity;
+                    if ((bookItem.Quantity + item.Quantity) >= qty)
+                    {
+                        bookItem.Quantity = qty;
+                    }
+                    else
+                    {
+                        bookItem.Quantity = bookItem.Quantity + item.Quantity;
+                    }
+                    _context.Cart.Remove(item);
+                }
+                else
+                {
+                    item.SessionId = userName;
+                }
             }
-    _context.SaveChanges();
-}
+                _context.SaveChanges();
+        }
         public string CreateTransaction(decimal totalPrice, int buyerId, DateTime date, string paymentId)
         {
             Invoice invoice = new Invoice()

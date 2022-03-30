@@ -125,8 +125,6 @@ namespace ThriftBook_phase2.Controllers
                 return View(cartObject);
             }
 
-
-
         // This method receives and stores the Paypal transaction details.
         [HttpPost]
         public JsonResult PaySuccess([FromBody] IPN ipn)

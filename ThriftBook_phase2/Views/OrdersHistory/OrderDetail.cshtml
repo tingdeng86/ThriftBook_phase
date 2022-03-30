@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ThriftBook_phase2.ViewModels.OrderDetailVM>
+
+@{
+    ViewData["Title"] = "OrderDetail";
+}
+
+<h1>OrderDetail</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuyerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfTransaction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                Amount
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuyerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfTransaction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @((item.Price * item.Quantity).ToString("c"))
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<p>Total Items: @Model.Sum(i => i.Quantity)</p>
+<p>Subtotal: @((Model.First().TotalPrice/1.12m).ToString("c"))</p>
+<p>Tax: @((Model.First().TotalPrice / 1.12m * 0.12m).ToString("c"))</p>
+<p>Total: @Model.First().TotalPrice.ToString("c")</p>

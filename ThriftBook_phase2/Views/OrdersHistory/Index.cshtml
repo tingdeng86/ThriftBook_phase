@@ -17,6 +17,9 @@ else
         <thead>
             <tr>
                 <th>
+                    @Html.DisplayNameFor(model => model.PaymentId)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.TotalPrice)
                 </th>
                 <th>
@@ -31,20 +34,23 @@ else
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TotalPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateOfTransaction)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Profile.Email)
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.PaymentId">Details</a> 
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentId)
+                </td>
+                <td>
+                    @((item.TotalPrice).ToString("c"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfTransaction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "OrderDetail", new { paymentID = @item.PaymentId })
+                </td>
+            </tr>
             }
         </tbody>
     </table>

@@ -11,12 +11,12 @@ a.navbar-brand {
 }
 
 body {
-    background-color: #ebf6ff!important;
+    background-color: #ebf6ff !important;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 a, td, th {
@@ -27,7 +27,7 @@ a, td, th {
     background-color: transparent;
     border: 2px solid #1A1A1A;
     border-radius: 15px;
-    box-sizing: border-box;    
+    box-sizing: border-box;
     color: black;
     cursor: pointer;
     display: inline-block;
@@ -51,7 +51,7 @@ a, td, th {
 
     .add-to-cartbtn:hover > a:hover {
         color: white;
-        text-decoration:none;
+        text-decoration: none;
     }
 
     .add-to-cartbtn:disabled {
@@ -61,34 +61,35 @@ a, td, th {
     .add-to-cartbtn:hover {
         color: #fff;
         text-decoration-color: #fff;
-        text-decoration:none;
+        text-decoration: none;
         background-color: #1A1A1A;
         box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
         transform: translateY(-2px);
     }
 
-.add-to-cartbtn:active {
-    box-shadow: none;
-    text-decoration: none;
-    transform: translateY(0);
-}
+    .add-to-cartbtn:active {
+        box-shadow: none;
+        text-decoration: none;
+        transform: translateY(0);
+    }
 
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .logo-img {
@@ -97,38 +98,40 @@ html {
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 img {
@@ -136,7 +139,7 @@ img {
 }
 
 .search-div {
-    margin-left:11em;
+    margin-left: 4em;
 }
 
 .create-book {
@@ -145,7 +148,7 @@ img {
 
 #SearchString {
     border-radius: 10px;
-    padding: 10px!important;
+    padding: 10px !important;
 }
 
 .btn-outline-primary {
@@ -154,14 +157,15 @@ img {
     color: rebeccapurple;
 }
 
-.btn-outline-primary:hover {
+    .btn-outline-primary:hover {
         background-color: rebeccapurple;
-}
+    }
 
 .navbar-brand {
     font-family: 'Bree Serif', serif;
     font-family: 'Pacifico', cursive;
-    font-size: 30px;
+    font-size: 25px;
+    min-width: 190px;
 }
 
 .available-books {
@@ -199,21 +203,21 @@ img {
     will-change: transform;
 }
 
-.items:disabled {
-    pointer-events: none;
-}
+    .items:disabled {
+        pointer-events: none;
+    }
 
-.items:hover {
-    color: #fff;
-    background-color: #1A1A1A;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-    transform: translateY(-2px);
-}
+    .items:hover {
+        color: #fff;
+        background-color: #1A1A1A;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+        transform: translateY(-2px);
+    }
 
-.items:active {
-    box-shadow: none;
-    transform: translateY(0);
-}
+    .items:active {
+        box-shadow: none;
+        transform: translateY(0);
+    }
 
 .cards-container {
     display: flex;

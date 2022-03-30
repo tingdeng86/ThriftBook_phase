@@ -35,8 +35,7 @@
                         <p class="card-text">@Html.DisplayFor(modelItem => item.Gennre)</p>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.BookQuality)</p>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.BookQuantity) in stock</p>
-                        <p class="card-text">$@Html.DisplayFor(modelItem => item.Price)</p>
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.StoreName)</p>
+                        <p class="card-text">$@Html.DisplayFor(modelItem => item.Price)</p>                      
                         <p class="card-text">
                             @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
                             {

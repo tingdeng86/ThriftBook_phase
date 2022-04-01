@@ -17,14 +17,14 @@ namespace ThriftBook_phase2.Controllers
     public class CartController : Controller
     {
         private readonly ILogger<CartController> _logger;
-        private readonly ApplicationDbContext _context;      
+        private readonly ApplicationDbContext _context;
         public CartController(ILogger<CartController> logger,
-                              ApplicationDbContext context )
+                              ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;
         }
-        const string CARTITEMS= "CartItems";
+        const string CARTITEMS = "CartItems";
 
         public string GetSessionId()
         {
@@ -45,9 +45,6 @@ namespace ThriftBook_phase2.Controllers
 
             return HttpContext.Session.GetString("SessionId");
         }
-
-
-
 
         public IActionResult Index()
         {
@@ -78,7 +75,7 @@ namespace ThriftBook_phase2.Controllers
         public ActionResult Details(int cartId)
         {
             CartRepo cartRepo = new CartRepo(_context);
-            var cartVM = cartRepo.GetDetail(cartId);           
+            var cartVM = cartRepo.GetDetail(cartId);
             return View(cartVM);
         }
 
@@ -108,9 +105,10 @@ namespace ThriftBook_phase2.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-            [Authorize]
+
+        [Authorize]
         public IActionResult Checkout(decimal totalPayment)
-            {
+        {
             ViewData["EnoughBooksInDb"] = true;
             string sessionId = GetSessionId();
             ViewData["TotalPrice"] = totalPayment;
@@ -129,12 +127,14 @@ namespace ThriftBook_phase2.Controllers
             {
                 //booksObj.isValid = cartRepo.GetBooks(booksObj);
                 bool enoughBooks = cartRepo.GetBooks(booksObj);
-                if (enoughBooks == false) {
+                if (enoughBooks == false)
+                {
                     ViewData["EnoughBooksInDb"] = false;
                 }
             }
             return View(cartObjects);
-            }
+
+        }
 
         // This method receives and stores the Paypal transaction details.
         [HttpPost]
@@ -167,7 +167,7 @@ namespace ThriftBook_phase2.Controllers
             }
             return Json(ipn);
         }
- 
+
         // Show transaction detail. 
         public IActionResult FinishShopping(string paymentID)
         {

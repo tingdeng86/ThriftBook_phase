@@ -189,8 +189,7 @@ img {
 }
 
 
-.items {
-    appearance: none;
+.items {    
     background-color: transparent;
     text-decoration: none;
     border: 2px solid #1A1A1A;
@@ -301,7 +300,6 @@ footer {
         align-content: center;
         justify-content: center;
         align-items: stretch;
-    }
     }
 }
 

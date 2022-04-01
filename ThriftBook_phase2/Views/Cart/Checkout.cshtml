@@ -41,7 +41,7 @@
         {
             //if (item.isValid)
             //if (item.isValid)
-            if (item.isValid)
+            if (item.IsValid)
             {
 
             }
@@ -50,34 +50,34 @@
                 <tr><td colspan="7"><h4 class="text-danger">Some items in your cart are out of stock</h4></td></tr>
 
             }
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SessionId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookPhoto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalQuantity)
-                </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SessionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookPhoto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalQuantity)
+        </td>
 
 
-                @ViewBag.TotalPrice
-                @ViewBag.BuyerId
-
-            </tr>
+        @ViewBag.TotalPrice
+        @ViewBag.BuyerId
+        @ViewBag.EnoughBooksInDb
+    </tr>
         }
         }
     </tbody>
@@ -120,7 +120,7 @@
 
                         // The custom property value that you send to Paypal for a
                         // payment request is returned in Paypal's reponse.
-                        custom: @ViewBag.BuyerId,
+                        custom: @ViewBag.EnoughBooksInDb,
                         amount: { total: @ViewBag.TotalPrice, currency: 'CAD' }
                         @*amount: { total: @ViewBag.TotalPayment, currency: 'CAD'}*@
                     }

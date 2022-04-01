@@ -17,6 +17,6 @@ namespace ThriftBook_phase2.ViewModels
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public int TotalQuantity { get; set; }
-        public bool isValid { get; set; }
+        public bool IsValid { get; set; }
     }
 }

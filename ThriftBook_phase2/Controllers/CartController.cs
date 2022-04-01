@@ -90,26 +90,29 @@ namespace ThriftBook_phase2.Controllers
             [Authorize]
         public IActionResult Checkout(decimal totalPayment)
             {
+            ViewData["EnoughBooksInDb"] = true;
             string sessionId = HttpContext.Session.Id;
-
             ViewData["TotalPrice"] = totalPayment;
 
-                string userEmail = User.Identity.Name;
-                ProfileRepo prRepo = new ProfileRepo(_context);
-                int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
-                ViewData["BuyerID"] = buyerId;
+            string userEmail = User.Identity.Name;
+            ProfileRepo prRepo = new ProfileRepo(_context);
+            int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+            ViewData["BuyerID"] = buyerId;
 
-                PaymentRepo pmRepo = new PaymentRepo(_context);
-                var cartObjects = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+            PaymentRepo pmRepo = new PaymentRepo(_context);
+            var cartObjects = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
 
             //perform a check of books (by Id) in db to make sure there's enough:
             CartRepo cartRepo = new CartRepo(_context);
             foreach (var booksObj in cartObjects.ToList())
             {
-                booksObj.isValid = cartRepo.GetBooks(booksObj);
+                //booksObj.isValid = cartRepo.GetBooks(booksObj);
+                bool enoughBooks = cartRepo.GetBooks(booksObj);
+                if (enoughBooks == false) {
+                    ViewData["EnoughBooksInDb"] = false;
+                }
             }
             return View(cartObjects);
-                //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
             }
 
         // This method receives and stores the Paypal transaction details.
@@ -136,7 +139,7 @@ namespace ThriftBook_phase2.Controllers
             try
             {
                 decimal totalAmount = Convert.ToDecimal(ipn.amount);
-                var nnn = cartRepo.CreateTransaction(totalAmount, buyerId, DateTime.Parse(ipn.Create_time), paymentId);
+                var transaction = cartRepo.CreateTransaction(totalAmount, buyerId, DateTime.Parse(ipn.Create_time), paymentId);
                 var bookInv = cartRepo.CreateBookInvoice(sessionId, paymentId);
             }
             catch (Exception ex)
@@ -151,7 +154,7 @@ namespace ThriftBook_phase2.Controllers
         // Show transaction detail. 
         private CartVM ValidateOrder(CartVM bookObj)
         {
-            bookObj.isValid = true;
+            bookObj.IsValid = true;
 
             return bookObj;
         }

@@ -71,7 +71,7 @@ namespace ThriftBook_phase2.Repositories
                             Price = b.Price,
                             TotalQuantity = b.BookQuantity,
                             Quantity = c.Quantity,
-                            isValid = false
+                            IsValid = false
                         };
             return query;
         }

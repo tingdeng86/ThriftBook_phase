@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using rolesDemoSSD.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using ThriftBook_phase2.Repositories;
 
 namespace ThriftBook_phase2.Controllers
 {
+    //[Authorize]
     public class OrdersHistoryController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -16,6 +18,8 @@ namespace ThriftBook_phase2.Controllers
         {
             _context = context;
         }
+
+        
         public IActionResult Index()
         {
             ViewData["Message"] = "";

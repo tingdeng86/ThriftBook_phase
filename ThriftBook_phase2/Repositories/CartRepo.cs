@@ -73,6 +73,7 @@ namespace ThriftBook_phase2.Repositories
                             Price = b.Price,
                             TotalQuantity = b.BookQuantity,
                             Quantity = c.Quantity,
+                            IsValid = false
                         };
             return query;
         }
@@ -244,6 +245,25 @@ namespace ThriftBook_phase2.Repositories
                                where b.PaymentId == paymentId
                                select b;
             return bookInvoices;
+        }
+
+        //public int GetBooks(CartVM currentBook, int cartBookQuantity)
+        public Boolean GetBooks(CartVM currentBook)
+        {
+            int numberOfBooksInDb = -1;
+            var query = from b in _context.Book
+                        where b.BookId == currentBook.BookId
+                        select b;
+            foreach (var item in query)
+            {
+                numberOfBooksInDb = item.BookQuantity;
+
+                if (item.BookQuantity < currentBook.Quantity)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 

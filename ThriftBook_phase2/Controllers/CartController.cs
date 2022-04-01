@@ -90,9 +90,7 @@ namespace ThriftBook_phase2.Controllers
             [Authorize]
         public IActionResult Checkout(decimal totalPayment)
             {
-            int currentIndex = 0;
             string sessionId = HttpContext.Session.Id;
-            bool indicator = false;
 
             ViewData["TotalPrice"] = totalPayment;
 
@@ -103,30 +101,12 @@ namespace ThriftBook_phase2.Controllers
 
                 PaymentRepo pmRepo = new PaymentRepo(_context);
                 var cartObjects = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
-            //var newCartObj = cartObjects;
 
             //perform a check of books (by Id) in db to make sure there's enough:
             CartRepo cartRepo = new CartRepo(_context);
-
-            //cartObjects.ToList()[0].isValid = true;
-            //cartObjects.ToList()[0].Price = 13m;
-            //var price = cartObjects.ToList()[0].Price;
-            //bool value = cartObjects.ToList()[0].isValid;
-
             foreach (var booksObj in cartObjects.ToList())
             {
                 booksObj.isValid = cartRepo.GetBooks(booksObj);
-                //if (booksObj.isValid == true) {
-                //    indicator = cartRepo.GetBooks(booksObj);
-                //    ValidateOrder(booksObj);
-                //    cartObjects.ToList()[currentIndex] = ValidateOrder(booksObj);
-                    //cartObjects.ToList()[currentIndex].isValid = true;
-                    //currentIndex = currentIndex + 1;
-                //}
-                //if (purchasePossible == false)
-                //{
-                //    return StatusCode(StatusCodes.Status500InternalServerError);
-                //}
             }
             return View(cartObjects);
                 //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
@@ -190,3 +170,49 @@ namespace ThriftBook_phase2.Controllers
         }
     }
 }
+
+
+//[Authorize]
+//public IActionResult Checkout(decimal totalPayment)
+//{
+//    int currentIndex = 0;
+//    string sessionId = HttpContext.Session.Id;
+//    bool indicator = false;
+
+//    ViewData["TotalPrice"] = totalPayment;
+
+//    string userEmail = User.Identity.Name;
+//    ProfileRepo prRepo = new ProfileRepo(_context);
+//    int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+//    ViewData["BuyerID"] = buyerId;
+
+//    PaymentRepo pmRepo = new PaymentRepo(_context);
+//    var cartObjects = pmRepo.GetOrderData(sessionId, totalPayment, buyerId);
+//    //var newCartObj = cartObjects;
+
+//    //perform a check of books (by Id) in db to make sure there's enough:
+//    CartRepo cartRepo = new CartRepo(_context);
+
+//    //cartObjects.ToList()[0].isValid = true;
+//    //cartObjects.ToList()[0].Price = 13m;
+//    //var price = cartObjects.ToList()[0].Price;
+//    //bool value = cartObjects.ToList()[0].isValid;
+
+//    foreach (var booksObj in cartObjects.ToList())
+//    {
+//        booksObj.isValid = cartRepo.GetBooks(booksObj);
+//        //if (booksObj.isValid == true) {
+//        //    indicator = cartRepo.GetBooks(booksObj);
+//        //    ValidateOrder(booksObj);
+//        //    cartObjects.ToList()[currentIndex] = ValidateOrder(booksObj);
+//        //cartObjects.ToList()[currentIndex].isValid = true;
+//        //currentIndex = currentIndex + 1;
+//        //}
+//        //if (purchasePossible == false)
+//        //{
+//        //    return StatusCode(StatusCodes.Status500InternalServerError);
+//        //}
+//    }
+//    return View(cartObjects);
+//    //return RedirectToAction("Index", "Cart", new { message = ViewData["TotalPrice"] });
+//}

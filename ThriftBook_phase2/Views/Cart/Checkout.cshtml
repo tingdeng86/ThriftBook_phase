@@ -6,9 +6,14 @@
 
 <h1>Checkout</h1>
 
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>*@
+
+@if (!@ViewBag.EnoughBooksInDb) {
+    <tr><td colspan="7"><h4 class="text-danger">Some items in your cart are out of stock</h4></td></tr>
+    }
+
 <table class="table">
     <thead>
         <tr>
@@ -39,41 +44,41 @@
     <tbody>
         @foreach (var item in Model)
         {
-            if (@ViewBag.EnoughBooksInDb)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SessionId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookPhoto)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TotalQuantity)
-                    </td>
-                </tr>
-            }
-            else
+            //if (@ViewBag.EnoughBooksInDb)
+            //{
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SessionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookPhoto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalQuantity)
+                </td>
+            </tr>
+            @*  }*@
+            @*else
             {
                 <tr><td colspan="7"><h4 class="text-danger">Some items in your cart are out of stock</h4></td></tr>
-            }
+            }*@
         }
     </tbody>
 </table>
 
-@if (!@ViewBag.EnoughBooksInDb)
+@if (@ViewBag.EnoughBooksInDb)
 {
     <div id="paypal-button"></div>
 }

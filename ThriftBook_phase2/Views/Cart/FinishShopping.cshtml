@@ -3,13 +3,9 @@
 @{
     ViewData["Title"] = "FinishShopping";
     string transactionTime = Model.FirstOrDefault().DateOfTransaction.ToString("dd/MMM/yyyy hh:mm");
-    string amount = Model.FirstOrDefault().TotalPrice.ToString("c");
+    string amount = Model.FirstOrDefault().TotalPrice.ToString("C");
 }
 
-<h3>Thank you for your purchase</h3>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <h1>Thank you for your purchase</h1>
 <br />
 <h3>Time of Purchase @transactionTime</h3>
@@ -53,4 +49,9 @@
         }
     </tbody>
 </table>
-<h3>Your total @amount</h3>
+
+<p>Total Items: @ViewBag.TotalItems </p>
+<p>Subtotal: $@ViewBag.SubTotal</p>
+<p>Tax: $@ViewBag.Tax</p>
+<p>Total: @amount CAD</p>
+@*<h3>Your total @amount CAD</h3>*@

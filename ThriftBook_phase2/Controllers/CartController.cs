@@ -90,7 +90,7 @@ namespace ThriftBook_phase2.Controllers
             [Authorize]
         public IActionResult Checkout(decimal totalPayment)
             {
-            ViewData["EnoughBooksInDb"] = true;
+            ViewData["EnoughBooksInDb"] = false;
             string sessionId = HttpContext.Session.Id;
             ViewData["TotalPrice"] = totalPayment;
 
@@ -168,6 +168,13 @@ namespace ThriftBook_phase2.Controllers
             //updating books:
             CartRepo cartRepo = new CartRepo(_context);
             var books = cartRepo.UpdateBooks(paymentID);
+
+            ViewData["TotalItems"] = HttpContext.Session.GetInt32(CARTITEMS);
+            string sessionId = HttpContext.Session.Id;
+            var subTotals = cartRepo.GetSubTotal(sessionId);
+            ViewData["SubTotal"] = subTotals;
+            ViewData["Tax"] = Math.Round(subTotals * 0.12m, 2, MidpointRounding.ToEven);
+            ViewData["Total"] = Math.Round(subTotals * 1.12m, 2, MidpointRounding.ToEven);
 
             return View(currentOrder);
         }

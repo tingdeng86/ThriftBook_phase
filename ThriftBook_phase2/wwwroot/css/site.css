@@ -179,9 +179,9 @@ img {
     color: rebeccapurple;
 }
 
-    .btn-outline-primary:hover {
+.btn-outline-primary:hover {
         background-color: rebeccapurple;
-    }
+}
 
 .navbar-brand {
     font-family: 'Bree Serif', serif;
@@ -365,14 +365,46 @@ footer {
         align-items: flex-start;
         width: 105px;
         margin: 30px;
-    }
-
+    }   
    .navbar {
        padding-right: 10em;
    }
 }
 
+@media screen and (max-width: 862px) {
+    .nav-item:first-child{
+        display: none;
 
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .book-img {
+        padding-right: 2.4em;
+    }
+
+    .navbar {
+        padding-right: 0;
+    }
+    li .nav-item {
+        display: flex;
+    }
+    .navbar-collapse {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        flex-wrap: nowrap;       
+        align-items: center;
+    }
+    .search-div > input {
+        max-width: 205px;
+    }
+
+    .search-div > #searchbtn2 {
+        max-width: 100px;
+        height: 40px;
+    }
+}
 
 
 

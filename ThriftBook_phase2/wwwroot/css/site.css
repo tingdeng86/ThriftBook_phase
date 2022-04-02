@@ -46,8 +46,15 @@ a, td, th {
     touch-action: manipulation;
     width: 150px;
     will-change: transform;
-    padding-top: 15px;
+    padding-top: 15px;        
 }
+    add-to-cartbtn > a {
+        color: white;
+    }
+    .add-to-cartbtn:hover > a {
+    color: white;   
+    text-decoration: none;
+    }
 
     .add-to-cartbtn:hover > a:hover {
         color: white;

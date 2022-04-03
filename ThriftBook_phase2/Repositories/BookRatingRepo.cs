@@ -76,10 +76,21 @@ namespace ThriftBook_phase2.Repositories
         }
 
 
-        public void UpdateDb()
+        public bool FindRating(string userEmail, int bookId)
         {
-
+            ProfileRepo prRepo = new ProfileRepo(_context);
+            int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+            var rating = from b in _context.BookRating
+                         where b.BookId == bookId && b.BuyerId == buyerId
+                         select b;
+            if (rating != null)
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
         }
 
-        }
+       }
 }

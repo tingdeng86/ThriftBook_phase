@@ -7,7 +7,7 @@
 <div class="text-center">
     <h1 class="available-books">Available Books</h1>
     <p>@ViewBag.NoBooksMessage</p>
-    <table class="table">
+    <table class="table">        
         <p class="text-center">
             <div class="items">
                 @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
@@ -28,11 +28,11 @@
             {
 
                 <div class="card bg-light mb-3" style="width: 18rem;">
-                    <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Book-Image" class="book-img"/>
+                    <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Book-Image" class="book-img" />
                     <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>                        
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.BookQuantity) in stock</p>
-                        <p class="card-text">$@Html.DisplayFor(modelItem => item.Price)</p>                      
+                        <p class="card-text">$@Html.DisplayFor(modelItem => item.Price)</p>
                         <p class="card-text">
                             @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
                             {
@@ -43,13 +43,13 @@
                             else
                             {
                                 <div class="add-to-cartbtn btn btn-outline-dark">
-                                    @Html.ActionLink("Details", "Details", new { BookID = item.BookId })                                   
+                                    @Html.ActionLink("Details", "Details", new { BookID = item.BookId })
                                 </div>
                             }
                         </p>
                     </div>
                 </div>
             }
-        </div>               
+        </div>
     </table>
 </div>

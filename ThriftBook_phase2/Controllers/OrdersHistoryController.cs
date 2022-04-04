@@ -49,7 +49,6 @@ namespace ThriftBook_phase2.Controllers
             //check the book is rated or not, if rated, the button of "rate the book" would be hidden
             foreach (var item in query)
             {
-                //ViewBag[item.BookId] = "";
                 var isFinded = brRepo.FindRating(userEmail, item.BookId);
                 if (isFinded == true)
                 {
@@ -65,15 +64,6 @@ namespace ThriftBook_phase2.Controllers
         // GET: Home/Create
         public IActionResult CreateRating(int bookId)
         {
-            ViewData["Message"] = "";
-            string userEmail = User.Identity.Name;
-
-            BookRatingRepo brRepo = new BookRatingRepo(_context);
-            var isFinded = brRepo.FindRating(userEmail, bookId);
-            if(isFinded == true)
-            {
-                ViewData["Message"] = "You already rated this book.";
-            }
             return View();
         }
 

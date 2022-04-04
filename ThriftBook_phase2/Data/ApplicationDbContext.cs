@@ -310,5 +310,7 @@ namespace ThriftBook_phase2.Data
 
         public DbSet<ThriftBook_phase2.ViewModels.OrderDetailVM> OrderDetailVM { get; set; }
 
+        public DbSet<ThriftBook_phase2.ViewModels.BookRatingVM> BookRatingVM { get; set; }
+
     }
 }

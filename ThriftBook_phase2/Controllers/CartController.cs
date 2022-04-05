@@ -61,7 +61,7 @@ namespace ThriftBook_phase2.Controllers
             HttpContext.Session.SetInt32(CARTITEMS, totalItems);
 
             ViewData["TotalItems"] = HttpContext.Session.GetInt32(CARTITEMS);
-            ViewData["SubTotal"] = subTotals;
+            ViewData["SubTotal"] = Math.Round(subTotals * 1.00m, 2, MidpointRounding.ToEven);
             ViewData["Tax"] = Math.Round(subTotals * 0.12m, 2, MidpointRounding.ToEven);
             ViewData["Total"] = Math.Round(subTotals * 1.12m, 2, MidpointRounding.ToEven);
             return View(query);

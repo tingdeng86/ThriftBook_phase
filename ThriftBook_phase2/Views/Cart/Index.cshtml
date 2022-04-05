@@ -6,7 +6,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Your cart</h1>
 @if (@ViewBag.TotalItems > 0)
 {
     <table class="table">
@@ -19,7 +19,7 @@
                     @Html.DisplayNameFor(model => model.Title)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.BookPhoto)
+                   Book Photo
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Price)
@@ -47,7 +47,7 @@
                     <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Book-Image" class="book-img" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    $@Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
                     @Html.ActionLink("-", "DecreaseOne", new { cartId = @item.CartItemId })

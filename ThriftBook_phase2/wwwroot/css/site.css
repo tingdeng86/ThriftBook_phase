@@ -312,6 +312,10 @@ footer {
     height: 231px;
 }
 
+#cartandnumber {
+    display: flex;
+}
+
 /*Media Queries*/
 
 @media screen and (max-width: 1200px) {

@@ -78,8 +78,7 @@
         </nav>
     </header>
 
-    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
-    {
+
         <div class="pos-f-t">
             <div class="collapse" id="navbarToggleExternalContent">
                 <div class="bg-dark p-4">
@@ -114,7 +113,7 @@
                 </button>
             </nav>
         </div>
-    }
+    
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

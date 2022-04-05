@@ -10,7 +10,7 @@ using ThriftBook_phase2.ViewModels;
 
 namespace ThriftBook_phase2.Controllers
 {
-    [Authorize(Roles = "Admin, Manager")]
+    //[Authorize(Roles = "Admin, Manager")]
     public class BuyerController : Controller
     {
         ApplicationDbContext _context;

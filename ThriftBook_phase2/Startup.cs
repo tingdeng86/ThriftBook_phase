@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ThriftBook_phase2.Data;
+using ThriftBook_phase2.Data.Service;
 
 namespace ThriftBook_phase2
 {
@@ -37,12 +39,12 @@ namespace ThriftBook_phase2
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            services.AddTransient<IEmailService, EmailService>();
 
             services.AddSession(options => {
                 // Set timeout.
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

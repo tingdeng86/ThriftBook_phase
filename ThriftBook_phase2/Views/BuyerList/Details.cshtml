@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<ThriftBook_phase2.ViewModels.InvoiceDetailVM>
 
-@{
-    ViewData["Title"] = "Details";
-}
+@{ ViewData["Title"] = "Details"; /* BuyerList Section */ }
 
-<h1>Details</h1>
+<h1 class="buyerlist-detail-title">Invoice Details</h1>
 
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -33,31 +32,30 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BuyerId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateOfTransaction)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookId)
-                </td>             
-            </tr>
-        }
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.BuyerId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateOfTransaction)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Genre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BookId)
+    </td>
+</tr>}
         <div class="text-left">
             <form method="post" asp-controller="BuyerList" asp-action="ExportToCSVDetails">
-                <input type="text" id="transactionID" name="paymentid" hidden value="@Model.FirstOrDefault().PaymentId"/>
-                <input type="submit" value="Export to CSV"/>
+                <input type="text" id="transactionID" name="paymentid" hidden value="@Model.FirstOrDefault().PaymentId" />
+                <input type="submit" value="Export to CSV" />
             </form>
         </div>
     </tbody>

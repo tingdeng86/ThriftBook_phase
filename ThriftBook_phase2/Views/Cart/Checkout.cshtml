@@ -6,10 +6,6 @@
 
 <h1>Checkout</h1>
 
-@*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
-
 @if (!@ViewBag.EnoughBooksInDb) {
     <tr><td colspan="7"><h4 class="text-danger">Some items in your cart are out of stock</h4></td></tr>
     }
@@ -69,11 +65,6 @@
                     @Html.DisplayFor(modelItem => item.TotalQuantity)
                 </td>
             </tr>
-            @*  }*@
-            @*else
-            {
-                <tr><td colspan="7"><h4 class="text-danger">Some items in your cart are out of stock</h4></td></tr>
-            }*@
         }
     </tbody>
 </table>

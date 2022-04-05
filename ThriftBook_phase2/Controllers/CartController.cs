@@ -90,7 +90,7 @@ namespace ThriftBook_phase2.Controllers
             [Authorize]
         public IActionResult Checkout(decimal totalPayment)
             {
-            ViewData["EnoughBooksInDb"] = false;
+            ViewData["EnoughBooksInDb"] = true;
             string sessionId = HttpContext.Session.Id;
             ViewData["TotalPrice"] = totalPayment;
 

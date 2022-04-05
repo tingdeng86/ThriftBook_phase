@@ -4,11 +4,11 @@
     ViewData["Title"] = "Orders History";
 }
 
-<h1>Index</h1>
+<h1>Your order history</h1>
 
 @if (@ViewBag.Message != "")
 {
-    <p>Orders is Empty.</p>
+    <p>Orders are empty.</p>
     @Html.ActionLink("Continue Shopping", "Home")
 }
 else
@@ -17,13 +17,13 @@ else
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.PaymentId)
+                   Payment ID
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.TotalPrice)
+                   Total Price
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DateOfTransaction)
+                   Transaction Date
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Profile)

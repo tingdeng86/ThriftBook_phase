@@ -20,9 +20,16 @@
                 <input asp-for="BuyerId" class="form-control" type="hidden" />
             </div>
             <div class="form-group">
-                <label asp-for="Rating" class="control-label">How did you like this book? On a scale from 0 to 5.</label>
-                <input class="col-md-2 form-control" asp-for="Rating" />
-                <span asp-validation-for="Rating" class="text-danger"></span>
+                <label asp-for="Rating" class="control-label">How did you like this book?</label>                
+                <select class="form-control" id="Rating" name="Rating">
+                    <option value="">Select Rating</option>                   
+                    <option value="1">1 </option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                    <span asp-validation-for="Rating" class="text-danger"></span>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Comments, new { @class = "control-label" })

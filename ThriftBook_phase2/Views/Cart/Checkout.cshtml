@@ -119,10 +119,10 @@ else
 
         onAuthorize: function (data, actions) {
             return actions.payment.execute().then(function (payment) {
-                console.log("This is what comes back from Paypal: ")
+               @* console.log("This is what comes back from Paypal: ")
                 console.log(payment);
                 alert("This JSON is from Paypal: " + JSON.stringify(payment));
-                console.log("-------------------------------------")
+                console.log("-------------------------------------")*@
                 var dataObject = {
                     "cart":             payment.cart,
                     "intent":           payment.intent,

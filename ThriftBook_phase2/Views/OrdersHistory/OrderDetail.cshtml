@@ -4,19 +4,18 @@
     ViewData["Title"] = "OrderDetail";
 }
 
-<h1>OrderDetail</h1>
-
+<h1>Order Detail</h1>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BookTitle)
+               Book Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BuyerId)
+               Buyer ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateOfTransaction)
+               Transaction Date
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
@@ -44,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.DateOfTransaction)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                $@Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)

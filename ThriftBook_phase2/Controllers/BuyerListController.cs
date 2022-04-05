@@ -13,7 +13,7 @@ using ThriftBook_phase2.ViewModels;
 
 namespace ThriftBook_phase2.Controllers
 {
-    [Authorize(Roles = "Administrator, Manager")]
+    [Authorize(Roles = "Admin, Manager")]
     public class BuyerListController : Controller
     {
         private readonly ILogger<BuyerListController> _logger;

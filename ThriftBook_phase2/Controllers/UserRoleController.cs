@@ -11,11 +11,7 @@ using ThriftBook_phase2.ViewModels;
 
 namespace ThriftBook_phase2.Controllers
 {
-    // This annotation can be used at the class or method level.
-    // The annotation could include a comma separated list or different
-    // roles.
-    //[Authorize(Roles = "Admin")]
-    //[Authorize(Roles = "Manager")]
+    [Authorize(Roles = "Administrator, Manager")]
     public class UserRoleController : Controller
     {
         private ApplicationDbContext _context;

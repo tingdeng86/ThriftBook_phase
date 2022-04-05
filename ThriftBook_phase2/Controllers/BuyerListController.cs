@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using rolesDemoSSD.Models;
 using System;
@@ -12,6 +13,7 @@ using ThriftBook_phase2.ViewModels;
 
 namespace ThriftBook_phase2.Controllers
 {
+    [Authorize(Roles = "Administrator, Manager")]
     public class BuyerListController : Controller
     {
         private readonly ILogger<BuyerListController> _logger;

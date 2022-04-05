@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using ThriftBook_phase2.ViewModels;
 
 namespace ThriftBook_phase2.Controllers
 {
+    [Authorize(Roles = "Administrator, Manager")]
     public class BuyerController : Controller
     {
         ApplicationDbContext _context;

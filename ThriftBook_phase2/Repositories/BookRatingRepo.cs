@@ -53,7 +53,7 @@ namespace ThriftBook_phase2.Repositories
                                      BuyerId = b.BuyerId,
                                      Rating = br.Rating,
                                      Comments = br.Comments,
-                                     FirstName = b.FirstName
+                                     FirstName = b.FirstName,                                     
                                  };
             return allBookRatings;
         }

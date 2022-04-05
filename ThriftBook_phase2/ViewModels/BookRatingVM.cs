@@ -18,7 +18,7 @@ namespace ThriftBook_phase2.ViewModels
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         public decimal Rating { get; set; }
-        public string Comments { get; set; }
+        public string Comments { get; set; }      
 
     }
 }

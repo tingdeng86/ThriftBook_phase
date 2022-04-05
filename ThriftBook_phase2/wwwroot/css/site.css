@@ -307,6 +307,11 @@ footer {
     margin-bottom: 1em;
 }
 
+#detailbook {
+    width: 150px;
+    height: 231px;
+}
+
 /*Media Queries*/
 
 @media screen and (max-width: 1200px) {

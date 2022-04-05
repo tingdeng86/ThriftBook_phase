@@ -176,20 +176,14 @@ namespace ThriftBook_phase2.Controllers
             var currentOrder = coRepo.GetOrder(paymentID);
             CartRepo cartRepo = new CartRepo(_context);
             var books = cartRepo.UpdateBooks(paymentID);
-<<<<<<< HEAD
             string sessionId = GetSessionId();
             cartRepo.EmptyCarts(sessionId);
             HttpContext.Session.SetInt32(CARTITEMS, 0);
-=======
-
-            ViewData["TotalItems"] = HttpContext.Session.GetInt32(CARTITEMS);
-            string sessionId = HttpContext.Session.Id;
+            ViewData["TotalItems"] = HttpContext.Session.GetInt32(CARTITEMS);       
             var subTotals = cartRepo.GetSubTotal(sessionId);
             ViewData["SubTotal"] = subTotals;
             ViewData["Tax"] = Math.Round(subTotals * 0.12m, 2, MidpointRounding.ToEven);
             ViewData["Total"] = Math.Round(subTotals * 1.12m, 2, MidpointRounding.ToEven);
-
->>>>>>> BookReview-and-PaymentController
             return View(currentOrder);
         }
     }

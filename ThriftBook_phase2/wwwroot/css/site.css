@@ -307,8 +307,24 @@ footer {
     margin-bottom: 1em;
 }
 
-/*Media Queries*/
+#detailbook {
+    width: 150px;
+    height: 231px;
+}
 
+#cartandnumber {
+    display: flex;
+}
+
+.paypal-button {
+    height: 75px;
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+/*Media Queries*/
 @media screen and (max-width: 1200px) {
     .search-div {
         margin-left: 2em;

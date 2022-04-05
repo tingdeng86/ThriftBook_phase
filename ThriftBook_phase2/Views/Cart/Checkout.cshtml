@@ -20,16 +20,16 @@
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BookPhoto)
+               Book Photo
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Quantity)
+                In your cart
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TotalQuantity)
+                Amount in stock
             </th>
             <th></th>
         </tr>
@@ -47,10 +47,10 @@
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                    <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Book-Image" class="book-img" />
+                    <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Book-Image" class="book-img" id="detailbook"/>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    $@Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
@@ -77,9 +77,9 @@ else
     paypal.Button.render({
         env: 'sandbox', // Or ' production '
         style: { // You can customize your button here.
-            size: 'small',
-            color: 'gold',
-            shape: 'pill',
+            height: 50,
+            color: 'black',
+            shape: 'rect',
             label: 'checkout'
         },
         client: {

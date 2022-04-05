@@ -29,7 +29,7 @@ namespace ThriftBook_phase2.Controllers
             int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
             OrdersHistoryRepo oRepo = new OrdersHistoryRepo(_context);
             IQueryable<Invoice> iVM = oRepo.GetOrdersLists(buyerId);
-            if (iVM == null)
+            if (iVM.Count() == 0)
             {
                 ViewData["Message"] = "No orders history.";
             }

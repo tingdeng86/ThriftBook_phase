@@ -11,7 +11,7 @@ namespace ThriftBook_phase2.Models
     public class BookRating
     {
         [Key, Column(Order = 0)]
-        public int BookId { get; set; }
+        public int BookId { get; set; }       
 
         [Key, Column(Order = 1)]
         public int BuyerId { get; set; }

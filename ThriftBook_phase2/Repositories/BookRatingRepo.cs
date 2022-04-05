@@ -95,12 +95,12 @@ namespace ThriftBook_phase2.Repositories
             var rating = from b in _context.BookRating
                          where b.BookId == bookId && b.BuyerId == buyerId
                          select b;
-            if (rating != null)
-            {
-                return true;
-            }else
+            if (rating.Count() == 0)
             {
                 return false;
+            }else
+            {
+                return true;
             }
         }
 

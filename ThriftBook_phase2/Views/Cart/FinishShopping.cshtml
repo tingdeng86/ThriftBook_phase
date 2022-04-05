@@ -13,15 +13,14 @@
 <table class="table">
     <thead>
         <tr>
-
+            <th>
+                Title            
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Book)
             </th>
             <th>
                 Amount
@@ -32,20 +31,20 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    $@Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookTitle)
-                </td>
-                <td>
-                    $@Html.DisplayFor(modelItem => item.Price)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTitle)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @((item.Price * item.Quantity).ToString("c"))
+            </td>
+        </tr>
         }
     </tbody>
 </table>
@@ -55,7 +54,3 @@
 <p>Total: @Model.First().TotalPrice.ToString("c")</p>
 
 @Html.ActionLink("Continue Shopping", "Index", "Home")
-@*<p>Total Items: @ViewBag.TotalItems </p>
-    <p>Subtotal: $@ViewBag.SubTotal</p>
-    <p>Tax: $@ViewBag.Tax</p>
-    <p>Total: @amount CAD</p>*@

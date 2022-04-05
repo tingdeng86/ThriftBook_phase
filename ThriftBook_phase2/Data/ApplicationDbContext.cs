@@ -74,7 +74,7 @@ namespace ThriftBook_phase2.Data
                     Author = "Greg Dinkin",
                     Gennre = "Business & Investing",
                     BookQuality = "like new",
-                    BookQuantity = 5,
+                    BookQuantity = 45,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/41z2wSFrXbL._SX326_BO1,204,203,200_.jpg",
                     Price = 14,
                     StoreName = "ThriftBook"
@@ -86,7 +86,7 @@ namespace ThriftBook_phase2.Data
                     Author = "J.K. Rowling",
                     Gennre = "Children Books",
                     BookQuality = "good",
-                    BookQuantity = 3,
+                    BookQuantity = 73,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51rg5EDPpDL._SX336_BO1,204,203,200_.jpg",
                     Price = 12,
                     StoreName = "ThriftBook"
@@ -94,12 +94,12 @@ namespace ThriftBook_phase2.Data
                 new Book
                 {
                     BookId = 3,
-                    Title = "The Very Hungry Caterpillar",
-                    Author = "Eric Carle",
-                    Gennre = "Children Books",
+                    Title = "Guns, Germs, and Steel",
+                    Author = "Jared Diamond",
+                    Gennre = "SOCIETY, POLITICS & PHILOSOPHY",
                     BookQuality = "old",
-                    BookQuantity = 2,
-                    BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/41tyokViuNL._SY355_BO1,204,203,200_.jpg",
+                    BookQuantity = 102,
+                    BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/41VkhiITv+L._SX329_BO1,204,203,200_.jpg",
                     Price = 6.25m,
                     StoreName = "ThriftBook"
                 },
@@ -110,7 +110,7 @@ namespace ThriftBook_phase2.Data
                     Author = "Will Smith",
                     Gennre = "Biographies & Memoirs",
                     BookQuality = "like new",
-                    BookQuantity = 3,
+                    BookQuantity = 43,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51oDyfsqKwL._SX327_BO1,204,203,200_.jpg",
                     Price = 10,
                     StoreName = "ThriftBook"
@@ -122,9 +122,21 @@ namespace ThriftBook_phase2.Data
                     Author = "Carl Sagan",
                     Gennre = "Science & Math",
                     BookQuality = "like new",
-                    BookQuantity = 5,
+                    BookQuantity = 85,
                     BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/51IcVjsJlDL._SX322_BO1,204,203,200_.jpg",
                     Price = 7.50m,
+                    StoreName = "ThriftBook"
+                },
+                new Book
+                {
+                    BookId = 6,
+                    Title = "The Lord of the Rings",
+                    Author = "J. R. R. Tolkien",
+                    Gennre = "Science Fiction and Fantasy",
+                    BookQuality = "good",
+                    BookQuantity = 97,
+                    BookPhoto = "https://images-na.ssl-images-amazon.com/images/I/510hmfg7WEL._SX326_BO1,204,203,200_.jpg",
+                    Price = 12.50m,
                     StoreName = "ThriftBook"
                 }
                 );

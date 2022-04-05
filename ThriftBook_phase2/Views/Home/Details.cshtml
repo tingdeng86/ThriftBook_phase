@@ -64,6 +64,12 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.StoreName)
         </dd>
+        <dt class="col-sm-2">
+            Rating
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.Rating
+        </dd>
     </dl>
 </div>
 <div>
@@ -84,4 +90,8 @@
     }
     
     
+</div>
+<div>
+    @Html.ActionLink("View all Ratings", "GetAllBookRatings", new { bookId = Model.BookID })
+
 </div>

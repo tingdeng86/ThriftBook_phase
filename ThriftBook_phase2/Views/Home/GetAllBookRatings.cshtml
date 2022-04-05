@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ThriftBook_phase2.ViewModels.BookRatingVM>
+
+@{
+    ViewData["Title"] = "GetAllBookRatings";
+}
+
+<h1>GetAllBookRatings</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+@Html.ActionLink("Continue Shopping","Index", "Home")

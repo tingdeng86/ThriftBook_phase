@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ThriftBook_phase2.Data;
 using ThriftBook_phase2.Models;
+using ThriftBook_phase2.ViewModels;
 
 namespace ThriftBook_phase2.Repositories
 {
@@ -40,17 +41,28 @@ namespace ThriftBook_phase2.Repositories
             return singleBookRating;
         }
 
-        public IQueryable<BookRating> AllSingleBookRatings(int bookId)
+        public IQueryable<BookRatingVM> AllSingleBookRatings(int bookId)
         {
             //Getting ALL BookRatings for a SPECIFIC book
             var allBookRatings = from br in _context.BookRating
+                                 from b in _context.Profile
                                  where br.BookId == bookId
-                                 select new BookRating()
-                                 {
+                                 where br.BuyerId == b.BuyerId
+                                 select new BookRatingVM {
+                                     BookId = bookId,
+                                     BuyerId = b.BuyerId,
                                      Rating = br.Rating,
-                                     Comments = br.Comments
+                                     Comments = br.Comments,
+                                     FirstName = b.FirstName
                                  };
             return allBookRatings;
+        }
+
+        public decimal getBookRating(int bookId)
+        {
+            var allBookRatings = AllSingleBookRatings(bookId).ToList();
+            decimal result = allBookRatings.Select(x => x.Rating).Average();
+            return result;
         }
 
         public void CreateReview(BookRating newBookRating, string userEmail)
@@ -76,10 +88,21 @@ namespace ThriftBook_phase2.Repositories
         }
 
 
-        public void UpdateDb()
+        public bool FindRating(string userEmail, int bookId)
         {
-
+            ProfileRepo prRepo = new ProfileRepo(_context);
+            int buyerId = prRepo.GetLoggedInUser(userEmail).BuyerId;
+            var rating = from b in _context.BookRating
+                         where b.BookId == bookId && b.BuyerId == buyerId
+                         select b;
+            if (rating != null)
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
         }
 
-        }
+       }
 }

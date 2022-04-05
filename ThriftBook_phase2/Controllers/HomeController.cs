@@ -73,11 +73,22 @@ namespace ThriftBook_phase2.Controllers
         public ActionResult Details(int bookID)
         {
             BookDetailVMRepo bdRepo = new BookDetailVMRepo(_context);
-            BookVM bVM = bdRepo.Get(bookID);            
+            BookVM bVM = bdRepo.Get(bookID);
+            BookRatingRepo brRepo = new BookRatingRepo(_context);
+            ViewData["Rating"] =brRepo.getBookRating(bookID);
             return View(bVM);
 
         }
-          
+
+        public IActionResult GetAllBookRatings(int bookId)
+        {
+            //Getting ALL BookRatings for a SPECIFIC book, id of which is passed from the --- HTML (ViewBooks) page?. 
+
+            BookRatingRepo brRepo = new BookRatingRepo(_context);
+            var AllSingleBookRatings = brRepo.AllSingleBookRatings(bookId);
+            return View(AllSingleBookRatings);
+        }
+
         [HttpGet]
         public ActionResult Edit(int bookID)
         {

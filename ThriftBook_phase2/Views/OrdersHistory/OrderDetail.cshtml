@@ -52,6 +52,17 @@
             <td>
                 @((item.Price * item.Quantity).ToString("c"))
             </td>
+            @{
+                Dictionary<int, bool> bookIds = (Dictionary<int, bool>)ViewBag.Message;
+
+               var isFinded = bookIds.ToList().Where(x => x.Key == @item.BookId).FirstOrDefault();
+                if (isFinded.Key == 0)
+                {
+                    <td>
+                        @Html.ActionLink("Rate the Book", "CreateRating", new { bookId = @item.BookId })
+                    </td>
+                }
+            }
         </tr>
         }
     </tbody>

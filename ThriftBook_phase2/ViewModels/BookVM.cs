@@ -38,7 +38,6 @@ namespace ThriftBook_phase2.ViewModels
         public decimal Price { get; set; }
         [Required]
         [DisplayName("Store Name")]
-        public string StoreName { get; set; }
-        
+        public string StoreName { get; set; } 
     }
 }

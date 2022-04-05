@@ -28,6 +28,7 @@ namespace rolesDemoSSD.Models
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This is not a valid last name.")]
         [StringLength(50, ErrorMessage = "Name must be maximum of 50 characters.")]
         public string LastName { get; set; }
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This is not a valid city.")]
         public string City { get; set; }
         public string Street { get; set; }
 
@@ -36,9 +37,7 @@ namespace rolesDemoSSD.Models
 
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
-
         public virtual ICollection<BookRating> BookRatings { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }
-

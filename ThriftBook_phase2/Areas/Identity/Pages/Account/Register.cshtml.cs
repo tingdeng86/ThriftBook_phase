@@ -80,10 +80,6 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            //[Key]
-            //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-            //public int BuyerId { get; set; }
-
             public string City { get; set; }
             public string Street { get; set; }
 

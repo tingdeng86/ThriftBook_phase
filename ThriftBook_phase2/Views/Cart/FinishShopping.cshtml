@@ -34,7 +34,7 @@
         {
             <tr>
                 <td>
-                    $@Html.DisplayFor(modelItem => item.Price) 
+                    $@Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
@@ -49,8 +49,13 @@
         }
     </tbody>
 </table>
+<p>Total Items: @Model.Sum(i => i.Quantity)</p>
+<p>Subtotal: @((Model.First().TotalPrice/1.12m).ToString("c"))</p>
+<p>Tax: @((Model.First().TotalPrice / 1.12m * 0.12m).ToString("c"))</p>
+<p>Total: @Model.First().TotalPrice.ToString("c")</p>
 
-<p>Total Items: @ViewBag.TotalItems </p>
-<p>Subtotal: $@ViewBag.SubTotal</p>
-<p>Tax: $@ViewBag.Tax</p>
-<p>Total: @amount CAD</p>
+@Html.ActionLink("Continue Shopping", "Index", "Home")
+@*<p>Total Items: @ViewBag.TotalItems </p>
+    <p>Subtotal: $@ViewBag.SubTotal</p>
+    <p>Tax: $@ViewBag.Tax</p>
+    <p>Total: @amount CAD</p>*@

@@ -19,7 +19,7 @@
                     @Html.DisplayNameFor(model => model.Title)
                 </th>
                 <th>
-                   Book Photo
+                    Book Photo
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Price)
@@ -36,32 +36,32 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td asp-for="@item.BookId" style="display: none;">
-                    @Html.DisplayFor(modelItem => item.BookId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Book-Image" class="book-img" />
-                </td>
-                <td>
-                    $@Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.ActionLink("-", "DecreaseOne", new { cartId = @item.CartItemId })
-                    @Html.DisplayFor(modelItem => item.Quantity)/@Html.DisplayFor(modelItem => item.TotalQuantity)
-                    @Html.ActionLink("+", "IncreaseOne", new { cartId = @item.CartItemId })
-                </td>
-                <td>
-                    @((item.Price * item.Quantity).ToString("c"))
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { cartId = @item.CartItemId })|
-                    @Html.ActionLink("Delete", "Delete", new { cartId = @item.CartItemId })
-                </td>
-            </tr>
+                <tr>
+                    <td asp-for="@item.BookId" style="display: none;">
+                        @Html.DisplayFor(modelItem => item.BookId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        <img src="@Html.DisplayFor(modelItem => item.BookPhoto)" alt="Book-Image" class="book-img" />
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("-", "DecreaseOne", new { cartId = @item.CartItemId })
+                        @Html.DisplayFor(modelItem => item.Quantity)/@Html.DisplayFor(modelItem => item.TotalQuantity)
+                        @Html.ActionLink("+", "IncreaseOne", new { cartId = @item.CartItemId })
+                    </td>
+                    <td>
+                        @((item.Price * item.Quantity).ToString("c"))
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { cartId = @item.CartItemId })|
+                        @Html.ActionLink("Remove", "Delete", new { cartId = @item.CartItemId })
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
@@ -70,14 +70,18 @@
     <p>Tax: $@ViewBag.Tax</p>
     <p>Total: $@ViewBag.Total</p>
     <br />
-    @Html.ActionLink("Continue Shopping", "Home")
-    <br />
-    @Html.ActionLink("Proceed to Checkout", "Checkout", new { totalPayment = ViewBag.Total })
-    <br />
+    <div class="add-to-cartbtn" style="width:170px;">
+        @Html.ActionLink("Continue Shopping", "Home")
+    </div>  
+    <div class="add-to-cartbtn" style="width: 200px;">
+        @Html.ActionLink("Proceed to Checkout", "Checkout", new { totalPayment = ViewBag.Total })
+    </div>   
 }
 else
 {
     <p>Cart is Empty.</p>
-    @Html.ActionLink("Continue Shopping", "Home")
-}
+    <div class="add-to-cartbtn" style="width:170px;">
+        @Html.ActionLink("Continue Shopping", "Home")
+    </div>
+        }
 

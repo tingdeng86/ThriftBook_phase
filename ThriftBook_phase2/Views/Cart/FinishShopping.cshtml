@@ -52,5 +52,6 @@
 <p>Subtotal: @((Model.First().TotalPrice/1.12m).ToString("c"))</p>
 <p>Tax: @((Model.First().TotalPrice / 1.12m * 0.12m).ToString("c"))</p>
 <p>Total: @Model.First().TotalPrice.ToString("c")</p>
-
-@Html.ActionLink("Continue Shopping", "Index", "Home")
+<div class="add-to-cartbtn" style="width:170px;">
+    @Html.ActionLink("Continue Shopping", "Index", "Home")
+</div>

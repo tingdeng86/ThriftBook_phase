@@ -9,7 +9,7 @@ using ThriftBook_phase2.Repositories;
 
 namespace ThriftBook_phase2.Controllers
 {
-    //[Authorize(Roles = "Admin, Manager")]
+    [Authorize(Roles = "Admin, Manager")]
     public class RoleController : Controller
     {
         ApplicationDbContext _context;

@@ -34,8 +34,5 @@ namespace ThriftBook_phase2.Controllers
             return View(query);
 
         }
-
-
-
     }
 }

@@ -30,8 +30,6 @@ namespace ThriftBook_phase2.Controllers
         public IActionResult Index(string sortOrder, string searchString)
         {
 
-
-            //HttpContext.Session.SetString("DUMB", "DUMB");
             //get totalItems of cart
             string sessionId = GetSessionId();
             CartRepo cartRepo = new CartRepo(_context);
@@ -65,7 +63,6 @@ namespace ThriftBook_phase2.Controllers
                     books = books.OrderBy(s => s.Title);
                     break;
             }            
-
             
             return View(books.ToList());
         }
@@ -150,6 +147,7 @@ namespace ThriftBook_phase2.Controllers
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
+        // get sessionId and set sessionId
         public string GetSessionId()
         {
             if (HttpContext.Session.GetString("SessionId") == null)
@@ -172,10 +170,10 @@ namespace ThriftBook_phase2.Controllers
         public ActionResult AddToCart(int bookId)
         {
             string sessionId = GetSessionId();
-            //string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
             var book = cartRepo.GetBook(bookId);
             var cartItem = cartRepo.Find(bookId, sessionId);
+
             // update the amount of total items in the session
             var totalItems = HttpContext.Session.GetInt32("CartItems");
             totalItems =  totalItems == null ? 1 : totalItems + 1;

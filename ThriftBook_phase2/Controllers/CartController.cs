@@ -49,11 +49,6 @@ namespace ThriftBook_phase2.Controllers
         public IActionResult Index()
         {
             string sessionId = GetSessionId();
-            //string aa = sessionID..Guid;
-            //sessionId changes all the time, after setting, it would not change
-            //HttpContext.Session.SetString("DUMB", "DUMB");
-
-            //string sessionId = HttpContext.Session.Id;
             CartRepo cartRepo = new CartRepo(_context);
             var query = cartRepo.GetLists(sessionId);
             var totalItems = cartRepo.GetTotalItems(sessionId);
@@ -175,7 +170,7 @@ namespace ThriftBook_phase2.Controllers
             OrderDetailRepo coRepo = new OrderDetailRepo(_context);
             var currentOrder = coRepo.GetOrder(paymentID);
             CartRepo cartRepo = new CartRepo(_context);
-            var books = cartRepo.UpdateBooks(paymentID);
+            cartRepo.UpdateBooks(paymentID);
             string sessionId = GetSessionId();
             cartRepo.EmptyCarts(sessionId);
             HttpContext.Session.SetInt32(CARTITEMS, 0);

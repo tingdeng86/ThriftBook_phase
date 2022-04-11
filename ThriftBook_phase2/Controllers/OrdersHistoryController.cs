@@ -19,8 +19,7 @@ namespace ThriftBook_phase2.Controllers
         {
             _context = context;
         }
-
-        
+       
         public IActionResult Index()
         {
             ViewData["Message"] = "";
@@ -36,7 +35,6 @@ namespace ThriftBook_phase2.Controllers
             return View(iVM);
             
         }
-
         public IActionResult OrderDetail(string paymentID)
         {
             ViewData["Message"] = "";
@@ -73,7 +71,6 @@ namespace ThriftBook_phase2.Controllers
         [HttpPost]
         public IActionResult CreateRating([Bind("Rating, Comments, BookId")] BookRating newBookRating)
         {
-
             //Getting current user profile object
             string userEmail = User.Identity.Name;
             ProfileRepo prRepo = new ProfileRepo(_context);
@@ -84,7 +81,6 @@ namespace ThriftBook_phase2.Controllers
             BookRatingRepo brRepo = new BookRatingRepo(_context);
             brRepo.CreateReview(newBookRating, userEmail);
             ViewData["Message"] = "Review Created Successfully. Thank you for helping to make the ThriftBook community better!";
-
 
             return RedirectToAction("ThankRating", "OrdersHistory", new { message = ViewData["Message"] });
 

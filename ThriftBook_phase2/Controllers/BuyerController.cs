@@ -19,7 +19,6 @@ namespace ThriftBook_phase2.Controllers
         {
             _context = context;
 
-        // GET: buyer
         }
         public ActionResult Index()
         {

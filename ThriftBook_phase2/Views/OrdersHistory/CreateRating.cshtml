@@ -20,16 +20,16 @@
                 <input asp-for="BuyerId" class="form-control" type="hidden" />
             </div>
             <div class="form-group">
-                <label asp-for="Rating" class="control-label">How did you like this book?</label>                
+                <label asp-for="Rating" class="control-label">How did you like this book?</label>
                 <select class="form-control" id="Rating" name="Rating">
-                    <option value="">Select Rating</option>                   
+                    <option value="">Select Rating</option>
                     <option value="1">1 </option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                    <span asp-validation-for="Rating" class="text-danger"></span>
+                <span asp-validation-for="Rating" class="text-danger"></span>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Comments, new { @class = "control-label" })
@@ -48,9 +48,8 @@
     <a asp-action="Index">Back to Order</a>
 </div>
 <br />
+
 @Html.ActionLink("Continue Shopping", "Index", "Home")
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

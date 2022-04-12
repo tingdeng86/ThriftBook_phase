@@ -61,7 +61,16 @@ namespace ThriftBook_phase2.Repositories
         public decimal getBookRating(int bookId)
         {
             var allBookRatings = AllSingleBookRatings(bookId).ToList();
-            decimal result = allBookRatings.Select(x => x.Rating).Average();
+            decimal result;
+            if (allBookRatings.Count() == 0)
+            {
+                result = 0;
+            }
+            else
+            {
+                 result = allBookRatings.Select(x => x.Rating).Average();
+            }
+            
             return result;
         }
 

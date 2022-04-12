@@ -9,13 +9,10 @@
     <thead>
         <tr>
             <th>
-               Book Title
+                Book Title
             </th>
             <th>
-               Buyer ID
-            </th>
-            <th>
-               Transaction Date
+                Transaction Date
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
@@ -32,37 +29,34 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuyerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfTransaction)
-            </td>
-            <td>
-                $@Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @((item.Price * item.Quantity).ToString("c"))
-            </td>
-            @{
-                Dictionary<int, bool> bookIds = (Dictionary<int, bool>)ViewBag.Message;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfTransaction)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @((item.Price * item.Quantity).ToString("c"))
+                </td>
+                @{
+                    Dictionary<int, bool> bookIds = (Dictionary<int, bool>)ViewBag.Message;
 
-               var isFinded = bookIds.ToList().Where(x => x.Key == @item.BookId).FirstOrDefault();
-                if (isFinded.Key == 0)
-                {
-                    <td>
-                        @Html.ActionLink("Rate the Book", "CreateRating", new { bookId = @item.BookId })
-                    </td>
+                    var isFinded = bookIds.ToList().Where(x => x.Key == @item.BookId).FirstOrDefault();
+                    if (isFinded.Key == 0)
+                    {
+                        <td>
+                            @Html.ActionLink("Rate the Book", "CreateRating", new { bookId = @item.BookId })
+                        </td>
+                    }
                 }
-            }
-        </tr>
+            </tr>
         }
     </tbody>
 </table>
@@ -70,3 +64,9 @@
 <p>Subtotal: @((Model.First().TotalPrice/1.12m).ToString("c"))</p>
 <p>Tax: @((Model.First().TotalPrice / 1.12m * 0.12m).ToString("c"))</p>
 <p>Total: @Model.First().TotalPrice.ToString("c")</p>
+
+<br />
+@Html.ActionLink("Back to Order", "Index", "OrdersHistory")
+
+<br />
+@Html.ActionLink("Continue Shopping", "Index", "Home")

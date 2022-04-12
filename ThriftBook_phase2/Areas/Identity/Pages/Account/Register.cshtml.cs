@@ -137,8 +137,8 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
 
                     var response = await _emailService.SendSingleEmail(new Models.ComposeEmailModel
                     {
-                        FirstName = "ThriftBook",
-                        LastName = "Manager",
+                        FirstName = "Simon",
+                        LastName = "Lee",
                         Subject = "Confirm your email",
                         Email = Input.Email,
                         Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."

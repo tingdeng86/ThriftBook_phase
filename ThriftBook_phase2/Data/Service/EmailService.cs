@@ -22,7 +22,7 @@ namespace ThriftBook_phase2.Data.Service
         {
             var apiKey = _configuration.GetSection("SendGrid")["ApiKey"];
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("craig_watson@bcit.ca", "Craig Watson"); 
+            var from = new EmailAddress("accept96@hotmail.com", "Simon Lee"); 
             var subject = payload.Subject; 
             var to = new EmailAddress(payload.Email
                                      , $"{payload.FirstName} {payload.LastName}");

@@ -61,8 +61,8 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
 
                 var response = await _emailService.SendSingleEmail(new Models.ComposeEmailModel
                 {
-                    FirstName = "Craig",
-                    LastName = "Watson",
+                    FirstName = "Simon",
+                    LastName = "Lee",
                     Subject = "Reset Password",
                     Email = Input.Email,
                     Body = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."

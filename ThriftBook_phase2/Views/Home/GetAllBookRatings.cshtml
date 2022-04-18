@@ -7,19 +7,19 @@
 <h1 class="ratings">All ratings</h1>
 <table class="table">
     <thead>
-        <tr>           
+        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Rating)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Comments)
-            </th>           
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>               
+            <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Rating)
                 </td>
@@ -31,6 +31,6 @@
     </tbody>
 </table>
 <br />
-<div class="add-to-cartbtn" style="width:170px;">
-    @Html.ActionLink("Continue Shopping", "Index", "Home")
-</div>
+
+<a asp-action="Index" class="add-to-cartbtn btn btn-outline-dark" style="width: 180px;">Continue Shopping</a>
+

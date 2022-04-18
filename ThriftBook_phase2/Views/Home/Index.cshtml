@@ -8,16 +8,10 @@
     <h1 class="available-books">Available Books</h1>
     <p>@ViewBag.NoBooksMessage</p>
     <table class="table">        
-        <p class="text-center">
-            <div class="items">
-                @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
-            </div>
-            <div class="items">
-                @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam })
-            </div>
-            <div class="items">
-                @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParam })
-            </div>
+        <p class="text-center">            
+                @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam }, new {@class ="items"})                      
+                @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParam }, new { @class = "items" })           
+                @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParam }, new { @class = "items" })            
             @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
             {
                 <a asp-action="Create" class="create-book">Create New</a>
@@ -41,10 +35,8 @@
                                 <a asp-action="Delete" asp-route-id="@item.BookId"> Delete </a>
                             }
                             else
-                            {
-                                <div class="add-to-cartbtn btn btn-outline-dark">
-                                    @Html.ActionLink("Details", "Details", new { BookID = item.BookId })
-                                </div>
+                            {                                
+                                    @Html.ActionLink("Details", "Details", new { BookID = item.BookId }, new { @class = "add-to-cartbtn btn btn-outline-dark" })                               
                             }
                         </p>
                     </div>

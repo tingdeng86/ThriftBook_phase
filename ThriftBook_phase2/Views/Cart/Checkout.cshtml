@@ -69,7 +69,7 @@
 }
 else
 {
-    @Html.ActionLink("Review Cart Items", "Index", "Cart", new { cartObject = Model })
+    @Html.ActionLink("Review Cart Items", "Index", "Cart", new { cartObject = Model }, new { @class = "add-to-cartbtn1 btn btn-outline-dark" })
 }
 
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>

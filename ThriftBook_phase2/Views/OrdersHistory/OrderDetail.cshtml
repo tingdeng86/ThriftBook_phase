@@ -51,23 +51,19 @@
                 var isFinded = bookIds.ToList().Where(x => x.Key == @item.BookId).FirstOrDefault();
                 if (isFinded.Key == 0)
                 {
-                    <div class="add-to-cartbtn" style="width:170px;">
-                        @Html.ActionLink("Rate the Book", "CreateRating", new { bookId = @item.BookId })
-                    </div>
-                    }
+
+                        @Html.ActionLink("Rate the Book", "CreateRating", new { bookId = @item.BookId }, new { @class = "add-to-cartbtn btn btn-outline-dark" })
+
+                }
             }
         </tr>
-        }
+                }
     </tbody>
 </table>
 <p>Total Items: @Model.Sum(i => i.Quantity)</p>
-<p>Subtotal: @((Model.First().TotalPrice/1.12m).ToString("c"))</p>
+<p>Subtotal: @((Model.First().TotalPrice / 1.12m).ToString("c"))</p>
 <p>Tax: @((Model.First().TotalPrice / 1.12m * 0.12m).ToString("c"))</p>
 <p>Total: @Model.First().TotalPrice.ToString("c")</p>
 
-<div class="add-to-cartbtn" style="width:170px;">
-    @Html.ActionLink("Back to Order", "Index", "OrdersHistory")
-</div>
-<div class="add-to-cartbtn" style="width:170px;">   
-    @Html.ActionLink("Continue Shopping", "Index", "Home")
-</div>
+    @Html.ActionLink("Back to Order", "Index", "OrdersHistory", new { @class = "add-to-cartbtn btn btn-outline-dark" })
+    <a asp-action="Index" class="add-to-cartbtn btn btn-outline-dark" style="width: 180px;">Continue Shopping</a>

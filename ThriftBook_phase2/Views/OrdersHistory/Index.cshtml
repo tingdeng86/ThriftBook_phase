@@ -9,7 +9,7 @@
 @if (@ViewBag.Message != "")
 {
     <p>Orders are empty.</p>
-    @Html.ActionLink("Continue Shopping", "Home")
+    @Html.ActionLink("Continue Shopping", "Home", new { @class = "add-to-cartbtn btn btn-outline-dark" })
 }
 else
 {
@@ -48,7 +48,7 @@ else
                     @Html.DisplayFor(modelItem => item.Profile.Email)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "OrderDetail", new { paymentID = @item.PaymentId })
+                    @Html.ActionLink("Details", "OrderDetail", new { paymentID = @item.PaymentId }, new { @class = "add-to-cartbtn btn btn-outline-dark" })
                 </td>
             </tr>
             }

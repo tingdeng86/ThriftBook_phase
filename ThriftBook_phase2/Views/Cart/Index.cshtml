@@ -70,18 +70,13 @@
     <p>Tax: $@ViewBag.Tax</p>
     <p>Total: $@ViewBag.Total</p>
     <br />
-    <div class="add-to-cartbtn" style="width:170px;">
-        @Html.ActionLink("Continue Shopping", "Home")
-    </div>  
-    <div class="add-to-cartbtn" style="width: 200px;">
-        @Html.ActionLink("Proceed to Checkout", "Checkout", new { totalPayment = ViewBag.Total })
-    </div>   
+    <a asp-action="Home" class="add-to-cartbtn btn btn-outline-dark" style="width: 180px;">Continue Shopping</a>
+    @Html.ActionLink("Proceed to Checkout", "Checkout", new { totalPayment = ViewBag.Total }, new { @class = "add-to-cartbtn1 btn btn-outline-dark" })
+
 }
 else
 {
     <p>Cart is Empty.</p>
-    <div class="add-to-cartbtn" style="width:170px;">
-        @Html.ActionLink("Continue Shopping", "Home")
-    </div>
-        }
+    <a asp-action="Home" class="add-to-cartbtn btn btn-outline-dark" style="width: 180px;">Continue Shopping</a>
+}
 

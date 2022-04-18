@@ -6,10 +6,7 @@
 <h1>Thank You</h1>
 <p>@ViewBag.Message</p>
 
-<div class="add-to-cartbtn" style="width:170px;">
-    @Html.ActionLink("Back to Order", "Index", "OrdersHistory")
-</div>
-<div class="add-to-cartbtn" style="width:170px;">
-    @Html.ActionLink("Continue Shopping", "Index", "Home")
-</div>
+    @Html.ActionLink("Back to Order", "Index", "OrdersHistory", new { @class = "add-to-cartbtn btn btn-outline-dark" })
+    @Html.ActionLink("Continue Shopping", "Index", "Home", new { @class = "add-to-cartbtn btn btn-outline-dark" })
+
 

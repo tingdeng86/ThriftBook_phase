@@ -49,7 +49,7 @@
 </div>
 <br />
 
-@Html.ActionLink("Continue Shopping", "Index", "Home")
+@Html.ActionLink("Continue Shopping", "Index", "Home", new { @class = "add-to-cartbtn btn btn-outline-dark" })
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

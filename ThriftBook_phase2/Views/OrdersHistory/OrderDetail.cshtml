@@ -45,6 +45,7 @@
             <td>
                 @((item.Price * item.Quantity).ToString("c"))
             </td>
+            <td>
             @{
                 Dictionary<int, bool> bookIds = (Dictionary<int, bool>)ViewBag.Message;
 
@@ -56,6 +57,7 @@
 
                 }
             }
+             </td>
         </tr>
                 }
     </tbody>
@@ -65,5 +67,5 @@
 <p>Tax: @((Model.First().TotalPrice / 1.12m * 0.12m).ToString("c"))</p>
 <p>Total: @Model.First().TotalPrice.ToString("c")</p>
 
-    @Html.ActionLink("Back to Order", "Index", "OrdersHistory", new { @class = "add-to-cartbtn btn btn-outline-dark" })
+    @Html.ActionLink("Back to Order", "Index", "OrdersHistory", null, new { @class = "add-to-cartbtn btn btn-outline-dark" })
     <a asp-action="Index" class="add-to-cartbtn btn btn-outline-dark" style="width: 180px;">Continue Shopping</a>

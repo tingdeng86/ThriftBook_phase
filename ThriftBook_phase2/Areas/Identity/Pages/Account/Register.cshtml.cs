@@ -127,22 +127,22 @@ namespace ThriftBook_phase2.Areas.Identity.Pages.Account
 
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    //var callbackUrl = Url.Page(
+                    //    "/Account/ConfirmEmail",
+                    //    pageHandler: null,
+                    //    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                    //    protocol: Request.Scheme);
 
-                    var response = await _emailService.SendSingleEmail(new Models.ComposeEmailModel
-                    {
-                        FirstName = "Simon",
-                        LastName = "Lee",
-                        Subject = "Confirm your email",
-                        Email = Input.Email,
-                        Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
-                    });
+                    //var response = await _emailService.SendSingleEmail(new Models.ComposeEmailModel
+                    //{
+                    //    FirstName = "Simon",
+                    //    LastName = "Lee",
+                    //    Subject = "Confirm your email",
+                    //    Email = Input.Email,
+                    //    Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
+                    //});
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
